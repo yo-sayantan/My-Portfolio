@@ -8,14 +8,14 @@ import Projects from './components/Projects';
 import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import CursorTrail from './components/CursorTrail';
+import ParticleNetwork from './components/ParticleNetwork';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <CursorTrail />
+    <div className="min-h-screen bg-slate-50 select-none relative">
+      <ParticleNetwork />
       <Header />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <About />
         <Skills />

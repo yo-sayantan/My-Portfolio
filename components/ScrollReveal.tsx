@@ -58,7 +58,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out transform ${delay} ${getAnimationClasses()} ${className}`}
+      className={`transition-all duration-700 ease-out transform ${delay} ${getAnimationClasses()} ${className}`}
     >
       {children}
     </div>
