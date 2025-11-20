@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 
 interface ScrollRevealProps {
@@ -11,7 +12,7 @@ interface ScrollRevealProps {
 const ScrollReveal: React.FC<ScrollRevealProps> = ({ 
   children, 
   className = "", 
-  threshold = 0.15,
+  threshold = 0.1,
   delay = "delay-0",
   variant = "fade-up"
 }) => {
@@ -28,7 +29,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       },
       {
         threshold,
-        rootMargin: '0px 0px -50px 0px' // Trigger slightly before bottom
+        rootMargin: '0px 0px -10% 0px' // Trigger slightly earlier
       }
     );
 
@@ -51,14 +52,15 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         return isVisible ? 'opacity-100' : 'opacity-0';
       case 'fade-up':
       default:
-        return isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12';
+        return isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8';
     }
   };
 
+  // duration-300 for fast, snappy scroll feel
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out transform ${delay} ${getAnimationClasses()} ${className}`}
+      className={`transition-all duration-300 ease-out transform ${delay} ${getAnimationClasses()} ${className}`}
     >
       {children}
     </div>

@@ -36,23 +36,22 @@ const ParticleNetwork: React.FC = () => {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.3; // Slower, calmer movement
-        this.vy = (Math.random() - 0.5) * 0.3;
-        this.size = Math.random() * 2.5 + 1.5; // Slightly larger, varied sizes
+        // Ultra slow, ambient drift (0.1 factor)
+        this.vx = (Math.random() - 0.5) * 0.1; 
+        this.vy = (Math.random() - 0.5) * 0.1;
+        this.size = Math.random() * 2 + 1.5; 
 
-        // Assign colors based on reference image distribution (mostly dark, some accents)
+        // Vivid Colors with higher opacity for visibility
         const rand = Math.random();
-        if (rand > 0.96) this.color = 'rgba(249, 115, 22, 0.8)'; // Orange-500
-        else if (rand > 0.90) this.color = 'rgba(59, 130, 246, 0.8)'; // Blue-500
-        else if (rand > 0.84) this.color = 'rgba(236, 72, 153, 0.8)'; // Pink-500
-        else this.color = 'rgba(51, 65, 85, 0.6)'; // Slate-700 (Dark Grey)
+        if (rand > 0.95) this.color = 'rgba(14, 165, 233, 0.8)'; // Primary Blue
+        else if (rand > 0.90) this.color = 'rgba(168, 85, 247, 0.8)'; // Purple
+        else this.color = 'rgba(100, 116, 139, 0.5)'; // Slate-500
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
 
-        // Bounce off edges
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
       }
@@ -68,8 +67,8 @@ const ParticleNetwork: React.FC = () => {
 
     const initParticles = () => {
       particles = [];
-      // Adjust density to match the clean look of the image
-      const particleCount = Math.min(Math.floor((width * height) / 12000), 90);
+      // High Density: (Reduced divisor from 8000 to 4500 for ~2x particles)
+      const particleCount = Math.min(Math.floor((width * height) / 4500), 250);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
@@ -82,40 +81,39 @@ const ParticleNetwork: React.FC = () => {
         particle.update();
         particle.draw();
 
-        // Connect particles (The Network Effect)
+        // Network Connections
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particle.x - particles[j].x;
           const dy = particle.y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 130) {
+          if (distance < 120) {
             ctx.beginPath();
-            // Very subtle grey lines for the network
-            ctx.strokeStyle = `rgba(100, 116, 139, ${0.15 * (1 - distance / 130)})`;
-            ctx.lineWidth = 0.8;
+            // Increased opacity for visibility
+            ctx.strokeStyle = `rgba(148, 163, 184, ${0.25 * (1 - distance / 120)})`;
+            ctx.lineWidth = 0.6;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
           }
         }
 
-        // Reactive Mouse Connections
+        // Mouse Reactivity
         const dx = particle.x - mouse.x;
         const dy = particle.y - mouse.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 220) {
+        if (distance < 250) {
           ctx.beginPath();
-          // Blue tint for mouse interactions to highlight reactivity
-          ctx.strokeStyle = `rgba(14, 165, 233, ${0.3 * (1 - distance / 220)})`;
+          ctx.strokeStyle = `rgba(14, 165, 233, ${0.4 * (1 - distance / 250)})`;
           ctx.lineWidth = 1;
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(mouse.x, mouse.y);
           ctx.stroke();
           
-          // Slight attraction effect (optional, keeping subtle)
-          particle.vx += (mouse.x - particle.x) * 0.00005;
-          particle.vy += (mouse.y - particle.y) * 0.00005;
+          // Gentle magnetic pull
+          particle.vx += (mouse.x - particle.x) * 0.0001;
+          particle.vy += (mouse.y - particle.y) * 0.0001;
         }
       });
 
@@ -143,7 +141,6 @@ const ParticleNetwork: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      // Multiply mode helps the grey dots sit nicely on the light background
       style={{ mixBlendMode: 'multiply' }} 
     />
   );

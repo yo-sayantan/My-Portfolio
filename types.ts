@@ -34,3 +34,10 @@ export interface Education {
   location: string;
   details: string[];
 }
+
+export interface Award {
+  title: string;
+  issuer: string;
+  year: string;
+  description: string;
+}

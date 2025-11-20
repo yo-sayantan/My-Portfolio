@@ -1,6 +1,6 @@
 import React from 'react';
 import { SKILLS } from '../constants';
-import { Terminal, Database, Cloud, Cpu, Code2 } from 'lucide-react';
+import { Terminal, Database, Cloud, Code2 } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const Skills: React.FC = () => {
@@ -11,23 +11,13 @@ const Skills: React.FC = () => {
     return <Code2 className="w-6 h-6" />;
   };
 
-  const getColor = (idx: number) => {
-    const colors = [
-      'bg-blue-50 text-blue-600 border-blue-100',
-      'bg-indigo-50 text-indigo-600 border-indigo-100',
-      'bg-purple-50 text-purple-600 border-purple-100',
-      'bg-teal-50 text-teal-600 border-teal-100',
-    ];
-    return colors[idx % colors.length];
-  };
-
   return (
-    <section id="skills" className="py-20 bg-slate-50/50 border-y border-slate-200/50">
+    <section id="skills" className="py-32 bg-transparent relative">
       <div className="container mx-auto px-6">
         <ScrollReveal>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Technical Arsenal</h2>
-            <p className="text-slate-500 max-w-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 tracking-tighter mb-4">Technical Arsenal</h2>
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
                A comprehensive toolset for building enterprise-grade applications.
             </p>
           </div>
@@ -37,20 +27,17 @@ const Skills: React.FC = () => {
           {SKILLS.map((skillGroup, idx) => (
             <ScrollReveal key={idx} delay={`delay-[${(idx * 100)}ms]`}>
               <div 
-                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-primary-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full group relative overflow-hidden"
+                className="bg-white/70 backdrop-blur-md p-8 rounded-[2rem] shadow-lg border border-white/50 hover:border-primary-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-full group relative overflow-hidden"
               >
-                {/* Subtle gradient background on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-primary-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 ${getColor(idx)}`}>
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 bg-slate-50 text-primary-600 group-hover:scale-110 group-hover:bg-primary-50`}>
                   {getIcon(skillGroup.category)}
                 </div>
-                <h3 className="text-lg font-bold text-secondary mb-4 group-hover:text-primary-600 transition-colors relative z-10">{skillGroup.category}</h3>
-                <div className="flex flex-wrap gap-2 relative z-10">
+                <h3 className="text-xl font-bold text-slate-900 mb-6">{skillGroup.category}</h3>
+                <div className="flex flex-wrap gap-2">
                   {skillGroup.items.map((skill) => (
                     <span 
                       key={skill}
-                      className="px-3 py-1.5 text-sm font-medium text-slate-600 bg-slate-50 border border-slate-200 rounded-lg group-hover:bg-white group-hover:shadow-sm group-hover:text-primary-700 transition-all"
+                      className="px-3 py-1.5 text-sm font-bold text-slate-600 bg-white/80 border border-slate-200 rounded-lg shadow-sm"
                     >
                       {skill}
                     </span>

@@ -1,5 +1,5 @@
 
-import { Experience, Project, Skill, Certification, Education } from './types';
+import { Experience, Project, Skill, Certification, Education, Award } from './types';
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/yo-sayantan",
@@ -8,7 +8,7 @@ export const SOCIAL_LINKS = {
   phone: "+917381183721",
 };
 
-export const SUMMARY = "Experienced Senior Software Engineer with nearly 5 years of expertise in Java backend development, cloud microservices, and API design. I specialize in building high-performance, scalable systems while leveraging AI-driven workflows—including prompt engineering and AI agents—to maximize productivity and code quality. Committed to continuous innovation, I drive engineering excellence through modern tech stacks and intelligent solutions.";
+export const SUMMARY = "Experienced Senior Software Engineer with nearly 5 years of expertise in Java backend development, AWS cloud architectures, and Microservices. I specialize in building high-performance, scalable systems while leveraging AI-driven workflows—including prompt engineering, MCP Servers, and AI agents—to maximize productivity and code quality. Committed to continuous innovation, I drive engineering excellence through modern tech stacks and intelligent solutions.";
 
 export const EXPERIENCES: Experience[] = [
   {
@@ -144,7 +144,7 @@ export const SKILLS: Skill[] = [
   },
   {
     category: "AI & Productivity",
-    items: ["GitHub Copilot", "Prompt Engineering", "AI Agents", "Gemini/ChatGPT", "Automated Workflows"]
+    items: ["GitHub Copilot", "Gemini 1.5 Pro", "ChatGPT-4o", "MCP Servers", "AI Agents", "Prompt Engineering"]
   },
   {
     category: "DevOps & Tools",
@@ -157,4 +157,19 @@ export const CERTIFICATIONS: Certification[] = [
   { name: "Product Essentials Program", date: "06/2021" },
   { name: "Basic Python Certification", date: "06/2019" },
   { name: "NIIT Java Certification", date: "05/2018" }
+];
+
+export const AWARDS: Award[] = [
+  {
+    title: "Spot Award",
+    issuer: "Oracle",
+    year: "2023",
+    description: "For exceptional delivery of the Payment Service Integration project ahead of schedule."
+  },
+  {
+    title: "Star Performer",
+    issuer: "HighRadius",
+    year: "2021",
+    description: "Recognized for outstanding contributions to the Credit Cloud module and team mentorship."
+  }
 ];
