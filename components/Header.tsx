@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Code2, Download, Sun, Moon } from 'lucide-react';
 
@@ -19,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
   }, []);
 
   const navLinks = [
+    { name: 'Home', href: '#hero', showScrolled: true },
     { name: 'Skills', href: '#skills' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
@@ -49,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
         isScrolled 
-          ? 'bg-white/30 dark:bg-slate-900/50 backdrop-blur-md border-b border-white/20 dark:border-slate-700/30 py-3 shadow-sm' 
+          ? 'bg-white/10 dark:bg-slate-900/40 backdrop-blur-xl border-b border-white/10 py-3 shadow-lg' 
           : 'bg-transparent py-6'
       }`}
     >
@@ -69,21 +71,29 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-white/40 dark:hover:bg-slate-800/50"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            if (link.showScrolled && !isScrolled) return null;
+            
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 
+                  text-slate-600 dark:text-slate-300 
+                  hover:text-primary-600 dark:hover:text-primary-400 
+                  hover:bg-slate-100 dark:hover:bg-white/10 hover:shadow-md
+                  ${link.showScrolled ? 'animate-in fade-in slide-in-from-right-4 duration-500' : ''}`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
           
-          <div className="ml-4 pl-4 border-l border-slate-200/50 dark:border-slate-700/50 flex items-center gap-3">
+          <div className="ml-4 pl-4 border-l border-slate-200/20 dark:border-slate-700/30 flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-full bg-white/20 dark:bg-slate-800/50 hover:bg-white/40 dark:hover:bg-slate-700/50 text-slate-700 dark:text-slate-200 transition-all duration-300 hover:scale-110 focus:outline-none relative overflow-hidden group"
+              className="p-2.5 rounded-full bg-white/10 dark:bg-slate-800/30 hover:bg-white/20 dark:hover:bg-slate-700/50 text-slate-700 dark:text-slate-200 transition-all duration-300 hover:scale-110 focus:outline-none relative overflow-hidden group"
               aria-label="Toggle Theme"
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -106,12 +116,12 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
         <div className="lg:hidden flex items-center gap-4">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full bg-white/20 dark:bg-slate-800/50 text-slate-900 dark:text-white"
+              className="p-2 rounded-full bg-white/10 dark:bg-slate-800/30 text-slate-900 dark:text-white"
             >
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button 
-              className="p-2 rounded-full text-slate-900 dark:text-white hover:bg-white/20"
+              className="p-2 rounded-full text-slate-900 dark:text-white hover:bg-white/10"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X /> : <Menu />}
@@ -121,18 +131,21 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white/90 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 shadow-2xl py-8 px-6 flex flex-col gap-4 animate-in slide-in-from-top-5">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="text-xl font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 text-center"
-            >
-              {link.name}
-            </a>
-          ))}
-          <hr className="border-slate-200 dark:border-slate-800 my-2" />
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white/30 dark:bg-slate-900/60 backdrop-blur-2xl border-t border-white/10 shadow-2xl py-8 px-6 flex flex-col gap-4 animate-in slide-in-from-top-5">
+          {navLinks.map((link) => {
+             if (link.showScrolled && !isScrolled) return null;
+             return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-xl font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 text-center p-2 rounded-xl hover:bg-white/10 transition-colors"
+              >
+                {link.name}
+              </a>
+            );
+          })}
+          <hr className="border-slate-200/20 dark:border-slate-800/30 my-2" />
           <a 
             href="/resume.pdf"
             target="_blank"

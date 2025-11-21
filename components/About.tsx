@@ -17,9 +17,9 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           
           {/* Main Summary Block */}
-          <div className="md:col-span-8 bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-8 md:p-12 rounded-[2.5rem] border border-white/30 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          <div className="md:col-span-8 bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 md:p-12 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300 group">
             <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-2xl bg-primary-100/80 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400">
+              <div className="p-3 rounded-2xl bg-primary-100/50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">
                 <Brain className="w-8 h-8" />
               </div>
               <h3 className="text-2xl font-bold text-slate-800 dark:text-white">Engineering Philosophy</h3>
@@ -29,7 +29,7 @@ const About: React.FC = () => {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {['Java Champion', 'Backend Engineer', 'AI Enthusiast'].map(tag => (
-                <span key={tag} className="px-4 py-2 rounded-full bg-white/30 dark:bg-white/10 text-slate-700 dark:text-slate-300 font-semibold text-sm border border-white/30 dark:border-white/10 shadow-sm">
+                <span key={tag} className="px-4 py-2 rounded-full bg-white/20 dark:bg-white/5 text-slate-700 dark:text-slate-300 font-semibold text-sm border border-white/20 dark:border-white/10 shadow-sm">
                   {tag}
                 </span>
               ))}
@@ -37,7 +37,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Expanded AI Focus Block */}
-          <div className="md:col-span-4 bg-slate-900/80 dark:bg-black/60 backdrop-blur-sm p-8 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group border border-white/10">
+          <div className="md:col-span-4 bg-slate-900/50 dark:bg-black/40 backdrop-blur-xl p-8 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group border border-white/10">
             <div className="absolute top-0 right-0 w-40 h-40 bg-primary-500/20 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
             <div className="relative z-10">
               <div className="flex items-center gap-3 mb-6">
@@ -70,16 +70,16 @@ const About: React.FC = () => {
           </div>
 
           {/* Awards Block */}
-          <div className="md:col-span-6 bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/30 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="md:col-span-6 bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300">
              <div className="flex items-center gap-4 mb-8">
-               <div className="p-3 rounded-2xl bg-yellow-100/80 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
+               <div className="p-3 rounded-2xl bg-yellow-100/50 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
                  <Trophy className="w-8 h-8" />
                </div>
                <h3 className="text-2xl font-bold text-slate-800 dark:text-white">Recognition</h3>
              </div>
              <div className="space-y-6">
                {AWARDS.map((award, idx) => (
-                 <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-white/30 dark:bg-white/5 border border-white/40 dark:border-white/10 hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
+                 <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-white/20 dark:bg-white/5 border border-white/20 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/10 transition-colors">
                     <span className="text-4xl">🏆</span>
                     <div>
                       <h4 className="font-bold text-slate-900 dark:text-white">{award.title}</h4>
@@ -93,8 +93,8 @@ const About: React.FC = () => {
 
           {/* Impact Block */}
           <div className="md:col-span-6 grid grid-rows-2 gap-6">
-             <div className="bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/30 dark:border-white/10 shadow-lg flex items-center gap-6 hover:-translate-y-1 transition-transform">
-                <div className="p-4 bg-green-100/80 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-2xl">
+             <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-lg flex items-center gap-6 hover:-translate-y-1 transition-transform">
+                <div className="p-4 bg-green-100/50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-2xl">
                   <Target className="w-8 h-8" />
                 </div>
                 <div>
@@ -102,8 +102,8 @@ const About: React.FC = () => {
                   <p className="text-slate-600 dark:text-slate-400 mt-1">Reduced approval times by <span className="text-slate-900 dark:text-white font-bold">80%</span> via parallel processing.</p>
                 </div>
              </div>
-             <div className="bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/30 dark:border-white/10 shadow-lg flex items-center gap-6 hover:-translate-y-1 transition-transform">
-                <div className="p-4 bg-purple-100/80 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl">
+             <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-lg flex items-center gap-6 hover:-translate-y-1 transition-transform">
+                <div className="p-4 bg-purple-100/50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl">
                   <Sparkles className="w-8 h-8" />
                 </div>
                 <div>

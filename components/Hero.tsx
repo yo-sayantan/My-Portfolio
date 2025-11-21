@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
           <a 
             href="#contact" 
             onClick={(e) => handleScrollTo(e, '#contact')}
-            className="px-8 py-4 rounded-full bg-white/40 dark:bg-slate-800/40 backdrop-blur-md text-slate-900 dark:text-white border border-white/50 dark:border-slate-700/50 font-bold text-lg hover:bg-white/60 dark:hover:bg-slate-800/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+            className="px-8 py-4 rounded-full bg-white/10 dark:bg-slate-800/20 backdrop-blur-md text-slate-900 dark:text-white border border-white/20 dark:border-slate-700/30 font-bold text-lg hover:bg-white/20 dark:hover:bg-slate-800/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
           >
             Let's Connect
           </a>
@@ -44,15 +44,15 @@ const Hero: React.FC = () => {
 
         <div className="relative inline-block">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-purple-600 rounded-[2.5rem] blur opacity-30 animate-pulse-slow"></div>
-          <div className="relative bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-2 rounded-[2.5rem] shadow-2xl border border-white/20 dark:border-white/10">
+          <div className="relative bg-white/10 dark:bg-slate-900/20 backdrop-blur-lg p-2 rounded-[2.5rem] shadow-2xl border border-white/20 dark:border-white/10">
             <img 
               src="https://github.com/yo-sayantan.png" 
               alt="Sayantan Biswas" 
               className="w-40 h-40 md:w-48 md:h-48 rounded-[2rem] object-cover opacity-95"
             />
             
-            <div className="absolute -bottom-4 -right-8 bg-white/40 dark:bg-slate-800/60 backdrop-blur-md px-4 py-2 rounded-xl shadow-xl border border-white/40 dark:border-slate-700/50 flex items-center gap-3 animate-bounce-slow">
-                <div className="bg-primary-100/80 dark:bg-primary-900/50 p-2 rounded-lg text-primary-600 dark:text-primary-400">
+            <div className="absolute -bottom-4 -right-8 bg-white/30 dark:bg-slate-800/50 backdrop-blur-xl px-4 py-2 rounded-xl shadow-xl border border-white/20 dark:border-slate-700/30 flex items-center gap-3 animate-bounce-slow">
+                <div className="bg-primary-100/50 dark:bg-primary-900/30 p-2 rounded-lg text-primary-600 dark:text-primary-400">
                     <Terminal size={16} />
                 </div>
                 <div className="text-left">
@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
                href={s.href}
                target="_blank"
                rel="noreferrer"
-               className="p-3 rounded-xl bg-white/20 dark:bg-slate-800/30 hover:bg-white/60 dark:hover:bg-slate-700/60 border border-white/30 dark:border-white/10 hover:border-primary-200 text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
+               className="p-3 rounded-xl bg-white/10 dark:bg-slate-800/20 hover:bg-white/30 dark:hover:bg-slate-700/40 border border-white/20 dark:border-white/5 hover:border-primary-200 text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110 hover:shadow-lg transition-all duration-300 backdrop-blur-md"
              >
                <s.Icon size={22} />
              </a>

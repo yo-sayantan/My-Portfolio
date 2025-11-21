@@ -13,14 +13,6 @@ import ParticleNetwork from './components/ParticleNetwork';
 function App() {
   const [isDark, setIsDark] = useState(false);
 
-  // Check system preference on mount
-  useEffect(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setIsDark(true);
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
-
   const toggleTheme = () => {
     setIsDark(!isDark);
     if (!isDark) {

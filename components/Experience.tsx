@@ -143,7 +143,7 @@ const Experience: React.FC = () => {
                     
                     <div className="w-full md:w-[48%] pl-20 md:pl-0">
                        <div className={`
-                          relative bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-8 md:p-12 rounded-[2.5rem] border border-white/30 dark:border-white/10 shadow-xl 
+                          relative bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 md:p-12 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-xl 
                           transition-all duration-500 group
                           hover:-translate-y-2 hover:shadow-[0_0_40px_-5px_rgba(14,165,233,0.4)] hover:border-primary-400/60
                           ${isEven ? 'md:mr-10' : 'md:ml-10'}
@@ -160,7 +160,7 @@ const Experience: React.FC = () => {
                                  {exp.company}
                                </div>
                             </div>
-                            <div className="text-sm font-bold text-slate-500 dark:text-slate-400 bg-white/40 dark:bg-white/10 px-5 py-3 rounded-2xl group-hover:bg-white/80 dark:group-hover:bg-white/20 group-hover:shadow-md transition-all whitespace-nowrap">
+                            <div className="text-sm font-bold text-slate-500 dark:text-slate-400 bg-white/20 dark:bg-white/5 px-5 py-3 rounded-2xl group-hover:bg-white/40 dark:group-hover:bg-white/10 group-hover:shadow-md transition-all whitespace-nowrap">
                                {exp.period}
                             </div>
                           </div>
@@ -177,7 +177,7 @@ const Experience: React.FC = () => {
                           {exp.skills && (
                             <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-200/30 dark:border-slate-700/50">
                               {exp.skills.map((skill) => (
-                                <span key={skill} className="px-3 py-1 text-xs font-bold text-slate-600 dark:text-slate-300 bg-white/40 dark:bg-slate-800/50 rounded-lg border border-white/30 dark:border-slate-700/50 shadow-sm">
+                                <span key={skill} className="px-3 py-1 text-xs font-bold text-slate-600 dark:text-slate-300 bg-white/20 dark:bg-slate-800/50 rounded-lg border border-white/20 dark:border-slate-700/50 shadow-sm">
                                   {skill}
                                 </span>
                               ))}
@@ -190,13 +190,13 @@ const Experience: React.FC = () => {
                          <div 
                            ref={el => { dotRefs.current[idx] = el; }}
                            className={`
-                             relative z-20 w-16 h-16 rounded-full bg-white/60 dark:bg-slate-800/60 backdrop-blur border-4 border-white/80 dark:border-slate-700 shadow-[0_0_30px_rgba(14,165,233,0.3)] 
+                             relative z-20 w-16 h-16 rounded-full bg-white/20 dark:bg-slate-800/30 backdrop-blur-md border-4 border-white/40 dark:border-slate-700 shadow-[0_0_30px_rgba(14,165,233,0.3)] 
                              flex items-center justify-center group transition-transform duration-500 hover:scale-110 pointer-events-auto
                              ${isEven ? 'md:-translate-x-12' : 'md:translate-x-12'}
                            `}
                          >
                             <div className="w-6 h-6 rounded-full bg-gradient-to-r from-primary-500 to-purple-600 shadow-inner group-hover:animate-ping"></div>
-                            <div className="absolute inset-0 rounded-full border border-slate-200 dark:border-slate-600 animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div className="absolute inset-0 rounded-full border border-slate-200/50 dark:border-slate-600/50 animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity"></div>
                          </div>
                     </div>
 

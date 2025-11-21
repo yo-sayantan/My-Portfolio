@@ -27,9 +27,9 @@ const Skills: React.FC = () => {
           {SKILLS.map((skillGroup, idx) => (
             <ScrollReveal key={idx} delay={`delay-[${(idx * 100)}ms]`}>
               <div 
-                className="bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-8 rounded-[2rem] shadow-lg border border-white/30 dark:border-white/10 hover:border-primary-300 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full group relative overflow-hidden"
+                className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-md p-8 rounded-[2rem] shadow-lg border border-white/20 dark:border-white/10 hover:border-primary-300 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full group relative overflow-hidden"
               >
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 bg-white/40 dark:bg-white/10 text-primary-600 dark:text-primary-400 group-hover:scale-110 group-hover:bg-primary-50/50 dark:group-hover:bg-primary-900/30`}>
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 bg-white/20 dark:bg-white/5 text-primary-600 dark:text-primary-400 group-hover:scale-110 group-hover:bg-primary-50/50 dark:group-hover:bg-primary-900/30`}>
                   {getIcon(skillGroup.category)}
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">{skillGroup.category}</h3>
@@ -37,7 +37,7 @@ const Skills: React.FC = () => {
                   {skillGroup.items.map((skill) => (
                     <span 
                       key={skill}
-                      className="px-3 py-1.5 text-sm font-bold text-slate-700 dark:text-slate-300 bg-white/40 dark:bg-white/10 border border-white/40 dark:border-white/10 rounded-lg shadow-sm hover:bg-white/60 dark:hover:bg-white/20 transition-colors"
+                      className="px-3 py-1.5 text-sm font-bold text-slate-700 dark:text-slate-300 bg-white/20 dark:bg-white/5 border border-white/20 dark:border-white/10 rounded-lg shadow-sm hover:bg-white/40 dark:hover:bg-white/10 transition-colors"
                     >
                       {skill}
                     </span>
