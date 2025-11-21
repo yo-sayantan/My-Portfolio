@@ -14,10 +14,10 @@ const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
+    { name: 'About', href: '#about' },
     { name: 'Education', href: '#education' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -26,7 +26,7 @@ const Header: React.FC = () => {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
-      const offset = 80;
+      const offset = 100;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;

@@ -5,7 +5,7 @@ import ScrollReveal from './ScrollReveal';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-32 bg-transparent relative">
+    <section id="contact" className="py-20 bg-transparent relative">
       <div className="container mx-auto px-6 relative z-10">
         <ScrollReveal>
             <div className="mb-16 text-center">
@@ -19,11 +19,11 @@ const Contact: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           
           <ScrollReveal delay="delay-100">
-            {/* More Transparent Glass: bg-white/50 */}
-            <div className="bg-white/50 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 shadow-xl hover:shadow-2xl transition-all duration-300">
+            {/* High Transparency Glass */}
+            <div className="bg-white/30 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300">
               <h3 className="text-2xl font-bold text-slate-900 mb-8">Contact Information</h3>
               <div className="space-y-6">
-                <a href={`mailto:${SOCIAL_LINKS.email}`} className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-slate-100 hover:bg-white/80 hover:shadow-md transition-all group">
+                <a href={`mailto:${SOCIAL_LINKS.email}`} className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-white/50 hover:bg-white/60 hover:shadow-md transition-all group">
                   <div className="p-3 bg-primary-100 text-primary-600 rounded-xl group-hover:scale-110 transition-transform">
                     <Mail className="w-6 h-6" />
                   </div>
@@ -33,7 +33,7 @@ const Contact: React.FC = () => {
                   </div>
                 </a>
 
-                <a href={`tel:${SOCIAL_LINKS.phone}`} className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-slate-100 hover:bg-white/80 hover:shadow-md transition-all group">
+                <a href={`tel:${SOCIAL_LINKS.phone}`} className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-white/50 hover:bg-white/60 hover:shadow-md transition-all group">
                   <div className="p-3 bg-primary-100 text-primary-600 rounded-xl group-hover:scale-110 transition-transform">
                     <Phone className="w-6 h-6" />
                   </div>
@@ -43,7 +43,7 @@ const Contact: React.FC = () => {
                   </div>
                 </a>
 
-                <div className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-slate-100">
+                <div className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-white/50">
                   <div className="p-3 bg-primary-100 text-primary-600 rounded-xl">
                     <MapPin className="w-6 h-6" />
                   </div>
@@ -57,29 +57,29 @@ const Contact: React.FC = () => {
           </ScrollReveal>
 
           <ScrollReveal delay="delay-200">
-            {/* More Transparent Glass: bg-white/50 */}
-            <div className="bg-white/50 backdrop-blur-md rounded-[2.5rem] border border-white/60 p-8 shadow-xl">
+            {/* High Transparency Glass */}
+            <div className="bg-white/30 backdrop-blur-xl rounded-[2.5rem] border border-white/40 p-8 shadow-xl">
               <h3 className="text-2xl font-bold text-slate-900 mb-6">Send a Message</h3>
               <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-2 gap-5">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Name</label>
-                    <input type="text" id="name" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-slate-200 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="John Doe" />
+                    <input type="text" id="name" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-white/50 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="John Doe" />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Email</label>
-                    <input type="email" id="email" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-slate-200 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="john@example.com" />
+                    <input type="email" id="email" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-white/50 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="john@example.com" />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
                   <label htmlFor="subject" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Subject</label>
-                  <input type="text" id="subject" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-slate-200 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="Project discussion" />
+                  <input type="text" id="subject" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-white/50 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="Project discussion" />
                 </div>
 
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Message</label>
-                  <textarea id="message" rows={4} className="w-full px-4 py-3 rounded-xl bg-white/40 border border-slate-200 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all resize-none font-medium placeholder:text-slate-400" placeholder="Tell me about your project..."></textarea>
+                  <textarea id="message" rows={4} className="w-full px-4 py-3 rounded-xl bg-white/40 border border-white/50 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all resize-none font-medium placeholder:text-slate-400" placeholder="Tell me about your project..."></textarea>
                 </div>
 
                 <button type="submit" className="w-full py-4 px-6 bg-slate-900 hover:bg-primary-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 hover:-translate-y-1">

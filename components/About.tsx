@@ -18,8 +18,8 @@ const About: React.FC = () => {
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           
-          {/* Main Summary Block - 8 Columns */}
-          <div className="md:col-span-8 bg-white/70 backdrop-blur-md p-8 md:p-12 rounded-[2.5rem] border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 group">
+          {/* Main Summary Block - High Transparency Glass */}
+          <div className="md:col-span-8 bg-white/30 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 group">
             <div className="flex items-center gap-4 mb-6">
               <div className="p-3 rounded-2xl bg-primary-100 text-primary-600">
                 <Brain className="w-8 h-8" />
@@ -31,15 +31,15 @@ const About: React.FC = () => {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {['Java Champion', 'Cloud Architect', 'AI Enthusiast'].map(tag => (
-                <span key={tag} className="px-4 py-2 rounded-full bg-slate-100 text-slate-600 font-semibold text-sm border border-slate-200">
+                <span key={tag} className="px-4 py-2 rounded-full bg-white/50 text-slate-600 font-semibold text-sm border border-white/50">
                   {tag}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* AI Focus Block - 4 Columns */}
-          <div className="md:col-span-4 bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group">
+          {/* AI Focus Block */}
+          <div className="md:col-span-4 bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl p-8 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-40 h-40 bg-primary-500/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
             <div className="relative z-10">
               <div className="flex items-center gap-3 mb-6">
@@ -61,8 +61,8 @@ const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Awards Block - 6 Columns */}
-          <div className="md:col-span-6 bg-white/70 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300">
+          {/* Awards Block - High Transparency */}
+          <div className="md:col-span-6 bg-white/30 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300">
              <div className="flex items-center gap-4 mb-8">
                <div className="p-3 rounded-2xl bg-yellow-100 text-yellow-600">
                  <Trophy className="w-8 h-8" />
@@ -71,7 +71,7 @@ const About: React.FC = () => {
              </div>
              <div className="space-y-6">
                {AWARDS.map((award, idx) => (
-                 <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-white/50 border border-white/60 hover:bg-white transition-colors">
+                 <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-white/40 border border-white/50 hover:bg-white/60 transition-colors">
                     <span className="text-4xl">🏆</span>
                     <div>
                       <h4 className="font-bold text-slate-900">{award.title}</h4>
@@ -83,24 +83,24 @@ const About: React.FC = () => {
              </div>
           </div>
 
-          {/* Impact Block - 6 Columns */}
+          {/* Impact Block - High Transparency */}
           <div className="md:col-span-6 grid grid-rows-2 gap-6">
-             <div className="bg-white/70 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/40 shadow-xl flex items-center gap-6 hover:-translate-y-1 transition-transform">
+             <div className="bg-white/30 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/40 shadow-xl flex items-center gap-6 hover:-translate-y-1 transition-transform">
                 <div className="p-4 bg-green-100 text-green-600 rounded-2xl">
                   <Target className="w-8 h-8" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900">Result Driven</h4>
-                  <p className="text-slate-500 mt-1">Reduced approval times by <span className="text-slate-900 font-bold">80%</span> via parallel processing.</p>
+                  <p className="text-slate-600 mt-1">Reduced approval times by <span className="text-slate-900 font-bold">80%</span> via parallel processing.</p>
                 </div>
              </div>
-             <div className="bg-white/70 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/40 shadow-xl flex items-center gap-6 hover:-translate-y-1 transition-transform">
+             <div className="bg-white/30 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/40 shadow-xl flex items-center gap-6 hover:-translate-y-1 transition-transform">
                 <div className="p-4 bg-purple-100 text-purple-600 rounded-2xl">
                   <Sparkles className="w-8 h-8" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900">Innovation</h4>
-                  <p className="text-slate-500 mt-1">Designed <span className="text-slate-900 font-bold">Dynamic Notification</span> systems boosting user retention.</p>
+                  <p className="text-slate-600 mt-1">Designed <span className="text-slate-900 font-bold">Dynamic Notification</span> systems boosting user retention.</p>
                 </div>
              </div>
           </div>

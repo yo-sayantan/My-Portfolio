@@ -36,16 +36,16 @@ const ParticleNetwork: React.FC = () => {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        // Ultra slow, ambient drift
-        this.vx = (Math.random() - 0.5) * 0.08; 
-        this.vy = (Math.random() - 0.5) * 0.08;
+        // Slow drift
+        this.vx = (Math.random() - 0.5) * 0.15; 
+        this.vy = (Math.random() - 0.5) * 0.15;
         this.size = Math.random() * 2 + 1.5; 
 
-        // Vivid Colors with high opacity for maximum visibility
+        // DARKER COLORS FOR VISIBILITY ON LIGHT BACKGROUND
         const rand = Math.random();
-        if (rand > 0.95) this.color = 'rgba(14, 165, 233, 0.9)'; // Primary Blue
-        else if (rand > 0.90) this.color = 'rgba(168, 85, 247, 0.9)'; // Purple
-        else this.color = 'rgba(71, 85, 105, 0.6)'; // Slate-600 (Darker grey for contrast)
+        if (rand > 0.92) this.color = 'rgba(14, 165, 233, 0.8)'; // Primary Blue
+        else if (rand > 0.84) this.color = 'rgba(168, 85, 247, 0.8)'; // Purple
+        else this.color = 'rgba(30, 41, 59, 0.6)'; // Slate-800 (Much darker for contrast)
       }
 
       update() {
@@ -67,8 +67,8 @@ const ParticleNetwork: React.FC = () => {
 
     const initParticles = () => {
       particles = [];
-      // Very High Density
-      const particleCount = Math.min(Math.floor((width * height) / 3500), 300);
+      // Balanced Density
+      const particleCount = Math.min(Math.floor((width * height) / 4000), 250);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
@@ -81,17 +81,17 @@ const ParticleNetwork: React.FC = () => {
         particle.update();
         particle.draw();
 
-        // Network Connections
+        // Network Connections - Darker lines
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particle.x - particles[j].x;
           const dy = particle.y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 120) {
+          if (distance < 130) {
             ctx.beginPath();
-            // Stronger opacity for visibility
-            ctx.strokeStyle = `rgba(148, 163, 184, ${0.3 * (1 - distance / 120)})`;
-            ctx.lineWidth = 0.8;
+            // Darker stroke style for visibility
+            ctx.strokeStyle = `rgba(71, 85, 105, ${0.25 * (1 - distance / 130)})`;
+            ctx.lineWidth = 0.6;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
@@ -105,7 +105,7 @@ const ParticleNetwork: React.FC = () => {
 
         if (distance < 250) {
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(14, 165, 233, ${0.5 * (1 - distance / 250)})`;
+          ctx.strokeStyle = `rgba(14, 165, 233, ${0.4 * (1 - distance / 250)})`;
           ctx.lineWidth = 1;
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(mouse.x, mouse.y);
@@ -141,6 +141,7 @@ const ParticleNetwork: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
+      // Removed mix-blend-mode to ensure particles sit ON TOP of the background color
     />
   );
 };

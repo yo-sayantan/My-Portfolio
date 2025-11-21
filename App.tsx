@@ -17,10 +17,10 @@ function App() {
       <Header />
       <main className="relative z-10">
         <Hero />
-        <About />
         <Skills />
         <Experience />
         <Projects />
+        <About />
         <Education />
         <Contact />
       </main>

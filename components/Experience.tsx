@@ -161,13 +161,13 @@ const Experience: React.FC = () => {
                     {/* 1. The Card (Increased width to 48% to fill space) */}
                     <div className="w-full md:w-[48%] pl-20 md:pl-0">
                        <div className={`
-                          relative bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-[2.5rem] border border-white/60 shadow-xl 
+                          relative bg-white/30 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/40 shadow-xl 
                           transition-all duration-500 group
-                          hover:-translate-y-2 hover:shadow-[0_0_40px_-5px_rgba(14,165,233,0.4)] hover:border-primary-400
+                          hover:-translate-y-2 hover:shadow-[0_0_40px_-5px_rgba(14,165,233,0.4)] hover:border-primary-400/60
                           ${isEven ? 'md:mr-10' : 'md:ml-10'}
                        `}>
                           {/* Subtle Gradient Glow on Hover */}
-                          <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                          <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
                           <div className="flex flex-col xl:flex-row justify-between items-start gap-4 mb-8">
                             <div className="space-y-2">
@@ -179,7 +179,7 @@ const Experience: React.FC = () => {
                                  {exp.company}
                                </div>
                             </div>
-                            <div className="text-sm font-bold text-slate-500 bg-slate-100 px-5 py-3 rounded-2xl group-hover:bg-white group-hover:shadow-md transition-all whitespace-nowrap">
+                            <div className="text-sm font-bold text-slate-500 bg-white/60 px-5 py-3 rounded-2xl group-hover:bg-white group-hover:shadow-md transition-all whitespace-nowrap">
                                {exp.period}
                             </div>
                           </div>
@@ -200,7 +200,7 @@ const Experience: React.FC = () => {
                          <div 
                            ref={el => { dotRefs.current[idx] = el; }}
                            className={`
-                             relative z-20 w-16 h-16 rounded-full bg-white border-4 border-slate-100 shadow-[0_0_30px_rgba(14,165,233,0.3)] 
+                             relative z-20 w-16 h-16 rounded-full bg-white/80 backdrop-blur border-4 border-white shadow-[0_0_30px_rgba(14,165,233,0.3)] 
                              flex items-center justify-center group transition-transform duration-500 hover:scale-110 pointer-events-auto
                              ${isEven ? 'md:-translate-x-12' : 'md:translate-x-12'}
                            `}

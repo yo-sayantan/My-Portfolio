@@ -18,7 +18,7 @@ const Projects: React.FC = () => {
               A showcase of professional work and personal innovations.
             </p>
             
-            <div className="inline-flex p-1.5 bg-white/80 backdrop-blur rounded-xl border border-slate-200 shadow-sm">
+            <div className="inline-flex p-1.5 bg-white/30 backdrop-blur-xl rounded-xl border border-white/40 shadow-sm">
               {['All', 'Work', 'Personal'].map((type) => (
                 <button
                   key={type}
@@ -26,7 +26,7 @@ const Projects: React.FC = () => {
                   className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${
                     filter === type 
                       ? 'bg-slate-900 text-white shadow-lg scale-105' 
-                      : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                      : 'text-slate-500 hover:bg-white/50 hover:text-slate-700'
                   }`}
                 >
                   {type}
@@ -39,14 +39,14 @@ const Projects: React.FC = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, idx) => (
             <ScrollReveal key={project.id} delay={`delay-[${(idx % 3) * 100}ms]`} variant="zoom-in">
-              <div className={`bg-white/80 backdrop-blur-md rounded-[2rem] border border-white/60 shadow-lg overflow-hidden transition-all duration-300 flex flex-col h-full group relative hover:-translate-y-2 hover:shadow-2xl`}>
+              <div className={`bg-white/30 backdrop-blur-xl rounded-[2rem] border border-white/40 shadow-lg overflow-hidden transition-all duration-300 flex flex-col h-full group relative hover:-translate-y-2 hover:shadow-2xl`}>
                 
                 <div className={`h-1.5 w-full transition-all duration-500 ${project.type === 'Work' ? 'bg-blue-500 group-hover:h-2.5' : 'bg-purple-500 group-hover:h-2.5'}`} />
                 
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex items-center justify-between mb-6">
                     <div className={`p-3 rounded-2xl transition-all duration-300 ${
-                        project.type === 'Work' ? 'bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white' : 'bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white'
+                        project.type === 'Work' ? 'bg-blue-50/80 text-blue-600 group-hover:bg-blue-600 group-hover:text-white' : 'bg-purple-50/80 text-purple-600 group-hover:bg-purple-600 group-hover:text-white'
                     }`}>
                       {project.type === 'Work' ? <Briefcase size={20} /> : <FolderGit2 size={20} />}
                     </div>
@@ -68,9 +68,9 @@ const Projects: React.FC = () => {
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-slate-100">
+                  <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-slate-100/50">
                     {project.techStack.map((tech) => (
-                      <span key={tech} className="text-xs font-bold text-slate-500 bg-slate-100/80 px-3 py-1.5 rounded-lg border border-slate-200">
+                      <span key={tech} className="text-xs font-bold text-slate-500 bg-white/40 px-3 py-1.5 rounded-lg border border-white/40">
                         {tech}
                       </span>
                     ))}

@@ -26,10 +26,11 @@ const Skills: React.FC = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SKILLS.map((skillGroup, idx) => (
             <ScrollReveal key={idx} delay={`delay-[${(idx * 100)}ms]`}>
+              {/* High Transparency Floating Glass Card */}
               <div 
-                className="bg-white/70 backdrop-blur-md p-8 rounded-[2rem] shadow-lg border border-white/50 hover:border-primary-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-full group relative overflow-hidden"
+                className="bg-white/30 backdrop-blur-xl p-8 rounded-[2rem] shadow-lg border border-white/40 hover:border-primary-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-full group relative overflow-hidden"
               >
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 bg-slate-50 text-primary-600 group-hover:scale-110 group-hover:bg-primary-50`}>
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 bg-white/50 text-primary-600 group-hover:scale-110 group-hover:bg-primary-50`}>
                   {getIcon(skillGroup.category)}
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-6">{skillGroup.category}</h3>
@@ -37,7 +38,7 @@ const Skills: React.FC = () => {
                   {skillGroup.items.map((skill) => (
                     <span 
                       key={skill}
-                      className="px-3 py-1.5 text-sm font-bold text-slate-600 bg-white/80 border border-slate-200 rounded-lg shadow-sm"
+                      className="px-3 py-1.5 text-sm font-bold text-slate-600 bg-white/50 border border-white/50 rounded-lg shadow-sm hover:bg-white transition-colors"
                     >
                       {skill}
                     </span>

@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <ChevronDown className="text-slate-400 w-8 h-8 cursor-pointer" onClick={(e) => handleScrollTo(e as any, '#about')} />
+        <ChevronDown className="text-slate-400 w-8 h-8 cursor-pointer" onClick={(e) => handleScrollTo(e as any, '#skills')} />
       </div>
     </section>
   );
