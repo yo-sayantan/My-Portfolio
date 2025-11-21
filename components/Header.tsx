@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Code2, Download, Sun, Moon } from 'lucide-react';
 
@@ -19,8 +20,8 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
       const sections = document.querySelectorAll('section');
       let current = 'hero';
       
-      // Highlight the section that is currently in the middle of the viewport
-      const scrollPosition = window.scrollY + (window.innerHeight / 3);
+      // Check which section is currently in the middle of the viewport
+      const scrollPosition = window.scrollY + (window.innerHeight / 2);
 
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
@@ -98,10 +99,10 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`px-4 py-2 rounded-full text-sm transition-all duration-200 
+                className={`px-4 py-2 rounded-full text-sm transition-all duration-300 
                   ${isActive 
-                    ? 'bg-slate-100 dark:bg-white/10 text-primary-600 dark:text-primary-400 font-extrabold shadow-sm' 
-                    : 'text-slate-600 dark:text-slate-300 font-medium hover:font-bold hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5'}
+                    ? 'bg-slate-900 text-white font-bold shadow-md' 
+                    : 'text-slate-600 dark:text-slate-300 font-medium hover:font-bold hover:bg-slate-950 hover:text-white dark:hover:bg-white dark:hover:text-slate-950 hover:shadow-lg hover:-translate-y-0.5'}
                   ${link.showScrolled ? 'animate-in fade-in slide-in-from-right-4 duration-500' : ''}`}
               >
                 {link.name}

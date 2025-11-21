@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, ChevronDown, Terminal } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
@@ -11,7 +10,7 @@ const Hero: React.FC = () => {
   };
 
   const experienceYears = useMemo(() => {
-    const startDate = new Date('2020-05-01');
+    const startDate = new Date('2020-07-01');
     const today = new Date();
     const diffTime = Math.abs(today.getTime() - startDate.getTime());
     const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25);
@@ -54,10 +53,11 @@ const Hero: React.FC = () => {
         <div className="relative inline-block">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-purple-600 rounded-[2.5rem] blur opacity-30 animate-pulse-slow"></div>
           <div className="relative bg-white/10 dark:bg-slate-900/20 backdrop-blur-lg p-2 rounded-[2.5rem] shadow-2xl border border-white/20 dark:border-white/10">
+            {/* Increased size here: w-64 h-64 md:w-80 md:h-80 */}
             <img 
               src="https://github.com/yo-sayantan.png" 
               alt="Sayantan Biswas" 
-              className="w-56 h-56 md:w-72 md:h-72 rounded-[2rem] object-cover opacity-95"
+              className="w-64 h-64 md:w-80 md:h-80 rounded-[2rem] object-cover opacity-95"
             />
             
             <div className="absolute -bottom-4 -right-8 bg-white/30 dark:bg-slate-800/50 backdrop-blur-xl px-4 py-2 rounded-xl shadow-xl border border-white/20 dark:border-slate-700/30 flex items-center gap-3 animate-bounce-slow">
@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
                 </div>
                 <div className="text-left">
                     <p className="text-[10px] uppercase font-bold text-slate-600 dark:text-slate-400 tracking-wider">Experience</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">{experienceYears} years</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white">{experienceYears} Years</p>
                 </div>
             </div>
           </div>
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
              <a 
                key={i} 
                href={s.href}
-               target="_blank"
+               target="_blank" 
                rel="noreferrer"
                className="p-3 rounded-xl bg-white/10 dark:bg-slate-800/20 hover:bg-white/30 dark:hover:bg-slate-700/40 border border-white/20 dark:border-white/5 hover:border-primary-200 text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110 hover:shadow-lg transition-all duration-300 backdrop-blur-md"
              >
