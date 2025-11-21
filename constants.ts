@@ -108,7 +108,7 @@ export const PROJECTS: Project[] = [
       'Responsive React UI with Dark Mode Support',
       'RESTful API Design with Swagger Documentation'
     ],
-    link: 'https://github.com/yo-sayantan/book-exchange'
+    link: 'https://github.com/yo-sayantan/Book_Exchange_Project'
   },
   {
     id: 'quick-task',
@@ -124,7 +124,7 @@ export const PROJECTS: Project[] = [
       'Customizable Task Categories & Priorities',
       'Push Notifications for Deadlines'
     ],
-    link: 'https://github.com/yo-sayantan/quick-task'
+    link: 'https://github.com/yo-sayantan/QuickTask_Pro'
   },
   {
     id: 'legal-entity',
@@ -169,8 +169,7 @@ export const PROJECTS: Project[] = [
       'Portfolio Rebalancing Alerts',
       'Visual Data Analysis with Matplotlib',
       'Google Sheets Bi-directional Sync'
-    ],
-    link: 'https://github.com/yo-sayantan/investment-tracker'
+    ]
   },
   {
     id: 'os-scheduler',
@@ -186,7 +185,7 @@ export const PROJECTS: Project[] = [
       'Performance Metrics (Turnaround Time, Wait Time)',
       'Bash Scripts for Automated Testing'
     ],
-    link: 'https://github.com/yo-sayantan/os-scheduler'
+    link: 'https://github.com/yo-sayantan/OS_Scheduling'
   }
 ];
 

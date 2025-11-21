@@ -1,4 +1,3 @@
-
 import { SUMMARY, EXPERIENCES, PROJECTS, SKILLS, SOCIAL_LINKS } from '../constants';
 
 const RESUME_DATA = {
@@ -34,13 +33,17 @@ Guidelines:
  */
 export const sendMessageToGemini = async (message: string): Promise<string> => {
   try {
+    // Include the current URL to give context to the AI about where the user is
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : 'Unknown';
+    const promptWithContext = `[Current Page Context: ${currentUrl}]\n\n${message}`;
+
     const response = await fetch('/.netlify/functions/ai', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        prompt: message,
+        prompt: promptWithContext,
         systemInstruction: SYSTEM_INSTRUCTION
       }),
     });

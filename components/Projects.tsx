@@ -36,7 +36,7 @@ const Projects: React.FC = () => {
     setTimeout(() => {
       window.open(link, '_blank');
       setIsRedirecting(false);
-    }, 1200);
+    }, 1500);
   };
 
   const renderDoodle = (project: Project) => {
@@ -148,8 +148,9 @@ const Projects: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center mb-20">
           <ScrollReveal>
-            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-6">
-              Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-purple-500">Projects</span>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">Featured </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-purple-500">Projects</span>
             </h2>
           </ScrollReveal>
           
@@ -255,17 +256,18 @@ const Projects: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
           <div 
             className="absolute inset-0 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300" 
-            onClick={() => setSelectedProject(null)}
+            onClick={() => !isRedirecting && setSelectedProject(null)}
           ></div>
-          <div className="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl relative z-10 animate-in zoom-in-95 duration-300 border border-slate-200 dark:border-white/10 flex flex-col">
+          <div className={`bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl relative z-10 animate-in zoom-in-95 duration-300 border border-slate-200 dark:border-white/10 flex flex-col transition-opacity duration-300 ${isRedirecting ? 'pointer-events-none opacity-90' : ''}`}>
              
              {/* Modal Header */}
-             <div className="relative h-48 md:h-64 shrink-0 bg-slate-100 dark:bg-slate-950 overflow-hidden group">
+             <div className={`relative h-48 md:h-64 shrink-0 bg-slate-100 dark:bg-slate-950 overflow-hidden group ${isRedirecting ? 'opacity-50' : ''}`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-purple-500/10">
                    {renderDoodle(selectedProject)}
                 </div>
                 <button 
                   onClick={() => setSelectedProject(null)}
+                  disabled={isRedirecting}
                   className="absolute top-6 right-6 p-2.5 bg-white/20 backdrop-blur-md border border-white/10 text-slate-900 dark:text-white rounded-full hover:bg-white/40 transition-colors z-20"
                 >
                   <X size={20} />
@@ -281,7 +283,7 @@ const Projects: React.FC = () => {
              </div>
 
              {/* Modal Content */}
-             <div className="p-6 md:p-10 grid lg:grid-cols-3 gap-10">
+             <div className={`p-6 md:p-10 grid lg:grid-cols-3 gap-10 transition-opacity duration-300 ${isRedirecting ? 'opacity-50' : ''}`}>
                
                {/* Main Info - Left Col */}
                <div className="lg:col-span-2 space-y-8">
@@ -341,7 +343,7 @@ const Projects: React.FC = () => {
                          {isRedirecting ? (
                             <>
                               <Loader2 size={18} className="animate-spin" />
-                              <span className="animate-pulse">Opening Repository...</span>
+                              <span className="animate-pulse">Redirecting to GitHub...</span>
                             </>
                          ) : (
                             <>

@@ -82,7 +82,7 @@ const Experience: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="mb-24 text-center">
           <ScrollReveal>
-            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-6">Professional Journey</h2>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">Professional Journey</h2>
           </ScrollReveal>
           <ScrollReveal delay="delay-100">
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">

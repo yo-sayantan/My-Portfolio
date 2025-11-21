@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, ChevronDown, Terminal } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
@@ -37,7 +36,7 @@ const Hero: React.FC = () => {
     { 
       Icon: Linkedin, 
       href: SOCIAL_LINKS.linkedin, 
-      label: "LinkedIn",
+      label: "LinkedIn", 
       color: "text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
     },
     { 
@@ -49,19 +48,19 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden selection:bg-primary-500/30">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden selection:bg-primary-500/30">
       
       {/* Modern Background Elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-[120px] -z-10 animate-pulse"></div>
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] -z-10"></div>
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[120px] -z-10 opacity-60"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* Layout: Flex Col on Mobile, Flex Row on Large, Absolute Image on 2XL for true centering */}
-        <div className="flex flex-col lg:flex-row 2xl:block items-center lg:justify-between 2xl:justify-center relative w-full">
+        {/* Grid Layout: Text Left (Centered Content), Image Right */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
             
-            {/* Text Content - Takes available space on LG, Centered on 2XL */}
-            <div className="flex flex-col items-center text-center lg:flex-1 2xl:w-full 2xl:max-w-5xl 2xl:mx-auto relative z-20">
+            {/* Text Content - Centered Alignment */}
+            <div className="flex flex-col items-center text-center order-2 lg:order-1 relative z-20">
                 
                 {/* Status Badge */}
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-slate-200/20 backdrop-blur-xl shadow-lg mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
@@ -72,26 +71,28 @@ const Hero: React.FC = () => {
                     <span className="text-xs font-bold tracking-widest uppercase text-slate-600 dark:text-slate-300">Looking for Exciting Opportunities</span>
                 </div>
 
-                {/* Main Headline */}
-                <h1 className="text-5xl md:text-7xl xl:text-8xl font-extrabold tracking-tighter mb-8 leading-[1.1] max-w-4xl 2xl:max-w-5xl mx-auto relative z-20">
-                  <span className="block text-slate-900 dark:text-white">Engineering</span>
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 via-blue-500 to-purple-600 animate-gradient-x bg-[length:200%_auto]">
+                {/* Main Headline with Improved Spacing */}
+                <h1 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tight mb-8 leading-tight">
+                  <span className="block bg-clip-text text-transparent bg-gradient-to-b from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-500 drop-shadow-sm pb-3">
+                    Engineering
+                  </span>
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 via-blue-500 to-purple-600 animate-gradient-x bg-[length:200%_auto] py-2">
                     Intelligent Systems
                   </span>
                 </h1>
 
                 {/* Subheadline */}
-                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
-                  Senior Software Engineer architecting scalable <span className="text-slate-900 dark:text-white font-semibold">Cloud Solutions</span> and <span className="text-slate-900 dark:text-white font-semibold">AI Agents</span>. 
+                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mb-10 leading-relaxed font-medium">
+                  Senior Software Engineer architecting scalable <span className="text-slate-900 dark:text-white font-bold">Cloud Solutions</span> and <span className="text-slate-900 dark:text-white font-bold">AI Agents</span>. 
                   I turn complex problems into elegant, production-ready code.
                 </p>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16 relative z-20">
+                <div className="flex flex-col sm:flex-row items-center gap-5 mb-12">
                     <a 
                         href="#projects" 
                         onClick={(e) => handleScrollTo(e, '#projects')}
-                        className="group relative px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                        className="group relative px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-300 hover:-translate-y-1 overflow-hidden w-full sm:w-auto flex justify-center"
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <span className="relative flex items-center gap-2">
@@ -102,15 +103,14 @@ const Hero: React.FC = () => {
                     <a 
                         href="#contact" 
                         onClick={(e) => handleScrollTo(e, '#contact')}
-                        className="group px-8 py-4 rounded-full bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
+                        className="group px-8 py-4 rounded-full bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto flex justify-center"
                     >
                        Let's Connect
                     </a>
                 </div>
 
                 {/* Social Proof / Icons */}
-                <div className="flex items-center justify-center gap-8 mb-12 lg:mb-0 relative z-20">
-                   <div className="h-px w-12 bg-gradient-to-r from-transparent to-slate-300 dark:to-slate-700"></div>
+                <div className="flex items-center gap-6">
                    <div className="flex gap-6">
                       {socials.map((s, i) => (
                         <a 
@@ -125,19 +125,13 @@ const Hero: React.FC = () => {
                         </a>
                       ))}
                    </div>
-                   <div className="h-px w-12 bg-gradient-to-l from-transparent to-slate-300 dark:to-slate-700"></div>
                 </div>
 
             </div>
 
-            {/* Image Section */}
-            {/* Flex Item on LG (Safe Layout), Absolute on 2XL (True Centering) */}
-            <div className="
-                w-full flex justify-center pointer-events-none select-none
-                mt-12 lg:mt-0 lg:w-auto lg:shrink-0 lg:ml-20
-                2xl:absolute 2xl:right-0 2xl:top-1/2 2xl:-translate-y-1/2 2xl:m-0 2xl:block 2xl:pr-0
-            ">
-                <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-[320px] lg:h-[320px] pointer-events-auto group perspective-1000">
+            {/* Image Section - Right Column */}
+            <div className="flex justify-center lg:justify-end order-1 lg:order-2 relative z-10 mb-12 lg:mb-0">
+                <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] pointer-events-auto group perspective-1000">
                     
                     {/* Partition/Background Elements - Circular */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-primary-600 to-purple-600 rounded-full rotate-6 scale-105 opacity-20 dark:opacity-40 group-hover:rotate-12 transition-transform duration-500"></div>
@@ -146,11 +140,6 @@ const Hero: React.FC = () => {
 
                     {/* Main Image Container - Circular */}
                     <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl border border-white/20 dark:border-white/5 bg-white dark:bg-slate-900 z-10 transform transition-transform duration-500 group-hover:scale-[1.02]">
-                        {/* 
-                           TODO: To use your own image:
-                           1. Add a file named 'profile.png' to your 'public' folder.
-                           2. Change the src below to "/profile.png"
-                        */}
                         <img 
                             src="https://github.com/yo-sayantan.png" 
                             alt="Sayantan Biswas" 
@@ -159,8 +148,8 @@ const Hero: React.FC = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
 
-                    {/* Experience Badge - Thin Bluish Glassy */}
-                    <div className="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 z-20 
+                    {/* Experience Badge */}
+                    <div className="absolute -bottom-2 -right-2 md:bottom-4 md:right-4 z-20 
                         bg-sky-100/20 dark:bg-sky-900/20 backdrop-blur-xl 
                         p-3 rounded-xl border border-white/30 dark:border-white/10 
                         shadow-[0_8px_32px_0_rgba(14,165,233,0.15)]

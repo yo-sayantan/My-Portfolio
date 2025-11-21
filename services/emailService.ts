@@ -3,6 +3,7 @@ export interface EmailData {
   name: string;
   email: string;
   message: string;
+  type?: 'contact' | 'transcript';
 }
 
 export interface EmailResponse {
@@ -16,7 +17,7 @@ export interface EmailResponse {
  */
 export const sendEmail = async (data: EmailData): Promise<EmailResponse> => {
   console.group('📨 Email Service (Netlify Function)');
-  console.log('Sending data to backend...');
+  console.log(`Sending ${data.type || 'contact'} email to backend...`);
 
   if (!data.email || !data.message || !data.name) {
     console.groupEnd();
@@ -25,8 +26,6 @@ export const sendEmail = async (data: EmailData): Promise<EmailResponse> => {
 
   try {
     // Call the Netlify Function
-    // In development, `netlify dev` will proxy this.
-    // In production, it hits the function endpoint.
     const response = await fetch('/.netlify/functions/sendEmail', {
       method: 'POST',
       headers: {
@@ -43,9 +42,12 @@ export const sendEmail = async (data: EmailData): Promise<EmailResponse> => {
     console.log('✅ Backend processed email successfully.');
 
     console.groupEnd();
+    
     return {
       success: true,
-      reply: "Thank you for reaching out. I have received your message and will respond shortly."
+      reply: data.type === 'transcript' 
+        ? "Transcript sent successfully!" 
+        : "Message sent! 🚀 I'll reply faster than a hot-reloaded React component (usually)."
     };
 
   } catch (error) {

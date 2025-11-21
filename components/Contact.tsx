@@ -105,8 +105,10 @@ const Contact: React.FC = () => {
              {/* Left Side - Text & Info */}
              <div className="text-left">
                 <ScrollReveal variant="slide-right">
-                  <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-6">
-                    Let's build something <br />
+                  <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">
+                    <span className="block bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
+                      Let's build something
+                    </span>
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-purple-500">extraordinary.</span>
                   </h2>
                   <p className="text-slate-600 dark:text-slate-400 text-lg mb-10 max-w-md leading-relaxed">

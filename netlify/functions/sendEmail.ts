@@ -5,12 +5,13 @@ interface EmailPayload {
   name: string;
   email: string;
   message: string;
+  type?: 'contact' | 'transcript';
 }
 
 // Environment variables
 const GMAIL_USER = process.env.GMAIL_USER;
 const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
-const TO_EMAIL = "sayantanbiswas.mycareer@gmail.com"; // Where you want to receive the emails
+const OWNER_EMAIL = "sayantanbiswas.mycareer@gmail.com"; // Your email
 
 export default async (req: Request) => {
   // Handle CORS preflight
@@ -34,22 +35,18 @@ export default async (req: Request) => {
     // Netlify headers for IP
     const ip = req.headers.get('x-nf-client-connection-ip') || req.headers.get('client-ip') || 'Unknown'; 
     
-    if (!body.name || !body.email || !body.message) {
+    if (!body.email || !body.message) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
+    const isTranscript = body.type === 'transcript';
+
     // --- DEMO MODE / FALLBACK ---
-    // If credentials are missing, log to console (prevents app crash during dev/demo)
     if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
-      console.log("⚠️  GMAIL CREDENTIALS MISSING - RUNNING IN DEMO MODE");
-      console.log("📧  [MOCK EMAIL SENT]");
-      console.log(`    From: ${body.name} <${body.email}>`);
-      console.log(`    To: ${TO_EMAIL}`);
-      console.log(`    Message: ${body.message}`);
-      
+      console.log(`⚠️  GMAIL CREDENTIALS MISSING - RUNNING IN DEMO MODE (${isTranscript ? 'TRANSCRIPT' : 'CONTACT'})`);
       return new Response(JSON.stringify({ success: true, mode: 'demo' }), {
         status: 200,
         headers: {
@@ -59,9 +56,7 @@ export default async (req: Request) => {
       });
     }
 
-    // --- PRODUCTION MODE (Gmail SMTP) ---
-    
-    // 1. Create Transporter
+    // --- CONFIGURATION ---
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -70,61 +65,68 @@ export default async (req: Request) => {
       },
     });
 
-    // 2. Professional Standard HTML Template (Not a card)
-    const htmlContent = `
+    let mailOptions;
+
+    if (isTranscript) {
+      // CASE 1: SEND TRANSCRIPT TO USER
+      const htmlContent = `
       <!DOCTYPE html>
       <html>
-      <head>
-        <meta charset="utf-8">
-        <title>New Contact Message</title>
-      </head>
-      <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; background-color: #ffffff; padding: 20px;">
-        <div style="max-width: 650px; margin: 0 auto;">
+      <head><meta charset="utf-8"><title>Chat Transcript</title></head>
+      <body style="font-family: sans-serif; color: #333; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px; padding: 20px;">
+          <h2 style="color: #0f172a; margin-top: 0;">Chat Transcript</h2>
+          <p style="color: #666; font-size: 14px;">Here is the copy of your conversation with Sayantan's AI Assistant.</p>
           
-          <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 25px;">
-            <h2 style="color: #0f172a; margin: 0; font-size: 20px;">New Portfolio Contact</h2>
-          </div>
+          <div style="background-color: #f8fafc; border-radius: 8px; padding: 15px; margin: 20px 0; font-size: 14px; line-height: 1.6; white-space: pre-wrap; border: 1px solid #e2e8f0;">${body.message}</div>
 
-          <div style="margin-bottom: 25px;">
-            <p style="font-size: 12px; color: #64748b; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; text-transform: uppercase;">Sender Information</p>
-            <p style="margin: 0; font-size: 16px; font-weight: 500; color: #0f172a;">
-              ${body.name}
-              <span style="color: #64748b; font-weight: 400;">&lt;<a href="mailto:${body.email}" style="color: #0ea5e9; text-decoration: none;">${body.email}</a>&gt;</span>
-            </p>
-          </div>
-
-          <div style="margin-bottom: 25px;">
-            <p style="font-size: 12px; color: #64748b; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase;">Message Content</p>
-            <div style="background-color: #f8fafc; border-left: 3px solid #0ea5e9; padding: 16px; color: #334155; font-size: 15px; white-space: pre-wrap;">${body.message}</div>
-          </div>
-
-          <div style="background-color: #f9fafb; border-radius: 6px; padding: 15px; font-size: 12px; color: #64748b; border: 1px solid #f1f5f9;">
-            <p style="font-weight: 600; margin: 0 0 8px 0; text-transform: uppercase;">Technical Metadata</p>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-              <li style="margin-bottom: 4px;"><strong>Timestamp:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })} IST</li>
-              <li style="margin-bottom: 4px;"><strong>IP Address:</strong> ${ip}</li>
-              <li><strong>User Agent:</strong> ${userAgent}</li>
-            </ul>
-          </div>
-
-          <p style="font-size: 11px; color: #94a3b8; margin-top: 30px; text-align: center;">
-            Sent securely from Sayantan Biswas Portfolio
-          </p>
+          <p style="font-size: 12px; color: #999; text-align: center;">Generated by Sayantan Biswas Portfolio AI</p>
         </div>
       </body>
       </html>
-    `;
+      `;
 
-    // 3. Send Email
-    const info = await transporter.sendMail({
-      from: `"Portfolio Notification" <${GMAIL_USER}>`, // Sender address
-      to: TO_EMAIL, // List of receivers
-      replyTo: body.email, // Allows you to click "Reply" and email the user directly
-      subject: `Portfolio Inquiry: ${body.name}`, // Subject line
-      text: `Name: ${body.name}\nEmail: ${body.email}\n\nMessage:\n${body.message}\n\nIP: ${ip}`, // Plain text body
-      html: htmlContent, // HTML body
-    });
+      mailOptions = {
+        from: `"Sayantan's AI Assistant" <${GMAIL_USER}>`,
+        to: body.email, // Send TO the user
+        replyTo: OWNER_EMAIL, // If they reply, it goes to you
+        subject: `Your Chat Transcript with Sayantan's AI`,
+        text: body.message,
+        html: htmlContent,
+      };
 
+    } else {
+      // CASE 2: SEND CONTACT FORM TO OWNER
+      const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head><meta charset="utf-8"><title>New Contact Message</title></head>
+      <body style="font-family: sans-serif; line-height: 1.6; color: #333; padding: 20px;">
+        <div style="max-width: 650px; margin: 0 auto;">
+          <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 25px;">
+            <h2 style="color: #0f172a; margin: 0;">New Portfolio Contact</h2>
+          </div>
+          <p><strong>From:</strong> ${body.name} &lt;${body.email}&gt;</p>
+          <div style="background-color: #f8fafc; border-left: 3px solid #0ea5e9; padding: 16px; margin: 20px 0; white-space: pre-wrap;">${body.message}</div>
+          <div style="font-size: 12px; color: #64748b; border-top: 1px solid #eee; padding-top: 10px;">
+            <strong>IP:</strong> ${ip} | <strong>UA:</strong> ${userAgent}
+          </div>
+        </div>
+      </body>
+      </html>
+      `;
+
+      mailOptions = {
+        from: `"Portfolio Notification" <${GMAIL_USER}>`,
+        to: OWNER_EMAIL, // Send TO you
+        replyTo: body.email,
+        subject: `Portfolio Inquiry: ${body.name}`,
+        text: `Name: ${body.name}\nEmail: ${body.email}\nMessage:\n${body.message}`,
+        html: htmlContent,
+      };
+    }
+
+    const info = await transporter.sendMail(mailOptions);
     console.log("Message sent: %s", info.messageId);
 
     return new Response(JSON.stringify({ success: true, messageId: info.messageId }), {
@@ -137,7 +139,7 @@ export default async (req: Request) => {
 
   } catch (error: any) {
     console.error("SMTP Error:", error);
-    return new Response(JSON.stringify({ error: "Failed to send email via SMTP", details: error.message }), {
+    return new Response(JSON.stringify({ error: "Failed to send email", details: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });

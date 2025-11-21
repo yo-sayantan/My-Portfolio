@@ -1,7 +1,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, Send, X, Sparkles, Loader2, User, Bot, Trash2, ChevronRight } from 'lucide-react';
+import { MessageSquare, Send, X, Sparkles, Loader2, User, Bot, Trash2, ChevronRight, Mail, Check } from 'lucide-react';
 import { sendMessageToGemini } from '../services/geminiService';
+import { sendEmail } from '../services/emailService';
 
 interface Message {
   id: string;
@@ -30,6 +31,10 @@ const AIChatbot: React.FC = () => {
   ]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmailMode, setIsEmailMode] = useState(false);
+  const [transcriptEmail, setTranscriptEmail] = useState('');
+  const [isSendingTranscript, setIsSendingTranscript] = useState(false);
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -38,7 +43,7 @@ const AIChatbot: React.FC = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isOpen]);
+  }, [messages, isOpen, isEmailMode]);
 
   const handleSendMessage = async (e?: React.FormEvent, textOverride?: string) => {
     if (e) e.preventDefault();
@@ -91,6 +96,47 @@ const AIChatbot: React.FC = () => {
     ]);
   };
 
+  const handleSendTranscript = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!transcriptEmail.trim()) return;
+
+    setIsSendingTranscript(true);
+
+    // Format transcript
+    const transcriptText = messages.map(msg => 
+      `[${new Date(msg.timestamp).toLocaleTimeString()}] ${msg.sender === 'user' ? 'You' : 'AI'}: ${msg.text}`
+    ).join('\n\n');
+
+    try {
+      await sendEmail({
+        name: "User", // Placeholder
+        email: transcriptEmail,
+        message: transcriptText,
+        type: 'transcript'
+      });
+
+      setMessages(prev => [...prev, {
+        id: Date.now().toString(),
+        text: `✅ I've emailed the transcript to ${transcriptEmail}.`,
+        sender: 'ai',
+        timestamp: new Date()
+      }]);
+      
+      setIsEmailMode(false);
+      setTranscriptEmail('');
+
+    } catch (error) {
+      setMessages(prev => [...prev, {
+        id: Date.now().toString(),
+        text: "❌ Failed to send transcript. Please try again later.",
+        sender: 'ai',
+        timestamp: new Date()
+      }]);
+    } finally {
+      setIsSendingTranscript(false);
+    }
+  };
+
   // Simple parser to handle **bold** text and newlines
   const renderMessageText = (text: string) => {
     return text.split('\n').map((line, i) => (
@@ -112,11 +158,12 @@ const AIChatbot: React.FC = () => {
       {/* Chat Window */}
       <div 
         className={`
-          pointer-events-auto origin-bottom-right transition-all duration-300 ease-out
-          ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-10 pointer-events-none'}
+          pointer-events-auto origin-bottom-right transition-all duration-500 ease-in-out transform
+          ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8 pointer-events-none'}
           w-[90vw] sm:w-[400px] h-[600px] max-h-[80vh]
           bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-3xl shadow-2xl 
           border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden mb-4
+          relative
         `}
       >
         {/* Header */}
@@ -138,6 +185,13 @@ const AIChatbot: React.FC = () => {
           </div>
           <div className="flex items-center gap-1">
              <button 
+                onClick={() => setIsEmailMode(!isEmailMode)}
+                className={`p-2 rounded-lg transition-colors ${isEmailMode ? 'bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400' : 'text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700'}`}
+                title="Email Transcript"
+              >
+                <Mail className="w-4 h-4" />
+              </button>
+             <button 
                 onClick={handleClearChat}
                 className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                 title="Clear Chat"
@@ -152,6 +206,46 @@ const AIChatbot: React.FC = () => {
               </button>
           </div>
         </div>
+
+        {/* Email Transcript Overlay */}
+        {isEmailMode && (
+          <div className="absolute inset-0 z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md flex flex-col items-center justify-center p-8 animate-in fade-in duration-300">
+             <div className="p-4 bg-primary-50 dark:bg-primary-900/20 rounded-full mb-4">
+                <Mail className="w-8 h-8 text-primary-500" />
+             </div>
+             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Email Transcript</h3>
+             <p className="text-center text-sm text-slate-500 dark:text-slate-400 mb-6 max-w-[250px]">
+               Enter your email address to receive a full copy of this conversation.
+             </p>
+             <form onSubmit={handleSendTranscript} className="w-full space-y-4">
+                <input 
+                  type="email" 
+                  required
+                  placeholder="name@example.com"
+                  value={transcriptEmail}
+                  onChange={(e) => setTranscriptEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-primary-500 outline-none text-slate-900 dark:text-white transition-all"
+                />
+                <div className="flex gap-3">
+                   <button 
+                     type="button" 
+                     onClick={() => setIsEmailMode(false)}
+                     className="flex-1 py-3 rounded-xl font-bold text-sm text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                   >
+                     Cancel
+                   </button>
+                   <button 
+                     type="submit"
+                     disabled={isSendingTranscript} 
+                     className="flex-1 py-3 rounded-xl font-bold text-sm bg-primary-600 text-white hover:bg-primary-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+                   >
+                     {isSendingTranscript ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                     Send
+                   </button>
+                </div>
+             </form>
+          </div>
+        )}
 
         {/* Messages Area */}
         <div className="flex-1 overflow-y-auto p-4 space-y-5 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600">
@@ -195,7 +289,7 @@ const AIChatbot: React.FC = () => {
         </div>
         
         {/* Suggestions Chips */}
-        {messages.length < 3 && (
+        {messages.length < 3 && !isEmailMode && (
             <div className="px-4 pb-2">
                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Suggested Questions</p>
                <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none mask-gradient">
