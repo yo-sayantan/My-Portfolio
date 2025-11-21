@@ -12,7 +12,7 @@ const Education: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-16">
             <div>
                 <div className="mb-10">
-                    <ScrollReveal>
+                    <ScrollReveal variant="slide-right">
                         <div className="flex items-center gap-4">
                             <div className="p-3 bg-primary-100/50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-2xl">
                                 <GraduationCap className="w-8 h-8" />
@@ -24,7 +24,7 @@ const Education: React.FC = () => {
 
                 <div className="space-y-8">
                     {EDUCATION.map((edu, index) => (
-                        <ScrollReveal key={index} delay={`delay-[${index * 150}ms]`}>
+                        <ScrollReveal key={index} delay={`delay-[${index * 150}ms]`} variant="fade-up">
                         <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2rem] border border-white/20 dark:border-white/10 shadow-lg hover:shadow-xl transition-all">
                             <h3 className="text-xl font-bold text-slate-900 dark:text-white">{edu.school}</h3>
                             <p className="text-lg font-medium text-primary-600 dark:text-primary-400 mb-1">{edu.degree}</p>
@@ -46,7 +46,7 @@ const Education: React.FC = () => {
 
             <div>
                 <div className="mb-10">
-                    <ScrollReveal delay="delay-200">
+                    <ScrollReveal delay="delay-200" variant="slide-left">
                         <div className="flex items-center gap-4">
                             <div className="p-3 bg-purple-100/50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl">
                                 <Award className="w-8 h-8" />
@@ -58,7 +58,7 @@ const Education: React.FC = () => {
 
                 <div className="space-y-4">
                   {CERTIFICATIONS.map((cert, index) => (
-                    <ScrollReveal key={index} delay={`delay-[${(index * 100) + 200}ms]`}>
+                    <ScrollReveal key={index} delay={`delay-[${(index * 100) + 200}ms]`} variant="fade-up">
                         <div className="flex items-center justify-between p-6 rounded-[1.5rem] bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg border border-white/20 dark:border-white/10 shadow-sm hover:shadow-lg hover:bg-white/20 dark:hover:bg-slate-800/40 transition-all duration-300 group">
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 rounded-full bg-purple-50/30 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">

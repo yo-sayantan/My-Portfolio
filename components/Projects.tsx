@@ -12,14 +12,14 @@ const Projects: React.FC = () => {
     <section id="projects" className="py-32 relative z-10">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center mb-20">
-          <ScrollReveal>
+          <ScrollReveal variant="fade-up">
             <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-6">
               Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-purple-500">Projects</span>
             </h2>
           </ScrollReveal>
           
           {/* Modern Segmented Control Filter */}
-          <ScrollReveal delay="delay-100">
+          <ScrollReveal delay="delay-100" variant="zoom-in">
             <div className="flex p-1.5 bg-slate-200/50 dark:bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-white/5 shadow-inner relative">
                {['All', 'Work', 'Personal'].map((type) => (
                  <button

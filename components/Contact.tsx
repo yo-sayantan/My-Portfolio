@@ -9,10 +9,10 @@ const Contact: React.FC = () => {
     <section id="contact" className="py-16 bg-transparent relative">
       <div className="container mx-auto px-6 relative z-10">
         <div className="mb-12 text-center">
-            <ScrollReveal>
+            <ScrollReveal variant="fade-up">
                <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tighter mb-3">Get in Touch</h2>
             </ScrollReveal>
-            <ScrollReveal delay="delay-100">
+            <ScrollReveal delay="delay-100" variant="fade-up">
                <p className="text-base text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
                  Ready to build something amazing? Let's start the conversation.
                </p>
@@ -21,7 +21,7 @@ const Contact: React.FC = () => {
 
         <div className="grid md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
           
-          <ScrollReveal delay="delay-100">
+          <ScrollReveal delay="delay-100" variant="slide-right">
             <div className="h-full bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2rem] border border-white/20 dark:border-white/10 shadow-xl flex flex-col justify-center">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-8">Contact Information</h3>
               <div className="space-y-6">
@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay="delay-200">
+          <ScrollReveal delay="delay-200" variant="slide-left">
             <div className="h-full bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg rounded-[2rem] border border-white/20 dark:border-white/10 p-8 shadow-xl">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Send a Message</h3>
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>

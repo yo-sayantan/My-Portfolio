@@ -16,10 +16,10 @@ const Skills: React.FC = () => {
     <section id="skills" className="py-32 bg-transparent relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <ScrollReveal>
+          <ScrollReveal variant="fade-up">
             <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-4">Technical Arsenal</h2>
           </ScrollReveal>
-          <ScrollReveal delay="delay-100">
+          <ScrollReveal delay="delay-100" variant="fade-up">
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
                A comprehensive toolset for building enterprise-grade applications.
             </p>
@@ -28,7 +28,7 @@ const Skills: React.FC = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SKILLS.map((skillGroup, idx) => (
-            <ScrollReveal key={idx} delay={`delay-[${(idx * 100)}ms]`}>
+            <ScrollReveal key={idx} delay={`delay-[${(idx * 100)}ms]`} variant="zoom-in">
               <div 
                 className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-md p-8 rounded-[2rem] shadow-lg border border-white/20 dark:border-white/10 hover:border-primary-300 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full group relative overflow-hidden"
               >
