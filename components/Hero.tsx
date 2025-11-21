@@ -1,3 +1,4 @@
+
 import React, { useMemo } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, ChevronDown, Terminal } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
@@ -10,15 +11,21 @@ const Hero: React.FC = () => {
   };
 
   const experienceYears = useMemo(() => {
-    const startDate = new Date('2020-07-01');
+    const startDate = new Date('2020-05-01');
     const today = new Date();
     const diffTime = Math.abs(today.getTime() - startDate.getTime());
     const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25);
     return diffYears.toFixed(1);
   }, []);
 
+  const socials = [
+    { Icon: Github, href: SOCIAL_LINKS.github, colorClass: "text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white" },
+    { Icon: Linkedin, href: SOCIAL_LINKS.linkedin, colorClass: "text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300" },
+    { Icon: Mail, href: `mailto:${SOCIAL_LINKS.email}`, colorClass: "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300" }
+  ];
+
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center pt-20 pb-20 overflow-hidden">
       
       <div className="container mx-auto px-6 relative z-10 text-center">
         
@@ -44,7 +51,7 @@ const Hero: React.FC = () => {
           <a 
             href="#contact" 
             onClick={(e) => handleScrollTo(e, '#contact')}
-            className="px-8 py-4 rounded-full bg-white/10 dark:bg-slate-800/20 backdrop-blur-md text-slate-900 dark:text-white border border-white/20 dark:border-slate-700/30 font-bold text-lg hover:bg-white/20 dark:hover:bg-slate-800/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+            className="px-8 py-4 rounded-full bg-white/10 dark:bg-slate-800/20 backdrop-blur-md text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700/30 font-bold text-lg hover:bg-white/20 dark:hover:bg-slate-800/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
           >
             Let's Connect
           </a>
@@ -52,7 +59,7 @@ const Hero: React.FC = () => {
 
         <div className="relative inline-block">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-purple-600 rounded-[2.5rem] blur opacity-30 animate-pulse-slow"></div>
-          <div className="relative bg-white/10 dark:bg-slate-900/20 backdrop-blur-lg p-2 rounded-[2.5rem] shadow-2xl border border-white/20 dark:border-white/10">
+          <div className="relative bg-white/10 dark:bg-slate-900/20 backdrop-blur-lg p-2 rounded-[2.5rem] shadow-2xl border border-slate-200 dark:border-white/10">
             {/* Increased size here: w-64 h-64 md:w-80 md:h-80 */}
             <img 
               src="https://github.com/yo-sayantan.png" 
@@ -60,7 +67,7 @@ const Hero: React.FC = () => {
               className="w-64 h-64 md:w-80 md:h-80 rounded-[2rem] object-cover opacity-95"
             />
             
-            <div className="absolute -bottom-4 -right-8 bg-white/30 dark:bg-slate-800/50 backdrop-blur-xl px-4 py-2 rounded-xl shadow-xl border border-white/20 dark:border-slate-700/30 flex items-center gap-3 animate-bounce-slow">
+            <div className="absolute -bottom-4 -right-8 bg-white/30 dark:bg-slate-800/50 backdrop-blur-xl px-4 py-2 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700/30 flex items-center gap-3 animate-bounce-slow">
                 <div className="bg-primary-100/50 dark:bg-primary-900/30 p-2 rounded-lg text-primary-600 dark:text-primary-400">
                     <Terminal size={16} />
                 </div>
@@ -73,19 +80,18 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="mt-12 flex items-center justify-center gap-6">
-           {[
-             { Icon: Github, href: SOCIAL_LINKS.github },
-             { Icon: Linkedin, href: SOCIAL_LINKS.linkedin },
-             { Icon: Mail, href: `mailto:${SOCIAL_LINKS.email}` }
-           ].map((s, i) => (
+           {socials.map((s, i) => (
              <a 
                key={i} 
                href={s.href}
                target="_blank" 
                rel="noreferrer"
-               className="p-3 rounded-xl bg-white/10 dark:bg-slate-800/20 hover:bg-white/30 dark:hover:bg-slate-700/40 border border-white/20 dark:border-white/5 hover:border-primary-200 text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110 hover:shadow-lg transition-all duration-300 backdrop-blur-md"
+               className={`relative p-3 rounded-xl bg-white/10 dark:bg-slate-800/20 border border-slate-200 dark:border-white/5 hover:shadow-lg transition-all duration-300 backdrop-blur-md overflow-hidden group ${s.colorClass}`}
              >
-               <s.Icon size={22} />
+               {/* Ripple Effect */}
+               <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] bg-current opacity-0 group-hover:opacity-10 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-500 pointer-events-none"></span>
+               
+               <s.Icon size={22} className="relative z-10 transition-transform duration-300 group-hover:scale-110" />
              </a>
            ))}
         </div>

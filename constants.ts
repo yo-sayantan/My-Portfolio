@@ -74,9 +74,9 @@ export const EXPERIENCES: Experience[] = [
 
 export const EDUCATION: Education[] = [
   {
-    school: "Birla Institute of Technology & Science (BITS)",
+    school: "Birla Institute of Technology & Science (BITS) Pilani",
     degree: "M. Tech. (Software Engineering)",
-    location: "Hyderabad, Telangana",
+    location: "Hyderabad",
     details: [
       "Specialised in Software Engineering (Full Stack, Security, DevOps, Scalability, Cloud, Architecture)",
       "Post-Graduated with 8 CGPA"
@@ -96,49 +96,97 @@ export const EDUCATION: Education[] = [
 export const PROJECTS: Project[] = [
   {
     id: 'book-exchange',
-    title: 'Book Exchange Platform',
+    title: 'Book Exchange Ecosystem',
     type: 'Personal',
-    techStack: ['Java', 'SpringBoot', 'MySQL', 'React'],
-    description: 'Engineered a comprehensive full-stack web application that facilitates a peer-to-peer book exchange marketplace. The platform features real-time availability tracking, user ratings, and a secure messaging system, significantly promoting literacy and community engagement.',
-    link: 'https://github.com/yo-sayantan'
+    techStack: ['Java', 'Spring Boot', 'MySQL', 'React', 'Redux', 'Tailwind CSS', 'JWT'],
+    description: 'Architected a comprehensive full-stack platform facilitating peer-to-peer book marketplace interactions. Leveraged Spring Boot microservices for complex transaction handling and React for a responsive, community-driven user interface.',
+    longDescription: 'The Book Exchange Ecosystem is a robust, full-stack platform designed to democratize access to literature by enabling seamless peer-to-peer book trading. The architecture separates concerns between a high-performance Java Spring Boot backend and a dynamic React frontend. The system handles complex state management for trade negotiations, real-time inventory updates, and secure user authentication using JWT.',
+    features: [
+      'Secure User Authentication (JWT & OAuth2)',
+      'Real-time Inventory Management',
+      'Peer-to-Peer Trade Negotiation Logic',
+      'Responsive React UI with Dark Mode Support',
+      'RESTful API Design with Swagger Documentation'
+    ],
+    link: 'https://github.com/yo-sayantan/book-exchange'
   },
   {
     id: 'quick-task',
-    title: 'QuickTask Application',
+    title: 'QuickTask Mobile Suite',
     type: 'Personal',
-    techStack: ['Flutter', 'Dart', 'Android'],
-    description: 'Developed a robust Android application using Flutter and Dart designed for optimal task management. Features include intuitive categorization, deadline reminders, and progress tracking, resulting in a 40% improvement in personal productivity for beta testers.',
-    link: 'https://github.com/yo-sayantan'
+    techStack: ['Flutter', 'Dart', 'Android', 'SQLite', 'Provider', 'Material Design'],
+    description: 'Designed and deployed a cross-platform productivity application using Flutter. Implemented advanced state management with Provider and local data persistence via SQLite to ensure a seamless offline-first experience for task tracking.',
+    longDescription: 'QuickTask is a productivity-focused mobile application built with Flutter to ensure a native-like performance on both Android and iOS. It prioritizes an "Offline-First" architecture, utilizing SQLite for local persistence so users can manage tasks without internet connectivity. The app features a clean, Material Design interface and uses the Provider pattern for efficient state management across complex widget trees.',
+    features: [
+      'Offline-First Architecture with SQLite',
+      'Cross-Platform Support (Android/iOS)',
+      'Advanced State Management with Provider',
+      'Customizable Task Categories & Priorities',
+      'Push Notifications for Deadlines'
+    ],
+    link: 'https://github.com/yo-sayantan/quick-task'
   },
   {
     id: 'legal-entity',
-    title: 'Legal Entity Localisation',
+    title: 'Legal Entity Localization',
     type: 'Work',
-    techStack: ['AWS', 'Java', 'Microservices'],
-    description: 'Spearheaded the development of a Legal Entity Localization microservice on AWS. This critical component enables the dynamic generation of regulatory-compliant invoices across 30+ countries, utilizing complex logic to fetch and format entity-specific data.',
+    techStack: ['AWS', 'Java', 'Microservices', 'Compliance', 'PL/SQL', 'Spring Batch'],
+    description: 'Spearheaded the development of a mission-critical microservice on AWS for invoice localization. Engineered workflows to dynamically validate and fetch entity data, ensuring strict compliance with diverse international financial regulations.',
+    longDescription: 'This enterprise-grade microservice was architected to solve complex regulatory compliance challenges for multinational invoicing. Hosting on AWS, the service dynamically adjusts validation logic based on the legal entitys jurisdiction. It integrates with legacy PL/SQL systems while providing a modern REST interface for consuming applications, ensuring that all financial documents meet strict local legal standards.',
+    features: [
+      'Dynamic Regulatory Rule Engine',
+      'AWS Lambda & API Gateway Integration',
+      'Hybrid Cloud Architecture (AWS + On-Prem DB)',
+      'High-Volume Data Processing with Spring Batch',
+      'Automated Compliance Auditing'
+    ]
   },
   {
     id: 'parallel-invoice',
-    title: 'Parallel Invoice Processing',
+    title: 'Parallel Invoice Engine',
     type: 'Work',
-    techStack: ['Java', 'Credit Management'],
-    description: 'Architected a high-performance parallel processing engine for credit management. By implementing asynchronous threading models, I reduced credit limit approval latency by 80% during peak financial periods, enabling the concurrent processing of over 100 massive invoice payloads.',
+    techStack: ['Java', 'Concurrency', 'Multi-threading', 'ExecutorService', 'Distributed Systems'],
+    description: 'Revolutionized credit approval workflows by engineering a high-concurrency parallel processing engine. Utilized custom thread pools to process batches of 100+ invoices simultaneously, reducing turnaround time by 80% during peak financial closures.',
+    longDescription: 'Addressing a critical bottleneck in financial closing periods, this engine utilizes Java advanced concurrency utilities to parallelize invoice processing. By implementing custom ExecutorServices and optimizing thread pool management, the system can handle massive spikes in load without degradation. The architecture includes a robust failure recovery mechanism to ensure data integrity even during partial system failures.',
+    features: [
+      'High-Concurrency Invoice Processing',
+      'Custom Thread Pool Management',
+      'Fault-Tolerant Batch Processing',
+      'Real-time Processing Status Monitoring',
+      '80% Reduction in Turnaround Time'
+    ]
   },
   {
     id: 'investment-tracker',
-    title: 'Investment Tracker',
+    title: 'Algorithmic Investment Tracker',
     type: 'Personal',
-    techStack: ['Google Sheets API', 'Data Analysis'],
-    description: 'Implemented an automated financial tracking tool using Google Sheets API. The system aggregates real-time market data to analyze portfolio performance, visualize risk distribution, and provide actionable insights for maximizing returns on investment.',
-    link: 'https://github.com/yo-sayantan'
+    techStack: ['Google Sheets API', 'Python', 'Data Analysis', 'Pandas', 'Matplotlib'],
+    description: 'Built an automated financial analytics tool integrating Google Sheets API for real-time market data ingestion. Developed custom algorithms to calculate risk-adjusted returns and visualize portfolio diversification for data-driven decisions.',
+    longDescription: 'An automated personal finance tool that bridges the gap between raw market data and actionable insights. Using Python and the Google Sheets API, this tool fetches real-time stock prices, calculates complex metrics like Sharpe Ratio and Beta, and generates visualization reports. It allows for automated rebalancing alerts based on pre-set portfolio allocation targets.',
+    features: [
+      'Real-time Market Data Ingestion',
+      'Automated Risk Metrics Calculation (Sharpe, Beta)',
+      'Portfolio Rebalancing Alerts',
+      'Visual Data Analysis with Matplotlib',
+      'Google Sheets Bi-directional Sync'
+    ],
+    link: 'https://github.com/yo-sayantan/investment-tracker'
   },
   {
     id: 'os-scheduler',
-    title: 'OS Processes Scheduler',
+    title: 'OS CPU Scheduler Simulator',
     type: 'Personal',
-    techStack: ['C++', 'Bash'],
-    description: 'Designed a sophisticated OS Scheduling simulator in C++ to visualize process management. The project implements Round Robin and FCFS algorithms to optimize CPU utilization in a single-core environment with infinite I/O resources, demonstrating deep understanding of system internals.',
-    link: 'https://github.com/yo-sayantan'
+    techStack: ['C++', 'Bash', 'System Architecture', 'Make', 'Linux'],
+    description: 'Simulated a complex Operating System process scheduler in C++. Implemented core algorithms like Round Robin and Shortest Job First (SJF) to visualize CPU resource allocation and context switching in a resource-constrained environment.',
+    longDescription: 'A deep-dive educational simulation of Operating System internals. This project implements various CPU scheduling algorithms from scratch in C++ to visualize how processes are managed in a time-sharing environment. It includes a CLI interface to monitor process states (Ready, Running, Blocked) and analyzes the efficiency of algorithms like Round Robin, SJF, and Priority Scheduling under different loads.',
+    features: [
+      'Implementation of Round Robin & SJF Algorithms',
+      'Context Switching Simulation',
+      'Process State Visualization (CLI)',
+      'Performance Metrics (Turnaround Time, Wait Time)',
+      'Bash Scripts for Automated Testing'
+    ],
+    link: 'https://github.com/yo-sayantan/os-scheduler'
   }
 ];
 
@@ -153,11 +201,11 @@ export const SKILLS: Skill[] = [
   },
   {
     category: "AI & Productivity",
-    items: ["GitHub Copilot", "Cursor", "GPT-5", "ChatGPT-4o", "MCP Servers", "AI Agents", "Prompt Engineering"]
+    items: ["GitHub Copilot", "Cursor", "GPT5", "ChatGPT-4o", "MCP Servers", "AI Agents", "Prompt Engineering"]
   },
   {
     category: "DevOps & Tools",
-    items: ["CI/CD", "JBoss", "Git/GitHub", "JUnits", "Maven/Gradle", "XML/JSON", "Regex", "ADF UI"]
+    items: ["CI/CD", "JBoss", "Git/GitHub", "JUnits", "Maven/Gradle", "XML/JSON", "Regex", "ADF"]
   }
 ];
 

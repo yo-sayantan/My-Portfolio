@@ -14,6 +14,8 @@ export interface Project {
   title: string;
   techStack: string[];
   description: string;
+  longDescription?: string;
+  features?: string[];
   type: 'Work' | 'Personal';
   link?: string;
 }

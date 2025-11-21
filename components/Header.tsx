@@ -51,19 +51,23 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    
     const element = document.querySelector(href);
-    if (element) {
-      const offset = 100;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
+    if (!element) return;
+
+    // Slight delay to allow for visual feedback/animation before scroll starts
+    setTimeout(() => {
+      // Adjusted offset to 0. This utilizes the section's top padding (typically py-32) 
+      // to sit *under* the sticky header, placing the content nicely near the top.
+      const headerOffset = 0;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
-    }
+    }, 100);
   };
 
   return (

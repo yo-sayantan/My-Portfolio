@@ -5,9 +5,9 @@ import { Github, Linkedin, Heart, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const socialIcons = [
-    { Icon: Github, href: SOCIAL_LINKS.github, label: "GitHub", color: "hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900" },
-    { Icon: Linkedin, href: SOCIAL_LINKS.linkedin, label: "LinkedIn", color: "hover:bg-[#0077b5] hover:text-white" },
-    { Icon: Mail, href: `mailto:${SOCIAL_LINKS.email}`, label: "Email", color: "hover:bg-red-500 hover:text-white" }
+    { Icon: Github, href: SOCIAL_LINKS.github, label: "GitHub", color: "bg-white text-gray-600 hover:bg-gray-600 hover:text-white dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-white dark:hover:text-slate-900" },
+    { Icon: Linkedin, href: SOCIAL_LINKS.linkedin, label: "LinkedIn", color: "bg-white text-blue-600 hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-400" },
+    { Icon: Mail, href: `mailto:${SOCIAL_LINKS.email}`, label: "Email", color: "bg-white text-red-600 hover:bg-red-600 hover:text-white dark:bg-slate-800 dark:text-slate-400" }
   ];
 
   return (
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                   href={item.href}
                   target={item.label !== 'Email' ? "_blank" : undefined}
                   rel={item.label !== 'Email' ? "noopener noreferrer" : undefined}
-                  className={`p-3 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group ${item.color}`}
+                  className={`p-3 rounded-full border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group ${item.color}`}
                   aria-label={item.label}
                 >
                   <item.Icon className="w-4 h-4 transition-transform group-hover:scale-110" />

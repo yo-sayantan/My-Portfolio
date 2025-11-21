@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { PROJECTS } from '../constants';
-import { Briefcase, Code2, Github, Layers, Lock } from 'lucide-react';
+import { Code2, Github, Lock, X, ExternalLink, CheckCircle } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import { Project } from '../types';
 
 const Projects: React.FC = () => {
   const [filter, setFilter] = useState<'All' | 'Work' | 'Personal'>('All');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  
   const filteredProjects = PROJECTS.filter(p => filter === 'All' || p.type === filter);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProject]);
+
   const renderDoodle = (project: Project) => {
-    // Specific visualizations based on project ID
     switch (project.id) {
       case 'book-exchange':
         return (
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute inset-0 opacity-20 pointer-events-none transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1">
             <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 200">
                <path d="M50 150 Q 100 50 150 150 T 250 150" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary-300" strokeDasharray="8,8" />
                <rect x="120" y="60" width="40" height="60" rx="4" className="fill-primary-100 dark:fill-primary-900/50 stroke-primary-400" strokeWidth="2" />
@@ -29,8 +43,8 @@ const Projects: React.FC = () => {
 
       case 'quick-task':
         return (
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute top-8 left-12 w-28 h-48 border-4 border-slate-300 dark:border-slate-600 rounded-[1.5rem] bg-white dark:bg-slate-800 transform -rotate-12 shadow-xl overflow-hidden">
+          <div className="absolute inset-0 opacity-20 pointer-events-none transition-transform duration-700 group-hover:scale-105 group-hover:-rotate-1">
+            <div className="absolute top-8 left-12 w-28 h-48 border-4 border-slate-300 dark:border-slate-600 rounded-[1.5rem] bg-white dark:bg-slate-800 transform -rotate-12 shadow-xl overflow-hidden group-hover:-rotate-6 transition-transform duration-500">
                <div className="h-4 w-full bg-slate-100 dark:bg-slate-700 border-b border-slate-200"></div>
                <div className="p-3 space-y-2">
                   <div className="flex items-center gap-2">
@@ -54,7 +68,7 @@ const Projects: React.FC = () => {
 
       case 'investment-tracker':
         return (
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute inset-0 opacity-20 pointer-events-none transition-transform duration-700 group-hover:scale-105">
              <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
                <defs>
                  <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
@@ -62,10 +76,10 @@ const Projects: React.FC = () => {
                    <stop offset="100%" stopColor="#10b981" stopOpacity="0"/>
                  </linearGradient>
                </defs>
-               <path d="M0 150 L 60 130 L 120 160 L 180 100 L 240 120 L 320 40 L 400 60 V 200 H 0 Z" fill="url(#chartGrad)" />
-               <polyline points="0,150 60,130 120,160 180,100 240,120 320,40 400,60" fill="none" stroke="#10b981" strokeWidth="3" />
+               <path d="M0 150 L 60 130 L 120 160 L 180 100 L 240 120 L 320 40 L 400 60 V 200 H 0 Z" fill="url(#chartGrad)" className="group-hover:translate-y-1 transition-transform duration-500"/>
+               <polyline points="0,150 60,130 120,160 180,100 240,120 320,40 400,60" fill="none" stroke="#10b981" strokeWidth="3" className="group-hover:stroke-[4px] transition-all duration-500"/>
             </svg>
-            <div className="absolute top-10 right-10 px-3 py-1 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-bold rounded-full border border-green-200 dark:border-green-800 shadow-sm">
+            <div className="absolute top-10 right-10 px-3 py-1 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-bold rounded-full border border-green-200 dark:border-green-800 shadow-sm group-hover:scale-110 transition-transform duration-300">
               +24.5%
             </div>
           </div>
@@ -74,8 +88,8 @@ const Projects: React.FC = () => {
       default:
         if (project.type === 'Work') {
           return (
-            <div className="absolute inset-0 opacity-20 pointer-events-none">
-              <div className="absolute top-8 left-10 w-24 h-32 border-2 border-blue-400/30 rounded-lg flex flex-col gap-2 p-2">
+            <div className="absolute inset-0 opacity-20 pointer-events-none transition-transform duration-700 group-hover:scale-105">
+              <div className="absolute top-8 left-10 w-24 h-32 border-2 border-blue-400/30 rounded-lg flex flex-col gap-2 p-2 group-hover:-translate-y-2 transition-transform duration-500">
                 <div className="h-2 w-full bg-blue-400/20 rounded-full animate-pulse"></div>
                 <div className="h-2 w-2/3 bg-blue-400/20 rounded-full"></div>
                 <div className="h-2 w-full bg-blue-400/20 rounded-full"></div>
@@ -93,8 +107,8 @@ const Projects: React.FC = () => {
           );
         } else {
           return (
-            <div className="absolute inset-0 opacity-20 pointer-events-none">
-              <div className="absolute top-6 right-8 w-32 h-24 bg-slate-800/5 border border-purple-400/30 rounded-lg p-2 flex flex-col gap-1.5 transform -rotate-3">
+            <div className="absolute inset-0 opacity-20 pointer-events-none transition-transform duration-700 group-hover:scale-105">
+              <div className="absolute top-6 right-8 w-32 h-24 bg-slate-800/5 border border-purple-400/30 rounded-lg p-2 flex flex-col gap-1.5 transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
                  <div className="flex gap-1 mb-1">
                     <div className="w-1.5 h-1.5 rounded-full bg-red-400"></div>
                     <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
@@ -104,7 +118,7 @@ const Projects: React.FC = () => {
                  <div className="w-1/2 h-1 bg-slate-400/30 rounded-full ml-2"></div>
                  <div className="w-2/3 h-1 bg-slate-400/30 rounded-full"></div>
               </div>
-              <div className="absolute bottom-8 left-12 text-purple-500/30 rotate-12">
+              <div className="absolute bottom-8 left-12 text-purple-500/30 rotate-12 group-hover:rotate-[360deg] transition-transform duration-1000">
                   <Code2 size={40} />
               </div>
             </div>
@@ -124,117 +138,206 @@ const Projects: React.FC = () => {
           </ScrollReveal>
           
           <ScrollReveal delay="delay-100">
-            <div className="flex p-1.5 bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-slate-200/50 dark:border-white/5 shadow-sm relative">
+            <div className="flex p-1.5 bg-slate-100 dark:bg-slate-800/50 backdrop-blur-xl rounded-full border border-slate-200 dark:border-white/5 shadow-sm relative">
                {['All', 'Work', 'Personal'].map((type) => (
                  <button
                    key={type}
                    onClick={() => setFilter(type as any)}
-                   className={`relative z-10 px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                   className={`px-8 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
                      filter === type 
-                       ? 'text-white shadow-lg' 
-                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                     ? 'bg-slate-900 text-white shadow-lg scale-105' 
+                     : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/5'
                    }`}
                  >
                    {type}
-                   {filter === type && (
-                     <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-blue-600 rounded-xl -z-10 animate-in fade-in zoom-in duration-300"></div>
-                   )}
                  </button>
                ))}
             </div>
           </ScrollReveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, idx) => (
-            <ScrollReveal key={project.id} delay={`delay-[${(idx % 3) * 100}ms]`} variant="fade-up">
-              <div className="group relative h-full rounded-3xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800/60 hover:border-transparent transition-all duration-500 flex flex-col overflow-hidden shadow-sm hover:shadow-2xl dark:shadow-none">
-                
-                <div className="absolute -inset-[1px] bg-gradient-to-r from-primary-500 via-purple-500 to-blue-500 rounded-3xl opacity-0 group-hover:opacity-100 blur-sm transition-all duration-500 -z-10"></div>
-                <div className="absolute inset-[1px] bg-white dark:bg-slate-950 rounded-[22px] -z-10"></div>
-
-                <div className="h-52 relative overflow-hidden bg-slate-50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800/50 group-hover:bg-slate-100 dark:group-hover:bg-slate-800/50 transition-colors duration-500">
-                    
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project, index) => (
+            <ScrollReveal key={project.id} delay={`delay-[${index * 100}ms]`}>
+              <div
+                 onClick={() => setSelectedProject(project)}
+                 className={`
+                    group relative h-[420px] rounded-[2.5rem] bg-white dark:bg-slate-900 
+                    border border-slate-200 dark:border-slate-800 overflow-hidden 
+                    transition-all duration-500 
+                    hover:-translate-y-4 hover:scale-[1.03] hover:shadow-[0_20px_80px_-15px_rgba(14,165,233,0.3)] hover:border-primary-500/30
+                    cursor-pointer
+                 `}
+              >
+                 {/* Project Visual / Doodle Background */}
+                 <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 transition-colors duration-500 group-hover:from-primary-50/50 group-hover:to-purple-50/50 dark:group-hover:from-primary-900/20 dark:group-hover:to-purple-900/20">
                     {renderDoodle(project)}
-                    
-                    <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#64748b 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
-                    
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform transition-all duration-500 group-hover:-translate-y-[60%] z-10">
-                         <div className={`p-4 rounded-2xl bg-white dark:bg-slate-900 shadow-xl border border-slate-100 dark:border-slate-700/50 ${project.type === 'Work' ? 'text-blue-500' : 'text-purple-500'}`}>
-                             {project.type === 'Work' ? <Briefcase size={28} /> : <Code2 size={28} />}
-                         </div>
-                    </div>
-                    
-                    {project.type === 'Personal' && project.link && (
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 z-20">
-                            <a 
-                              href={project.link} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"
-                            >
-                              <Github size={18} />
-                              View Source
-                            </a>
-                        </div>
-                    )}
-
-                    {project.type === 'Work' && (
-                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 pointer-events-none">
-                            <div className="px-4 py-2 rounded-full bg-black/50 backdrop-blur-md text-white text-xs font-bold border border-white/20 flex items-center gap-2 shadow-lg">
-                                 <Lock size={12} /> Proprietary Code
-                            </div>
-                         </div>
-                    )}
-
-                    <div className="absolute top-4 right-4 z-10">
-                         <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border shadow-sm backdrop-blur-md ${
-                             project.type === 'Work' 
-                               ? 'bg-blue-50/80 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300 border-blue-100 dark:border-blue-800/30'
-                               : 'bg-purple-50/80 dark:bg-purple-900/20 text-purple-600 dark:text-purple-300 border-purple-100 dark:border-purple-800/30'
-                         }`}>
-                             {project.type}
-                         </span>
-                    </div>
-                </div>
-
-                <div className="p-6 flex flex-col flex-1 relative">
-                    <div className="mb-4">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                            {project.title}
-                        </h3>
-                        <div className="h-0.5 w-12 bg-slate-200 dark:bg-slate-800 group-hover:w-full group-hover:bg-gradient-to-r group-hover:from-primary-500 group-hover:to-purple-500 transition-all duration-500"></div>
+                 </div>
+                 
+                 {/* Content Overlay */}
+                 <div className="absolute inset-0 p-8 flex flex-col justify-end z-10 pointer-events-none">
+                    <div className="mb-auto">
+                       <div className="flex justify-between items-start mb-4">
+                          <div className={`p-3 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 text-slate-900 dark:text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}>
+                             {project.type === 'Work' ? <Lock size={20} /> : <Code2 size={20} />}
+                          </div>
+                       </div>
                     </div>
 
-                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 font-medium line-clamp-4">
-                        {project.description}
-                    </p>
+                    <div className="relative pointer-events-auto">
+                       <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
+                         {project.title}
+                       </h3>
+                       <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                         {project.description}
+                       </p>
+                       
+                       <div className="flex flex-wrap gap-2 mb-6">
+                          {project.techStack.slice(0, 3).map((tech, i) => (
+                             <span key={i} className="px-3 py-1 rounded-lg text-xs font-bold bg-white/60 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400">
+                               {tech}
+                             </span>
+                          ))}
+                          {project.techStack.length > 3 && (
+                             <span className="px-3 py-1 rounded-lg text-xs font-bold bg-white/60 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 text-slate-500">
+                               +{project.techStack.length - 3}
+                             </span>
+                          )}
+                       </div>
 
-                    <div className="mt-auto">
-                         <div className="flex items-center gap-2 mb-3 text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-                            <Layers size={12} />
-                            <span>Tech Stack</span>
-                         </div>
-                         <div className="flex flex-wrap gap-2">
-                            {project.techStack.slice(0, 4).map((tech, i) => (
-                                <span key={i} className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 group-hover:border-primary-200 dark:group-hover:border-primary-800/50 transition-colors">
-                                    {tech}
-                                </span>
-                            ))}
-                            {project.techStack.length > 4 && (
-                                <span className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-500 border border-slate-100 dark:border-slate-800">
-                                    +{project.techStack.length - 4}
-                                </span>
+                        {/* Action Button */}
+                        <div className="pt-4 border-t border-slate-200/50 dark:border-slate-700/50 mt-auto">
+                            {project.link ? (
+                                <div className="flex items-center justify-between w-full group/btn">
+                                    <span className="text-sm font-bold text-slate-700 dark:text-slate-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                                        View Details & Code
+                                    </span>
+                                    <button 
+                                      onClick={(e) => { e.stopPropagation(); window.open(project.link, '_blank'); }}
+                                      className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 dark:bg-white text-white dark:text-slate-900 shadow-lg transform transition-transform duration-300 hover:scale-110 active:scale-95 hover:rotate-12 z-20"
+                                    >
+                                        <Github size={20} />
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 opacity-75">
+                                    <Lock size={14} />
+                                    <span className="text-xs font-bold uppercase tracking-wider">Internal Project</span>
+                                </div>
                             )}
-                         </div>
+                        </div>
                     </div>
-                </div>
+                 </div>
               </div>
             </ScrollReveal>
           ))}
         </div>
-
       </div>
+
+      {/* Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+          <div 
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300" 
+            onClick={() => setSelectedProject(null)}
+          ></div>
+          <div className="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl relative z-10 animate-in zoom-in-95 duration-300 border border-slate-200 dark:border-white/10 flex flex-col">
+             
+             {/* Modal Header */}
+             <div className="relative h-48 md:h-64 shrink-0 bg-slate-100 dark:bg-slate-950 overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-purple-500/10">
+                   {renderDoodle(selectedProject)}
+                </div>
+                <button 
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-6 right-6 p-2.5 bg-white/20 backdrop-blur-md border border-white/10 text-slate-900 dark:text-white rounded-full hover:bg-white/40 transition-colors z-20"
+                >
+                  <X size={20} />
+                </button>
+                <div className="absolute bottom-6 left-6 md:left-10 z-10">
+                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/30 dark:bg-black/30 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-2">
+                      {selectedProject.type} Project
+                   </div>
+                   <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+                     {selectedProject.title}
+                   </h2>
+                </div>
+             </div>
+
+             {/* Modal Content */}
+             <div className="p-6 md:p-10 grid lg:grid-cols-3 gap-10">
+               
+               {/* Main Info - Left Col */}
+               <div className="lg:col-span-2 space-y-8">
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">Overview</h4>
+                    <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                      {selectedProject.longDescription || selectedProject.description}
+                    </p>
+                  </div>
+
+                  {selectedProject.features && (
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">Key Features</h4>
+                      <ul className="grid sm:grid-cols-2 gap-3">
+                        {selectedProject.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-sm font-medium">
+                             <CheckCircle className="w-5 h-5 text-green-500 shrink-0" />
+                             {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+               </div>
+
+               {/* Sidebar - Right Col */}
+               <div className="space-y-8">
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4">Technology Stack</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.techStack.map((tech, i) => (
+                        <span key={i} className="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {selectedProject.link ? (
+                    <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+                       <h4 className="font-bold text-slate-900 dark:text-white mb-2">Interested in the code?</h4>
+                       <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+                         Check out the repository to see the implementation details and contribution guidelines.
+                       </p>
+                       <a 
+                         href={selectedProject.link}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="flex items-center justify-center gap-2 w-full py-3 bg-gray-800 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
+                       >
+                         <Github size={18} />
+                         View on GitHub
+                         <ExternalLink size={14} className="ml-1" />
+                       </a>
+                    </div>
+                  ) : (
+                    <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 opacity-75">
+                       <div className="flex items-center gap-2 mb-2">
+                         <Lock className="text-slate-400" size={20} />
+                         <h4 className="font-bold text-slate-900 dark:text-white">Internal Project</h4>
+                       </div>
+                       <p className="text-xs text-slate-500 dark:text-slate-400">
+                         The source code for this project is proprietary and cannot be shared publicly due to company policies.
+                       </p>
+                    </div>
+                  )}
+               </div>
+
+             </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
