@@ -137,6 +137,11 @@ const Hero: React.FC = () => {
 
                     {/* Main Image Container - Circular */}
                     <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl border border-white/20 dark:border-white/5 bg-white dark:bg-slate-900 z-10 transform transition-transform duration-500 group-hover:scale-[1.02]">
+                        {/* 
+                           TODO: To use your own image:
+                           1. Add a file named 'profile.png' to your 'public' folder.
+                           2. Change the src below to "/profile.png"
+                        */}
                         <img 
                             src="https://github.com/yo-sayantan.png" 
                             alt="Sayantan Biswas" 
@@ -178,4 +183,3 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-    
