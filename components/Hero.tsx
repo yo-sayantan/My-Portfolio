@@ -7,7 +7,16 @@ const Hero: React.FC = () => {
   const handleScrollTo = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     const element = document.querySelector(id);
-    if (element) window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const experienceYears = useMemo(() => {
@@ -60,7 +69,7 @@ const Hero: React.FC = () => {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></span>
                     </span>
-                    <span className="text-xs font-bold tracking-widest uppercase text-slate-600 dark:text-slate-300">Available for New Projects</span>
+                    <span className="text-xs font-bold tracking-widest uppercase text-slate-600 dark:text-slate-300">Looking for Exciting Opportunities</span>
                 </div>
 
                 {/* Main Headline */}
@@ -176,7 +185,7 @@ const Hero: React.FC = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20">
-        <ChevronDown className="text-slate-300 dark:text-slate-600 w-8 h-8 cursor-pointer hover:text-primary-500 transition-colors" onClick={(e) => handleScrollTo(e as any, '#skills')} />
+        <ChevronDown className="text-slate-300 dark:text-slate-600 w-8 h-8 cursor-pointer hover:text-primary-500 transition-colors" onClick={(e) => handleScrollTo(e, '#skills')} />
       </div>
     </section>
   );
