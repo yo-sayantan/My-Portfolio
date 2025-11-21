@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { PROJECTS } from '../constants';
-import { Code2, Github, Lock, X, ExternalLink, CheckCircle } from 'lucide-react';
+import { Code2, Github, Lock, X, ExternalLink, CheckCircle, Loader2 } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import { Project } from '../types';
 
 const Projects: React.FC = () => {
   const [filter, setFilter] = useState<'All' | 'Work' | 'Personal'>('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   
   const filteredProjects = PROJECTS.filter(p => filter === 'All' || p.type === filter);
 
@@ -15,6 +16,8 @@ const Projects: React.FC = () => {
   useEffect(() => {
     if (selectedProject) {
       document.body.style.overflow = 'hidden';
+      // Reset redirect state when modal opens
+      setIsRedirecting(false);
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -22,6 +25,19 @@ const Projects: React.FC = () => {
       document.body.style.overflow = 'unset';
     };
   }, [selectedProject]);
+
+  const handleGithubClick = (e: React.MouseEvent, link: string) => {
+    e.stopPropagation();
+    if (isRedirecting) return;
+
+    setIsRedirecting(true);
+    
+    // Simulate a brief loading/preparation phase for visual feedback
+    setTimeout(() => {
+      window.open(link, '_blank');
+      setIsRedirecting(false);
+    }, 1200);
+  };
 
   const renderDoodle = (project: Project) => {
     switch (project.id) {
@@ -213,7 +229,7 @@ const Projects: React.FC = () => {
                                         View Details & Code
                                     </span>
                                     <button 
-                                      onClick={(e) => { e.stopPropagation(); window.open(project.link, '_blank'); }}
+                                      onClick={(e) => handleGithubClick(e, project.link!)}
                                       className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 dark:bg-white text-white dark:text-slate-900 shadow-lg transform transition-transform duration-300 hover:scale-110 active:scale-95 hover:rotate-12 z-20"
                                     >
                                         <Github size={20} />
@@ -310,16 +326,31 @@ const Projects: React.FC = () => {
                        <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
                          Check out the repository to see the implementation details and contribution guidelines.
                        </p>
-                       <a 
-                         href={selectedProject.link}
-                         target="_blank"
-                         rel="noopener noreferrer"
-                         className="flex items-center justify-center gap-2 w-full py-3 bg-gray-800 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
+                       <button 
+                         onClick={(e) => handleGithubClick(e, selectedProject.link!)}
+                         disabled={isRedirecting}
+                         className={`
+                           flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-sm 
+                           transition-all duration-300 shadow-lg
+                           ${isRedirecting 
+                              ? 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-wait translate-y-0 shadow-none' 
+                              : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:-translate-y-0.5 hover:shadow-xl active:scale-95'
+                           }
+                         `}
                        >
-                         <Github size={18} />
-                         View on GitHub
-                         <ExternalLink size={14} className="ml-1" />
-                       </a>
+                         {isRedirecting ? (
+                            <>
+                              <Loader2 size={18} className="animate-spin" />
+                              <span className="animate-pulse">Opening Repository...</span>
+                            </>
+                         ) : (
+                            <>
+                              <Github size={18} />
+                              <span>View on GitHub</span>
+                              <ExternalLink size={14} className="ml-0.5 opacity-70" />
+                            </>
+                         )}
+                       </button>
                     </div>
                   ) : (
                     <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 opacity-75">

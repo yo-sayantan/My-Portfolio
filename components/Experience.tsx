@@ -155,13 +155,17 @@ const Experience: React.FC = () => {
 
                           <div className="flex flex-col xl:flex-row justify-between items-start gap-4 mb-6">
                             <div className="space-y-2">
-                               <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white transition-all duration-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 group-hover:scale-[1.02] origin-left">
-                                 {exp.role}
-                               </h3>
-                               <div className="flex items-center gap-2 text-primary-600 dark:text-primary-400 font-bold text-lg md:text-xl transition-all duration-300 group-hover:text-primary-700 dark:group-hover:text-primary-300 group-hover:scale-[1.02] origin-left">
-                                 <Briefcase className="w-5 h-5 md:w-6 md:h-6" />
-                                 {exp.company}
-                               </div>
+                               <ScrollReveal delay="delay-200" variant="slide-right">
+                                   <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white transition-all duration-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 group-hover:scale-[1.02] origin-left">
+                                     {exp.role}
+                                   </h3>
+                               </ScrollReveal>
+                               <ScrollReveal delay="delay-300" variant="slide-right">
+                                   <div className="flex items-center gap-2 text-primary-600 dark:text-primary-400 font-bold text-lg md:text-xl transition-all duration-300 group-hover:text-primary-700 dark:group-hover:text-primary-300 group-hover:scale-[1.02] origin-left">
+                                     <Briefcase className="w-5 h-5 md:w-6 md:h-6" />
+                                     {exp.company}
+                                   </div>
+                               </ScrollReveal>
                             </div>
                             <div className="text-xs md:text-sm font-bold text-slate-500 dark:text-slate-400 bg-white/20 dark:bg-white/5 px-4 py-2 md:px-5 md:py-3 rounded-2xl group-hover:bg-white/40 dark:group-hover:bg-white/10 group-hover:shadow-md transition-all whitespace-nowrap">
                                {exp.period}
