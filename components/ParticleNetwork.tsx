@@ -36,16 +36,16 @@ const ParticleNetwork: React.FC = () => {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        // Ultra slow, ambient drift (0.1 factor)
-        this.vx = (Math.random() - 0.5) * 0.1; 
-        this.vy = (Math.random() - 0.5) * 0.1;
+        // Ultra slow, ambient drift
+        this.vx = (Math.random() - 0.5) * 0.08; 
+        this.vy = (Math.random() - 0.5) * 0.08;
         this.size = Math.random() * 2 + 1.5; 
 
-        // Vivid Colors with higher opacity for visibility
+        // Vivid Colors with high opacity for maximum visibility
         const rand = Math.random();
-        if (rand > 0.95) this.color = 'rgba(14, 165, 233, 0.8)'; // Primary Blue
-        else if (rand > 0.90) this.color = 'rgba(168, 85, 247, 0.8)'; // Purple
-        else this.color = 'rgba(100, 116, 139, 0.5)'; // Slate-500
+        if (rand > 0.95) this.color = 'rgba(14, 165, 233, 0.9)'; // Primary Blue
+        else if (rand > 0.90) this.color = 'rgba(168, 85, 247, 0.9)'; // Purple
+        else this.color = 'rgba(71, 85, 105, 0.6)'; // Slate-600 (Darker grey for contrast)
       }
 
       update() {
@@ -67,8 +67,8 @@ const ParticleNetwork: React.FC = () => {
 
     const initParticles = () => {
       particles = [];
-      // High Density: (Reduced divisor from 8000 to 4500 for ~2x particles)
-      const particleCount = Math.min(Math.floor((width * height) / 4500), 250);
+      // Very High Density
+      const particleCount = Math.min(Math.floor((width * height) / 3500), 300);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
@@ -89,9 +89,9 @@ const ParticleNetwork: React.FC = () => {
 
           if (distance < 120) {
             ctx.beginPath();
-            // Increased opacity for visibility
-            ctx.strokeStyle = `rgba(148, 163, 184, ${0.25 * (1 - distance / 120)})`;
-            ctx.lineWidth = 0.6;
+            // Stronger opacity for visibility
+            ctx.strokeStyle = `rgba(148, 163, 184, ${0.3 * (1 - distance / 120)})`;
+            ctx.lineWidth = 0.8;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
@@ -105,7 +105,7 @@ const ParticleNetwork: React.FC = () => {
 
         if (distance < 250) {
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(14, 165, 233, ${0.4 * (1 - distance / 250)})`;
+          ctx.strokeStyle = `rgba(14, 165, 233, ${0.5 * (1 - distance / 250)})`;
           ctx.lineWidth = 1;
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(mouse.x, mouse.y);
@@ -141,7 +141,6 @@ const ParticleNetwork: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ mixBlendMode: 'multiply' }} 
     />
   );
 };

@@ -12,7 +12,7 @@ import ParticleNetwork from './components/ParticleNetwork';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50 select-none relative">
+    <div className="min-h-screen bg-transparent select-none relative">
       <ParticleNetwork />
       <Header />
       <main className="relative z-10">
