@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { SUMMARY, AWARDS } from '../constants';
-import { Bot, Trophy, Target, Brain, Sparkles, Terminal } from 'lucide-react';
+import { Bot, Trophy, Target, Brain, Sparkles, Terminal, Cpu, Zap, Shield } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const About: React.FC = () => {
@@ -48,72 +48,80 @@ const About: React.FC = () => {
             <ScrollReveal variant="zoom-in" delay="delay-200" className="h-full">
               <div className="relative group rounded-[2.5rem] overflow-hidden h-full">
                 {/* Animated Gradient Border */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-purple-500 to-blue-600 opacity-40 group-hover:opacity-100 transition-all duration-500 blur-sm group-hover:blur-md"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-violet-500 to-fuchsia-500 opacity-60 group-hover:opacity-100 transition-all duration-500 blur-sm group-hover:blur-md"></div>
                 
                 {/* Card Content - Always Dark for Tech Feel */}
                 <div className="absolute inset-[2px] bg-slate-950 rounded-[2.4rem] overflow-hidden z-10">
                     
                     {/* Dynamic Background */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.1),transparent_50%)]"></div>
-                    <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.15),transparent_60%)]"></div>
+                    <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
                     
                     {/* Animated Glow Orbs */}
-                    <div className="absolute top-[-50%] left-[-50%] w-full h-full bg-cyan-500/10 blur-[80px] animate-pulse rounded-full"></div>
-                    <div className="absolute bottom-[-50%] right-[-50%] w-full h-full bg-purple-500/10 blur-[80px] animate-pulse rounded-full delay-700"></div>
+                    <div className="absolute top-[-50%] left-[-50%] w-full h-full bg-cyan-500/20 blur-[100px] animate-pulse rounded-full"></div>
+                    <div className="absolute bottom-[-50%] right-[-50%] w-full h-full bg-purple-500/20 blur-[100px] animate-pulse rounded-full delay-700"></div>
 
                     <div className="relative h-full p-8 flex flex-col justify-between">
                         
                         <div>
                             {/* Header */}
                             <div className="flex items-center justify-between mb-6">
-                                <div className="p-2.5 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                                <div className="p-2.5 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
                                     <Bot className="w-6 h-6 text-cyan-400" />
                                 </div>
-                                <div className="px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-500/30 flex items-center gap-2">
-                                    <span className="relative flex h-1.5 w-1.5">
+                                <div className="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 flex items-center gap-2 backdrop-blur-sm">
+                                    <span className="relative flex h-2 w-2">
                                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500"></span>
+                                      <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                                     </span>
-                                    <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest">AI Native</span>
+                                    <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest shadow-cyan-500/50 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">AI Native</span>
                                 </div>
                             </div>
 
-                            <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">Intelligent Workflow</h3>
+                            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-white mb-3 tracking-tight">Intelligent Workflow</h3>
                             <p className="text-slate-400 text-sm leading-relaxed mb-6 font-medium">
-                                Augmenting engineering capabilities with next-gen models to accelerate velocity.
+                                By leveraging advanced LLMs and autonomous agents, I augment traditional engineering capabilities to drastically accelerate velocity and architectural precision.
                             </p>
 
                             {/* Tool Tokens */}
                             <div className="flex flex-wrap gap-2 mb-6">
-                                {['Cursor', 'Copilot', 'GPT-5', 'MCP Agents'].map((item) => (
-                                    <div key={item} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-cyan-500/50 text-[11px] font-bold text-slate-300 hover:text-cyan-400 transition-colors flex items-center gap-2 group/item cursor-default backdrop-blur-sm">
-                                        <Sparkles className="w-3 h-3 text-slate-600 group-hover/item:text-cyan-500 transition-colors" />
-                                        {item}
+                                {[
+                                    { name: 'Cursor', icon: <Terminal size={10} /> },
+                                    { name: 'Copilot', icon: <Cpu size={10} /> },
+                                    { name: 'GPT-5', icon: <Sparkles size={10} /> },
+                                    { name: 'MCP Agents', icon: <Bot size={10} /> }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-950/30 text-[11px] font-bold text-slate-300 hover:text-cyan-400 transition-all duration-300 flex items-center gap-2 group/item cursor-default backdrop-blur-sm">
+                                        <span className="text-slate-500 group-hover/item:text-cyan-500 transition-colors">{item.icon}</span>
+                                        {item.name}
                                     </div>
                                 ))}
                             </div>
                         </div>
 
                         {/* Interactive Terminal/Code Snippet Visual */}
-                        <div className="mt-auto p-4 rounded-xl bg-black/60 border border-white/5 font-mono text-[10px] text-slate-400 leading-relaxed relative overflow-hidden shadow-inner">
-                            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-50"></div>
-                            <div className="flex items-center gap-2 mb-2 text-slate-600 border-b border-white/5 pb-2">
+                        <div className="mt-auto p-4 rounded-xl bg-black/80 border border-white/10 font-mono text-[10px] text-slate-400 leading-relaxed relative overflow-hidden shadow-inner group-hover:border-cyan-500/30 transition-colors">
+                            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/80 to-transparent opacity-60"></div>
+                            <div className="flex items-center gap-2 mb-2 text-slate-500 border-b border-white/5 pb-2">
                                 <Terminal size={10} />
-                                <span>agent.process_task()</span>
+                                <span>agent.optimize_workflow()</span>
                             </div>
-                            <div className="space-y-1">
+                            <div className="space-y-1.5">
                                 <p className="flex gap-2">
-                                    <span className="text-slate-600">1</span>
-                                    <span><span className="text-purple-400">const</span> <span className="text-blue-400">context</span> = <span className="text-green-400">await</span> load(docs);</span>
+                                    <span className="text-slate-700 select-none">1</span>
+                                    <span><span className="text-purple-400">const</span> <span className="text-blue-400">insights</span> = <span className="text-cyan-400">await</span> ai.analyze(code);</span>
                                 </p>
                                 <p className="flex gap-2">
-                                    <span className="text-slate-600">2</span>
-                                    <span><span className="text-purple-400">return</span> <span className="text-yellow-400">generate</span>(context);</span>
+                                    <span className="text-slate-700 select-none">2</span>
+                                    <span><span className="text-purple-400">if</span> (insights.score > <span className="text-green-400">90</span>) <span className="text-yellow-400">deploy</span>();</span>
                                 </p>
                             </div>
-                            <div className="mt-2 flex items-center gap-1.5 text-cyan-500/70">
-                                 <span className="w-1 h-1 bg-cyan-500 rounded-full animate-pulse"></span>
-                                 <span>Optimizing...</span>
+                            <div className="mt-3 flex items-center gap-2 text-cyan-400/90 font-bold bg-cyan-950/30 p-1.5 rounded border border-cyan-900/50">
+                                 <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                                 </span>
+                                 <span className="tracking-wider text-[9px]">OPTIMIZATION COMPLETE</span>
                             </div>
                         </div>
 
@@ -136,7 +144,7 @@ const About: React.FC = () => {
                    <div className="space-y-6">
                      {AWARDS.map((award, idx) => (
                        <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-white/20 dark:bg-white/5 border border-white/20 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/10 transition-colors">
-                          <span className="text-4xl">🏆</span>
+                          <span className="text-4xl filter drop-shadow-sm">🏆</span>
                           <div>
                             <h4 className="font-bold text-slate-900 dark:text-white">{award.title}</h4>
                             <p className="text-xs font-bold text-primary-600 dark:text-primary-400 uppercase tracking-wider mb-1">{award.issuer} • {award.year}</p>
@@ -152,24 +160,28 @@ const About: React.FC = () => {
           {/* Impact Block */}
           <div className="md:col-span-6 grid grid-rows-2 gap-6">
              <ScrollReveal variant="slide-left" delay="delay-200">
-                 <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-lg flex items-center gap-6 hover:-translate-y-1 transition-transform h-full">
-                    <div className="p-4 bg-green-100/50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-2xl">
+                 <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-lg flex items-center gap-6 hover:-translate-y-1 transition-transform h-full group">
+                    <div className="p-4 bg-green-100/50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-2xl group-hover:scale-110 transition-transform">
                       <Target className="w-8 h-8" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold text-slate-900 dark:text-white">Result Driven</h4>
-                      <p className="text-slate-600 dark:text-slate-400 mt-1">Reduced approval times by <span className="text-slate-900 dark:text-white font-bold">80%</span> via parallel processing.</p>
+                      <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-1">Result Driven</h4>
+                      <p className="text-slate-600 dark:text-slate-300 leading-snug">
+                        Reduced approval times by <span className="text-slate-900 dark:text-white font-bold">80%</span> via parallel processing and optimized database queries, resulting in seamless end-of-quarter financial closings.
+                      </p>
                     </div>
                  </div>
              </ScrollReveal>
              <ScrollReveal variant="slide-left" delay="delay-300">
-                 <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-lg flex items-center gap-6 hover:-translate-y-1 transition-transform h-full">
-                    <div className="p-4 bg-purple-100/50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl">
+                 <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-lg flex items-center gap-6 hover:-translate-y-1 transition-transform h-full group">
+                    <div className="p-4 bg-purple-100/50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl group-hover:scale-110 transition-transform">
                       <Sparkles className="w-8 h-8" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold text-slate-900 dark:text-white">Innovation</h4>
-                      <p className="text-slate-600 dark:text-slate-400 mt-1">Designed <span className="text-slate-900 dark:text-white font-bold">Dynamic Notification</span> systems boosting user retention.</p>
+                      <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-1">Innovation</h4>
+                      <p className="text-slate-600 dark:text-slate-300 leading-snug">
+                         Designed <span className="text-slate-900 dark:text-white font-bold">Dynamic Notification</span> systems and AI-driven workflows that boosted user retention by 25% and streamlined internal developer velocity.
+                      </p>
                     </div>
                  </div>
              </ScrollReveal>

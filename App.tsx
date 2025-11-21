@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -9,6 +10,7 @@ import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ParticleNetwork from './components/ParticleNetwork';
+import AIChatbot from './components/AIChatbot';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -35,6 +37,7 @@ function App() {
         <Education />
         <Contact />
       </main>
+      <AIChatbot />
       <Footer />
     </div>
   );
