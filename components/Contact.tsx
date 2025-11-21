@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SOCIAL_LINKS } from '../constants';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
@@ -7,14 +8,16 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-16 bg-transparent relative">
       <div className="container mx-auto px-6 relative z-10">
-        <ScrollReveal>
-            <div className="mb-12 text-center">
-                <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tighter mb-3">Get in Touch</h2>
-                <p className="text-base text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
-                  Ready to build something amazing? Let's start the conversation.
-                </p>
-            </div>
-        </ScrollReveal>
+        <div className="mb-12 text-center">
+            <ScrollReveal>
+               <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tighter mb-3">Get in Touch</h2>
+            </ScrollReveal>
+            <ScrollReveal delay="delay-100">
+               <p className="text-base text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
+                 Ready to build something amazing? Let's start the conversation.
+               </p>
+            </ScrollReveal>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
           

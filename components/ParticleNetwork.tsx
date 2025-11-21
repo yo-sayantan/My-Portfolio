@@ -45,9 +45,9 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
         
-        // Liquid-like slow movement
+        // Slower movement for viscous liquid feel, but slightly faster than dead stop
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 0.3 + 0.1; // Very slow base speed
+        const speed = Math.random() * 0.08 + 0.02; 
         this.baseVx = Math.cos(angle) * speed;
         this.baseVy = Math.sin(angle) * speed;
         
@@ -57,37 +57,55 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
 
       update() {
         // Smooth return to base velocity (viscosity/damping)
-        // This creates the "heavy" liquid feel where momentum is lost slowly
-        this.vx += (this.baseVx - this.vx) * 0.02;
-        this.vy += (this.baseVy - this.vy) * 0.02;
+        this.vx += (this.baseVx - this.vx) * 0.01;
+        this.vy += (this.baseVy - this.vy) * 0.01;
 
         // Interaction calculations
-        const dx = this.x - interactionRef.current.x;
-        const dy = this.y - interactionRef.current.y;
+        const dx = interactionRef.current.x - this.x;
+        const dy = interactionRef.current.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Mouse Repulsion (Pushing through liquid)
-        const hoverRadius = 250;
+        // Mouse Interaction
+        // Instead of pure attraction, we use a "sweet spot"
+        // Attract if far, repel if too close (prevents convergence at point)
+        const hoverRadius = 400;
+        const repulsionRadius = 80; // Particles won't go closer than this to mouse
+
         if (distance < hoverRadius) {
           const forceDirectionX = dx / distance;
           const forceDirectionY = dy / distance;
-          const force = (hoverRadius - distance) / hoverRadius;
           
-          // Gentle push
-          const pushStrength = 0.6; 
-          this.vx += forceDirectionX * force * pushStrength;
-          this.vy += forceDirectionY * force * pushStrength;
+          if (distance < repulsionRadius) {
+             // Repel if too close to mouse center
+             const force = (repulsionRadius - distance) / repulsionRadius;
+             const repelStrength = 0.05;
+             this.vx -= forceDirectionX * force * repelStrength;
+             this.vy -= forceDirectionY * force * repelStrength;
+          } else {
+             // Gentle pull towards mouse area if in the "web" zone
+             const force = (hoverRadius - distance) / hoverRadius;
+             const pullStrength = 0.02; 
+             this.vx += forceDirectionX * force * pullStrength;
+             this.vy += forceDirectionY * force * pullStrength;
+          }
         }
 
-        // Click Shockwave
-        if (interactionRef.current.isClicked && distance < 400) {
-           const forceDirectionX = dx / distance;
-           const forceDirectionY = dy / distance;
-           const force = (400 - distance) / 400;
-           
-           const clickStrength = 4; // Strong impulse
-           this.vx += forceDirectionX * force * clickStrength;
-           this.vy += forceDirectionY * force * clickStrength;
+        // Click Shockwave (Disrupt the web on click)
+        if (interactionRef.current.isClicked && distance < 300) {
+            // Push away on click
+            const pushDx = this.x - interactionRef.current.x;
+            const pushDy = this.y - interactionRef.current.y;
+            const pushDist = Math.sqrt(pushDx * pushDx + pushDy * pushDy);
+            
+            if (pushDist > 0) {
+                const forceX = pushDx / pushDist;
+                const forceY = pushDy / pushDist;
+                const force = (300 - pushDist) / 300;
+                
+                const clickStrength = 2; // Strong impulse
+                this.vx += forceX * force * clickStrength;
+                this.vy += forceY * force * clickStrength;
+            }
         }
 
         // Update position
@@ -105,8 +123,8 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
 
     const initParticles = () => {
       particles = [];
-      // Adjust density for a good mesh
-      const particleCount = Math.min(Math.floor((width * height) / 12000), 120);
+      // Increase density
+      const particleCount = Math.min(Math.floor((width * height) / 7000), 250);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
@@ -136,11 +154,12 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
           const dy = p1.y - p2.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 180) { // Connection threshold
+          // Increased threshold for "web" look (more connections)
+          if (distance < 200) { 
             ctx.beginPath();
-            const opacity = (1 - distance / 180) * 0.5;
+            const opacity = (1 - distance / 200) * 0.4;
             
-            // Theme colors: Cyan/Blue for visibility in dark mode, Slate for light
+            // Theme colors
             ctx.strokeStyle = isDark 
                 ? `rgba(56, 189, 248, ${opacity})` // Primary-400
                 : `rgba(15, 23, 42, ${opacity})`; // Slate-900
@@ -150,21 +169,9 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
             ctx.stroke();
           }
         }
-
-        // Connect to mouse for extra interactivity
-        const dx = p1.x - interactionRef.current.x;
-        const dy = p1.y - interactionRef.current.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 250) {
-             ctx.beginPath();
-             const opacity = (1 - dist / 250) * 0.5;
-             ctx.strokeStyle = isDark 
-                ? `rgba(56, 189, 248, ${opacity})` 
-                : `rgba(15, 23, 42, ${opacity})`; 
-             ctx.moveTo(p1.x, p1.y);
-             ctx.lineTo(interactionRef.current.x, interactionRef.current.y);
-             ctx.stroke();
-        }
+        
+        // Removed the code block that draws lines directly to the mouse cursor.
+        // This prevents the "converging at one point" visual artifact.
       }
 
       requestAnimationFrame(animate);

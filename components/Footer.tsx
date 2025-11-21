@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SOCIAL_LINKS } from '../constants';
 import { Github, Linkedin, Heart, Mail } from 'lucide-react';
@@ -10,7 +11,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-white/30 dark:bg-slate-900/40 backdrop-blur-xl border-t border-white/20 dark:border-white/10 text-slate-600 dark:text-slate-400 py-12 relative z-20 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
+    <footer className="bg-white/10 dark:bg-slate-900/40 backdrop-blur-xl border-t border-white/10 text-slate-600 dark:text-slate-400 py-12 relative z-20 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="text-center md:text-left space-y-2">
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Sayantan<span className="text-primary-500">.Dev</span></h3>

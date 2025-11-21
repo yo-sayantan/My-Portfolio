@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SKILLS } from '../constants';
 import { Terminal, Database, Cloud, Code2 } from 'lucide-react';
@@ -14,14 +15,16 @@ const Skills: React.FC = () => {
   return (
     <section id="skills" className="py-32 bg-transparent relative">
       <div className="container mx-auto px-6">
-        <ScrollReveal>
-          <div className="text-center mb-16">
+        <div className="text-center mb-16">
+          <ScrollReveal>
             <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-4">Technical Arsenal</h2>
+          </ScrollReveal>
+          <ScrollReveal delay="delay-100">
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
                A comprehensive toolset for building enterprise-grade applications.
             </p>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SKILLS.map((skillGroup, idx) => (

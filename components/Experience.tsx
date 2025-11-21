@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
 import { EXPERIENCES } from '../constants';
 import { Briefcase, ArrowRight } from 'lucide-react';
@@ -79,14 +80,16 @@ const Experience: React.FC = () => {
     <section id="experience" className="py-32 bg-transparent relative overflow-hidden">
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <ScrollReveal>
-          <div className="mb-24 text-center">
+        <div className="mb-24 text-center">
+          <ScrollReveal>
             <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-6">Professional Journey</h2>
+          </ScrollReveal>
+          <ScrollReveal delay="delay-100">
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
               Building enterprise scale solutions across the globe.
             </p>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
 
         <div ref={containerRef} className="relative max-w-[1800px] mx-auto">
           

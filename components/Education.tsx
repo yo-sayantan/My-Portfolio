@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { GraduationCap, Award } from 'lucide-react';
 import { EDUCATION, CERTIFICATIONS } from '../constants';
@@ -10,14 +11,16 @@ const Education: React.FC = () => {
         
         <div className="grid md:grid-cols-2 gap-16">
             <div>
-                <ScrollReveal>
-                    <div className="mb-10 flex items-center gap-4">
-                        <div className="p-3 bg-primary-100/50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-2xl">
-                            <GraduationCap className="w-8 h-8" />
+                <div className="mb-10">
+                    <ScrollReveal>
+                        <div className="flex items-center gap-4">
+                            <div className="p-3 bg-primary-100/50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-2xl">
+                                <GraduationCap className="w-8 h-8" />
+                            </div>
+                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">Education</h2>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">Education</h2>
-                    </div>
-                </ScrollReveal>
+                    </ScrollReveal>
+                </div>
 
                 <div className="space-y-8">
                     {EDUCATION.map((edu, index) => (
@@ -42,14 +45,16 @@ const Education: React.FC = () => {
             </div>
 
             <div>
-                <ScrollReveal delay="delay-200">
-                    <div className="mb-10 flex items-center gap-4">
-                        <div className="p-3 bg-purple-100/50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl">
-                            <Award className="w-8 h-8" />
+                <div className="mb-10">
+                    <ScrollReveal delay="delay-200">
+                        <div className="flex items-center gap-4">
+                            <div className="p-3 bg-purple-100/50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl">
+                                <Award className="w-8 h-8" />
+                            </div>
+                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">Certifications</h2>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">Certifications</h2>
-                    </div>
-                </ScrollReveal>
+                    </ScrollReveal>
+                </div>
 
                 <div className="space-y-4">
                   {CERTIFICATIONS.map((cert, index) => (

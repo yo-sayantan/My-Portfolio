@@ -11,13 +11,15 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-32 relative z-10">
       <div className="container mx-auto px-6">
-        <ScrollReveal>
-          <div className="flex flex-col items-center mb-20">
+        <div className="flex flex-col items-center mb-20">
+          <ScrollReveal>
             <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tighter mb-6">
               Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-purple-500">Projects</span>
             </h2>
-            
-            {/* Modern Segmented Control Filter */}
+          </ScrollReveal>
+          
+          {/* Modern Segmented Control Filter */}
+          <ScrollReveal delay="delay-100">
             <div className="flex p-1.5 bg-slate-200/50 dark:bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-white/5 shadow-inner relative">
                {['All', 'Work', 'Personal'].map((type) => (
                  <button
@@ -36,13 +38,13 @@ const Projects: React.FC = () => {
                  </button>
                ))}
             </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, idx) => (
             <ScrollReveal key={project.id} delay={`delay-[${(idx % 3) * 100}ms]`} variant="fade-up">
-              <div className="group relative h-full rounded-3xl bg-white/40 dark:bg-slate-900/40 border border-white/20 dark:border-white/10 hover:border-primary-500/30 transition-all duration-500 hover:shadow-[0_0_40px_-10px_rgba(14,165,233,0.15)] hover:-translate-y-2 flex flex-col overflow-hidden backdrop-blur-md">
+              <div className="group relative h-full rounded-3xl bg-white/40 dark:bg-slate-900/40 border border-white/20 dark:border-white/10 hover:border-primary-500/30 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(14,165,233,0.3)] hover:-translate-y-3 flex flex-col overflow-hidden backdrop-blur-md">
                 
                 {/* Abstract Cover Art Area */}
                 <div className={`h-48 relative overflow-hidden bg-gradient-to-br ${
@@ -53,6 +55,9 @@ const Projects: React.FC = () => {
                     
                     {/* Noise Texture Overlay */}
                     <div className="absolute inset-0 opacity-20 bg-repeat [background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiAvPgo8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjMDAwIiAvPgo8L3N2Zz4=')]"></div>
+                    
+                    {/* Animated Gradient Border Effect on Top */}
+                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-gradient-x transition-opacity duration-500"></div>
                     
                     {/* Animated Glow Blobs */}
                     <div className={`absolute -right-10 -top-10 w-40 h-40 rounded-full blur-3xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 ${project.type === 'Work' ? 'bg-blue-500' : 'bg-purple-500'}`}></div>
@@ -103,12 +108,12 @@ const Projects: React.FC = () => {
                     <div className="mt-auto pt-6 border-t border-slate-200/50 dark:border-white/5">
                          <div className="flex flex-wrap gap-2">
                             {project.techStack.slice(0, 4).map((tech, i) => (
-                                <span key={i} className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wide bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 hover:border-primary-400 transition-colors cursor-default">
+                                <span key={i} className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wide bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-white dark:group-hover:bg-slate-700 cursor-default">
                                     {tech}
                                 </span>
                             ))}
                             {project.techStack.length > 4 && (
-                                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700/50">
+                                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700/50 transition-all duration-300 group-hover:scale-110">
                                     +{project.techStack.length - 4}
                                 </span>
                             )}

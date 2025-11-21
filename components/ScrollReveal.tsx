@@ -22,10 +22,9 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
+        // Update visibility state based on intersection
+        // This allows the animation to replay whenever the element enters or leaves the viewport
+        setIsVisible(entry.isIntersecting);
       },
       {
         threshold,
@@ -52,15 +51,16 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         return isVisible ? 'opacity-100' : 'opacity-0';
       case 'fade-up':
       default:
-        return isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8';
+        // Changed translate-y-8 to translate-y-4 for a more subtle effect
+        return isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4';
     }
   };
 
-  // duration-300 for fast, snappy scroll feel
+  // duration-700 makes it slower and more elegant
   return (
     <div
       ref={ref}
-      className={`transition-all duration-300 ease-out transform ${delay} ${getAnimationClasses()} ${className}`}
+      className={`transition-all duration-700 ease-out transform ${delay} ${getAnimationClasses()} ${className}`}
     >
       {children}
     </div>
