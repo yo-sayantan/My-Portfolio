@@ -1,10 +1,4 @@
-
-import { GoogleGenAI } from "@google/genai";
 import { SUMMARY, EXPERIENCES, PROJECTS, SKILLS, SOCIAL_LINKS } from '../constants';
-
-// Initialize Gemini Client
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
 
 const RESUME_DATA = {
   name: "Sayantan Biswas",
@@ -34,23 +28,63 @@ Guidelines:
 - If asked something unrelated to the portfolio or professional skills, politely steer the conversation back to ${RESUME_DATA.name}'s work.
 `;
 
+/**
+ * Calls the secure Netlify Function to interact with Gemini.
+ */
 export const sendMessageToGemini = async (message: string): Promise<string> => {
-  if (!apiKey) {
-    return "I'm sorry, but the AI service is not configured correctly (Missing API Key). Please contact the developer.";
-  }
-
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: message,
-      config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
-      }
+    const response = await fetch('/.netlify/functions/ai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: message,
+        systemInstruction: SYSTEM_INSTRUCTION
+      }),
     });
 
-    return response.text || "I'm thinking... but couldn't generate a response right now.";
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data.text || "I'm thinking... but couldn't generate a response right now.";
   } catch (error) {
-    console.error("Gemini API Error:", error);
-    return "Sorry, I encountered an error while processing your request. Please try again later.";
+    console.error("Gemini Service Error:", error);
+    return "I'm having trouble connecting to the server right now. Please try again later.";
+  }
+};
+
+export const generateAutoReply = async (name: string, userMessage: string): Promise<string> => {
+  const prompt = `
+    You are acting as an automated email responder for Sayantan Biswas.
+    A user named "${name}" sent this message via the portfolio contact form: "${userMessage}".
+    
+    Write a friendly, professional, and concise confirmation receipt (max 2-3 sentences).
+    Acknowledge the content of their message briefly if applicable.
+    Assure them that Sayantan will review it and reply to their email soon.
+    Sign off as: "- Sayantan's AI Agent".
+  `;
+
+  try {
+    const response = await fetch('/.netlify/functions/ai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: prompt,
+        // No system instruction needed for auto-reply as the prompt is self-contained
+      }),
+    });
+
+    if (!response.ok) return `Thanks ${name}! I've received your message and will get back to you shortly.`;
+
+    const data = await response.json();
+    return data.text || `Thanks ${name}! I've received your message and will get back to you shortly.`;
+  } catch (error) {
+    console.error("Auto-reply generation failed:", error);
+    return `Thanks ${name}! I've received your message and will get back to you shortly.`;
   }
 };

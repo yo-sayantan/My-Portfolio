@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
 import { SOCIAL_LINKS } from '../constants';
-import { Mail, Phone, MapPin, Send, ArrowRight, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ArrowRight, Loader2, CheckCircle, AlertCircle, Sparkles } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+import { sendEmail } from '../services/emailService';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [responseMessage, setResponseMessage] = useState('');
 
   const validate = () => {
     const newErrors = { name: '', email: '', message: '' };
@@ -47,9 +49,16 @@ const Contact: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
     // Clear error when user starts typing
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+
+    // Reset status if they start typing after a success/error
+    if (status !== 'idle' && status !== 'submitting') {
+        setStatus('idle');
+        setResponseMessage('');
     }
   };
 
@@ -59,24 +68,25 @@ const Contact: React.FC = () => {
     if (!validate()) return;
 
     setStatus('submitting');
+    setResponseMessage('');
 
     try {
-      // Simulate backend API call
-      // Note: To enable real email sending, replace this with an API call to your backend
-      // or a service like EmailJS (e.g., emailjs.sendForm(...)).
-      console.log('Sending email...', formData);
+      // Send to our internal email service backend
+      const response = await sendEmail(formData);
       
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Mock network delay
-
+      setResponseMessage(response.reply);
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
       
-      // Reset status after a delay
-      setTimeout(() => setStatus('idle'), 5000);
+      // Auto-reset after 15 seconds
+      setTimeout(() => {
+        setStatus('idle');
+        setResponseMessage('');
+      }, 15000);
+
     } catch (error) {
       console.error('Submission error:', error);
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 5000);
     }
   };
 
@@ -216,12 +226,12 @@ const Contact: React.FC = () => {
                        {status === 'submitting' ? (
                          <>
                            <Loader2 className="w-5 h-5 animate-spin" />
-                           Sending...
+                           Processing...
                          </>
                        ) : status === 'success' ? (
                          <>
                            <CheckCircle className="w-5 h-5 animate-bounce" />
-                           Message Sent!
+                           Sent Successfully
                          </>
                        ) : status === 'error' ? (
                          <>
@@ -237,13 +247,23 @@ const Contact: React.FC = () => {
                     </button>
 
                     {status === 'success' && (
-                        <p className="text-green-600 dark:text-green-400 text-sm text-center font-medium animate-in fade-in mt-2">
-                            Thanks for reaching out! I'll get back to you soon.
-                        </p>
+                        <div className="mt-4 p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 animate-in fade-in slide-in-from-bottom-2 shadow-sm">
+                            <div className="flex items-start gap-3">
+                                <div className="p-1.5 bg-green-100 dark:bg-green-800 rounded-full shrink-0 mt-0.5">
+                                    <Sparkles className="w-3.5 h-3.5 text-green-600 dark:text-green-300" />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">Auto-Reply from Agent</h4>
+                                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                        "{responseMessage || "Thanks for reaching out! I'll get back to you soon."}"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     )}
                      {status === 'error' && (
                         <p className="text-red-500 dark:text-red-400 text-sm text-center font-medium animate-in fade-in mt-2">
-                            Something went wrong. Please email me directly.
+                            Something went wrong connecting to the service. Please try again.
                         </p>
                     )}
                   </form>
