@@ -30,6 +30,9 @@ export default async (req: Request) => {
 
   try {
     const body = await req.json() as EmailPayload;
+    const userAgent = req.headers.get('user-agent') || 'Unknown';
+    // Netlify headers for IP
+    const ip = req.headers.get('x-nf-client-connection-ip') || req.headers.get('client-ip') || 'Unknown'; 
     
     if (!body.name || !body.email || !body.message) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -67,57 +70,58 @@ export default async (req: Request) => {
       },
     });
 
-    // 2. Professional HTML Template
+    // 2. Professional Standard HTML Template (Not a card)
     const htmlContent = `
-      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-        <!-- Header -->
-        <div style="background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); padding: 30px 20px; text-align: center;">
-          <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 600; letter-spacing: 0.5px;">New Message Received</h1>
-          <p style="color: #e0f2fe; margin: 10px 0 0 0; font-size: 14px;">From your portfolio contact form</p>
-        </div>
-
-        <!-- Content -->
-        <div style="padding: 30px;">
-          <!-- Sender Info Box -->
-          <div style="background-color: #f8fafc; border-radius: 8px; padding: 20px; margin-bottom: 25px; border-left: 4px solid #0ea5e9;">
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 5px 0; color: #64748b; font-size: 12px; text-transform: uppercase; font-weight: 700; width: 80px;">Name</td>
-                <td style="padding: 5px 0; color: #0f172a; font-weight: 600;">${body.name}</td>
-              </tr>
-              <tr>
-                <td style="padding: 5px 0; color: #64748b; font-size: 12px; text-transform: uppercase; font-weight: 700;">Email</td>
-                <td style="padding: 5px 0; color: #0ea5e9; font-weight: 600;">
-                  <a href="mailto:${body.email}" style="color: #0ea5e9; text-decoration: none;">${body.email}</a>
-                </td>
-              </tr>
-            </table>
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <title>New Contact Message</title>
+      </head>
+      <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; background-color: #ffffff; padding: 20px;">
+        <div style="max-width: 650px; margin: 0 auto;">
+          
+          <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 25px;">
+            <h2 style="color: #0f172a; margin: 0; font-size: 20px;">New Portfolio Contact</h2>
           </div>
 
-          <!-- Message Body -->
-          <div style="margin-bottom: 10px;">
-            <p style="color: #64748b; font-size: 12px; text-transform: uppercase; font-weight: 700; margin-bottom: 10px;">Message</p>
-            <div style="color: #334155; line-height: 1.6; font-size: 16px; background-color: #ffffff; padding: 0;">
-              ${body.message.replace(/\n/g, '<br>')}
-            </div>
+          <div style="margin-bottom: 25px;">
+            <p style="font-size: 12px; color: #64748b; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; text-transform: uppercase;">Sender Information</p>
+            <p style="margin: 0; font-size: 16px; font-weight: 500; color: #0f172a;">
+              ${body.name}
+              <span style="color: #64748b; font-weight: 400;">&lt;<a href="mailto:${body.email}" style="color: #0ea5e9; text-decoration: none;">${body.email}</a>&gt;</span>
+            </p>
           </div>
-        </div>
 
-        <!-- Footer -->
-        <div style="background-color: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
-          <p style="margin: 0; color: #94a3b8; font-size: 12px;">Sent via Sayantan Biswas Portfolio</p>
-          <p style="margin: 5px 0 0 0; color: #cbd5e1; font-size: 11px;">${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })}</p>
+          <div style="margin-bottom: 25px;">
+            <p style="font-size: 12px; color: #64748b; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase;">Message Content</p>
+            <div style="background-color: #f8fafc; border-left: 3px solid #0ea5e9; padding: 16px; color: #334155; font-size: 15px; white-space: pre-wrap;">${body.message}</div>
+          </div>
+
+          <div style="background-color: #f9fafb; border-radius: 6px; padding: 15px; font-size: 12px; color: #64748b; border: 1px solid #f1f5f9;">
+            <p style="font-weight: 600; margin: 0 0 8px 0; text-transform: uppercase;">Technical Metadata</p>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+              <li style="margin-bottom: 4px;"><strong>Timestamp:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })} IST</li>
+              <li style="margin-bottom: 4px;"><strong>IP Address:</strong> ${ip}</li>
+              <li><strong>User Agent:</strong> ${userAgent}</li>
+            </ul>
+          </div>
+
+          <p style="font-size: 11px; color: #94a3b8; margin-top: 30px; text-align: center;">
+            Sent securely from Sayantan Biswas Portfolio
+          </p>
         </div>
-      </div>
+      </body>
+      </html>
     `;
 
     // 3. Send Email
     const info = await transporter.sendMail({
-      from: `"Portfolio Bot" <${GMAIL_USER}>`, // Sender address
+      from: `"Portfolio Notification" <${GMAIL_USER}>`, // Sender address
       to: TO_EMAIL, // List of receivers
       replyTo: body.email, // Allows you to click "Reply" and email the user directly
-      subject: `✨ Portfolio Inquiry: ${body.name}`, // Subject line
-      text: `Name: ${body.name}\nEmail: ${body.email}\n\nMessage:\n${body.message}`, // Plain text body
+      subject: `Portfolio Inquiry: ${body.name}`, // Subject line
+      text: `Name: ${body.name}\nEmail: ${body.email}\n\nMessage:\n${body.message}\n\nIP: ${ip}`, // Plain text body
       html: htmlContent, // HTML body
     });
 

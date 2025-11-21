@@ -1,6 +1,4 @@
 
-import { generateAutoReply } from './geminiService';
-
 export interface EmailData {
   name: string;
   email: string;
@@ -44,19 +42,10 @@ export const sendEmail = async (data: EmailData): Promise<EmailResponse> => {
 
     console.log('✅ Backend processed email successfully.');
 
-    // Generate Intelligent UI Confirmation (AI Auto-Reply)
-    // We do this on the client side to give immediate feedback while utilizing the existing Gemini service.
-    let uiReply = "Thank you for your message. I will get back to you soon.";
-    try {
-      uiReply = await generateAutoReply(data.name, data.message);
-    } catch (aiError) {
-      console.warn('AI Reply generation skipped:', aiError);
-    }
-
     console.groupEnd();
     return {
       success: true,
-      reply: uiReply
+      reply: "Thank you for reaching out. I have received your message and will respond shortly."
     };
 
   } catch (error) {

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { SOCIAL_LINKS } from '../constants';
-import { Mail, Phone, MapPin, Send, ArrowRight, Loader2, CheckCircle, AlertCircle, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ArrowRight, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import { sendEmail } from '../services/emailService';
 
@@ -250,12 +250,12 @@ const Contact: React.FC = () => {
                         <div className="mt-4 p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 animate-in fade-in slide-in-from-bottom-2 shadow-sm">
                             <div className="flex items-start gap-3">
                                 <div className="p-1.5 bg-green-100 dark:bg-green-800 rounded-full shrink-0 mt-0.5">
-                                    <Sparkles className="w-3.5 h-3.5 text-green-600 dark:text-green-300" />
+                                    <CheckCircle className="w-3.5 h-3.5 text-green-600 dark:text-green-300" />
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">Auto-Reply from Agent</h4>
+                                    <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">Message Sent</h4>
                                     <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                                        "{responseMessage || "Thanks for reaching out! I'll get back to you soon."}"
+                                        {responseMessage || "Thanks for reaching out! I'll get back to you soon."}
                                     </p>
                                 </div>
                             </div>
