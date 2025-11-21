@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -11,10 +11,29 @@ import Footer from './components/Footer';
 import ParticleNetwork from './components/ParticleNetwork';
 
 function App() {
+  const [isDark, setIsDark] = useState(false);
+
+  // Check system preference on mount
+  useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setIsDark(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    if (!isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-transparent select-none relative">
-      <ParticleNetwork />
-      <Header />
+    <div className="min-h-screen bg-transparent select-none relative transition-colors duration-500">
+      <ParticleNetwork isDark={isDark} />
+      <Header isDark={isDark} toggleTheme={toggleTheme} />
       <main className="relative z-10">
         <Hero />
         <Skills />

@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 
-const ParticleNetwork: React.FC = () => {
+interface ParticleNetworkProps {
+  isDark: boolean;
+}
+
+const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -14,7 +18,6 @@ const ParticleNetwork: React.FC = () => {
     let height = window.innerHeight;
     let particles: Particle[] = [];
     
-    // Mouse state
     const mouse = { x: -1000, y: -1000 };
 
     const resizeCanvas = () => {
@@ -36,16 +39,23 @@ const ParticleNetwork: React.FC = () => {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        // Slow drift
         this.vx = (Math.random() - 0.5) * 0.15; 
         this.vy = (Math.random() - 0.5) * 0.15;
         this.size = Math.random() * 2 + 1.5; 
 
-        // DARKER COLORS FOR VISIBILITY ON LIGHT BACKGROUND
+        // Theme Aware Colors
         const rand = Math.random();
-        if (rand > 0.92) this.color = 'rgba(14, 165, 233, 0.8)'; // Primary Blue
-        else if (rand > 0.84) this.color = 'rgba(168, 85, 247, 0.8)'; // Purple
-        else this.color = 'rgba(30, 41, 59, 0.6)'; // Slate-800 (Much darker for contrast)
+        if (isDark) {
+            // Dark Mode Particles (Light/Neon)
+            if (rand > 0.92) this.color = 'rgba(14, 165, 233, 0.7)'; // Cyan
+            else if (rand > 0.84) this.color = 'rgba(168, 85, 247, 0.7)'; // Purple
+            else this.color = 'rgba(148, 163, 184, 0.3)'; // Slate-400
+        } else {
+            // Light Mode Particles (Darker)
+            if (rand > 0.92) this.color = 'rgba(14, 165, 233, 0.8)'; // Blue
+            else if (rand > 0.84) this.color = 'rgba(168, 85, 247, 0.8)'; // Purple
+            else this.color = 'rgba(30, 41, 59, 0.6)'; // Slate-800
+        }
       }
 
       update() {
@@ -67,7 +77,6 @@ const ParticleNetwork: React.FC = () => {
 
     const initParticles = () => {
       particles = [];
-      // Balanced Density
       const particleCount = Math.min(Math.floor((width * height) / 4000), 250);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
@@ -81,7 +90,6 @@ const ParticleNetwork: React.FC = () => {
         particle.update();
         particle.draw();
 
-        // Network Connections - Darker lines
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particle.x - particles[j].x;
           const dy = particle.y - particles[j].y;
@@ -89,8 +97,9 @@ const ParticleNetwork: React.FC = () => {
 
           if (distance < 130) {
             ctx.beginPath();
-            // Darker stroke style for visibility
-            ctx.strokeStyle = `rgba(71, 85, 105, ${0.25 * (1 - distance / 130)})`;
+            // Theme Aware Lines
+            const strokeColor = isDark ? `rgba(148, 163, 184, ${0.15 * (1 - distance / 130)})` : `rgba(71, 85, 105, ${0.25 * (1 - distance / 130)})`;
+            ctx.strokeStyle = strokeColor;
             ctx.lineWidth = 0.6;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -98,7 +107,6 @@ const ParticleNetwork: React.FC = () => {
           }
         }
 
-        // Mouse Reactivity
         const dx = particle.x - mouse.x;
         const dy = particle.y - mouse.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -110,8 +118,6 @@ const ParticleNetwork: React.FC = () => {
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(mouse.x, mouse.y);
           ctx.stroke();
-          
-          // Gentle magnetic pull
           particle.vx += (mouse.x - particle.x) * 0.0001;
           particle.vy += (mouse.y - particle.y) * 0.0001;
         }
@@ -135,13 +141,12 @@ const ParticleNetwork: React.FC = () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [isDark]); // Re-run when theme changes
 
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      // Removed mix-blend-mode to ensure particles sit ON TOP of the background color
     />
   );
 };

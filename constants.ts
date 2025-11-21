@@ -18,10 +18,13 @@ export const EXPERIENCES: Experience[] = [
     period: 'Dec 2024 – Present',
     location: 'Hyderabad, Telangana',
     description: [
-      'Part of the FSD Team, developing and improving the infrastructure for Fraud Detection in Financial Transactions.',
-      'Currently working on the upgradation of PreciseID tool to provide better fraud analytics and verification policies.',
-      'Working on the API gateway to gather data from different services and re-direct requests to correct services.'
-    ]
+      'Driving the Fraud Detection (FSD) Team initiatives, enhancing critical infrastructure for real-time financial transaction monitoring.',
+      'Spearheading the modernization of the PreciseID tool to deliver advanced fraud analytics and robust verification policies.',
+      'Architecting a high-throughput API Gateway to efficiently orchestrate data flow between microservices and redirect requests with low latency.',
+      'Orchestrating containerized microservices using Docker and Kubernetes, ensuring high availability and seamless server management.',
+      'Championing an AI-first culture by integrating GitHub Copilot, Cursor, and GPT-5 into the development lifecycle, boosting team productivity by 30%.'
+    ],
+    skills: ['Java', 'Microservices', 'Docker', 'Kubernetes', 'API Gateway', 'Fraud Detection', 'AI Agents', 'Cursor']
   },
   {
     id: 'oracle',
@@ -30,13 +33,13 @@ export const EXPERIENCES: Experience[] = [
     period: 'Aug 2022 – Nov 2024',
     location: 'Hyderabad, Telangana',
     description: [
-      'Led the integration of a new payment service in partnership with Mastercard and HSBC, enhancing revenue for Oracle Fusion Cloud Financials.',
-      'Deployed and maintained dynamic Docker deployments on Oracle VM with seamless Oracle DB integration.',
-      'Collaborated with Tax and Project Management teams in developing new ideas, initiatives, products and services.',
-      'Designed and implemented microservices to enhance scalability and integration of payment services.',
-      'Leveraged PL/SQL to boost DB performance, ensuring reliability and safeguarding against data corruption.',
-      'Utilized AI tools like ChatGPT, Claude, and Gemini to automate repetitive tasks, increasing productivity by 30%.'
-    ]
+      'Led a strategic partnership integration with Mastercard and HSBC, significantly enhancing revenue streams for Oracle Fusion Cloud Financials.',
+      'Architected and maintained dynamic Docker deployments on Oracle VM, achieving seamless Oracle DB integration and improving environment stability.',
+      'Collaborated extensively with Tax and Project Management teams to innovate and launch new financial products and services.',
+      'Leveraged advanced PL/SQL optimization techniques to boost database performance, ensuring rock-solid reliability and data integrity.',
+      'Conducted deep-dive SQLHC and AWR analysis to implement critical data-fix scripts for performance tuning.'
+    ],
+    skills: ['Java', 'Oracle Cloud', 'Docker', 'PL/SQL', 'System Design']
   },
   {
     id: 'highradius-assoc',
@@ -45,12 +48,13 @@ export const EXPERIENCES: Experience[] = [
     period: 'Jun 2021 – Jul 2022',
     location: 'Hyderabad, Telangana',
     description: [
-      'Contributed to the HighRadius Credit application using Java, Spring, Hibernate, ExtJS, and MySQL.',
-      'Optimized performance with strategic multithreading implementations and leveraged AWS for cloud infrastructure.',
-      'Integrated QuickBooks and WorldPay, designing new credit limit functionalities leading to client acquisition.',
-      'Engineered a new Dynamic Notification system enabling customized in-portal notifications.',
-      'Trained and mentored 20 interns and new joiners.'
-    ]
+      'Played a core role in the design and development of the HighRadius Credit application using Java, Spring, Hibernate, and ExtJS.',
+      'Optimized system performance by implementing strategic multithreading solutions and leveraging AWS cloud infrastructure.',
+      'Spearheaded the integration of QuickBooks and WorldPay, designing novel credit limit functionalities that directly contributed to new client acquisition.',
+      'Engineered a highly flexible Dynamic Notification system, enabling customized in-portal alerts tailored to specific merchant criteria.',
+      'Mentored and trained a cohort of 20 interns and new hires, fostering best practices in SaaS development.'
+    ],
+    skills: ['Java', 'Spring Boot', 'AWS', 'Hibernate', 'MySQL', 'Multithreading']
   },
   {
     id: 'highradius-junior',
@@ -59,11 +63,12 @@ export const EXPERIENCES: Experience[] = [
     period: 'Jun 2020 – May 2021',
     location: 'Bhubaneshwar, Odisha',
     description: [
-      'Developed a framework for faster autonomous testing of software products like HighRadius Credit and EIPP.',
-      'Led a team of 6 designing and delivering User Stories.',
-      'Developed solutions for uploading and parsing PDF, TXT, and XLSX files using Regex.',
-      'Established scripts, test cases, and automation protocols with the QA team.'
-    ]
+      'Developed a high-efficiency framework for autonomous testing of flagship products like HighRadius Credit and EIPP.',
+      'Led a team of 6 engineers in designing and delivering critical User Stories for the EIPP product suite.',
+      'Engineered robust solutions for parsing complex PDF, TXT, and XLSX files using advanced Regex patterns.',
+      'Established comprehensive test scripts and automation protocols in collaboration with the QA team.'
+    ],
+    skills: ['Test Automation', 'Java', 'Regex', 'Team Leadership', 'Parsers']
   }
 ];
 
@@ -140,15 +145,15 @@ export const SKILLS: Skill[] = [
   },
   {
     category: "Cloud & Database",
-    items: ["AWS", "Oracle Cloud", "Docker", "MySQL", "PL/SQL", "Oracle DB", "Redis/NoSQL"]
+    items: ["AWS", "Oracle Cloud", "Docker", "Kubernetes", "MySQL", "PL/SQL", "Oracle DB", "Redis/NoSQL"]
   },
   {
     category: "AI & Productivity",
-    items: ["GitHub Copilot", "Gemini 1.5 Pro", "ChatGPT-4o", "MCP Servers", "AI Agents", "Prompt Engineering"]
+    items: ["GitHub Copilot", "Cursor", "GPT-5", "ChatGPT-4o", "MCP Servers", "AI Agents", "Prompt Engineering"]
   },
   {
     category: "DevOps & Tools",
-    items: ["CI/CD", "Git/GitHub", "JUnits", "Maven/Gradle", "XML/JSON", "Regex", "ADF UI"]
+    items: ["CI/CD", "JBoss", "Git/GitHub", "JUnits", "Maven/Gradle", "XML/JSON", "Regex", "ADF UI"]
   }
 ];
 

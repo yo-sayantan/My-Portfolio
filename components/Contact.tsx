@@ -5,51 +5,50 @@ import ScrollReveal from './ScrollReveal';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-20 bg-transparent relative">
+    <section id="contact" className="py-16 bg-transparent relative">
       <div className="container mx-auto px-6 relative z-10">
         <ScrollReveal>
-            <div className="mb-16 text-center">
-                <h2 className="text-4xl md:text-6xl font-bold text-slate-900 tracking-tighter mb-4">Get in Touch</h2>
-                <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                  Have a project in mind or want to discuss modern tech? I'm just a message away.
+            <div className="mb-12 text-center">
+                <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tighter mb-3">Get in Touch</h2>
+                <p className="text-base text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
+                  Ready to build something amazing? Let's start the conversation.
                 </p>
             </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
           
           <ScrollReveal delay="delay-100">
-            {/* High Transparency Glass */}
-            <div className="bg-white/30 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300">
-              <h3 className="text-2xl font-bold text-slate-900 mb-8">Contact Information</h3>
+            <div className="h-full bg-slate-50/50 dark:bg-slate-900/60 backdrop-blur-md p-8 rounded-[2rem] border border-white/50 dark:border-slate-700/50 shadow-xl flex flex-col justify-center">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-8">Contact Information</h3>
               <div className="space-y-6">
-                <a href={`mailto:${SOCIAL_LINKS.email}`} className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-white/50 hover:bg-white/60 hover:shadow-md transition-all group">
-                  <div className="p-3 bg-primary-100 text-primary-600 rounded-xl group-hover:scale-110 transition-transform">
-                    <Mail className="w-6 h-6" />
+                <a href={`mailto:${SOCIAL_LINKS.email}`} className="flex items-center gap-4 p-4 rounded-2xl bg-white/40 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 hover:bg-white/60 dark:hover:bg-slate-800/60 transition-all group">
+                  <div className="p-3 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-xl group-hover:scale-110 transition-transform">
+                    <Mail className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Email</p>
-                    <p className="text-base font-bold text-slate-900 break-all">{SOCIAL_LINKS.email}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-0.5">Email</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white break-all">{SOCIAL_LINKS.email}</p>
                   </div>
                 </a>
 
-                <a href={`tel:${SOCIAL_LINKS.phone}`} className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-white/50 hover:bg-white/60 hover:shadow-md transition-all group">
-                  <div className="p-3 bg-primary-100 text-primary-600 rounded-xl group-hover:scale-110 transition-transform">
-                    <Phone className="w-6 h-6" />
+                <a href={`tel:${SOCIAL_LINKS.phone}`} className="flex items-center gap-4 p-4 rounded-2xl bg-white/40 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 hover:bg-white/60 dark:hover:bg-slate-800/60 transition-all group">
+                  <div className="p-3 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-xl group-hover:scale-110 transition-transform">
+                    <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Phone</p>
-                    <p className="text-base font-bold text-slate-900">{SOCIAL_LINKS.phone}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-0.5">Phone</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">{SOCIAL_LINKS.phone}</p>
                   </div>
                 </a>
 
-                <div className="flex items-center gap-5 p-4 rounded-2xl bg-white/40 border border-white/50">
-                  <div className="p-3 bg-primary-100 text-primary-600 rounded-xl">
-                    <MapPin className="w-6 h-6" />
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/40 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50">
+                  <div className="p-3 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-xl">
+                    <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Location</p>
-                    <p className="text-base font-bold text-slate-900">Hyderabad, Telangana</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-0.5">Location</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">Hyderabad, Telangana</p>
                   </div>
                 </div>
               </div>
@@ -57,34 +56,33 @@ const Contact: React.FC = () => {
           </ScrollReveal>
 
           <ScrollReveal delay="delay-200">
-            {/* High Transparency Glass */}
-            <div className="bg-white/30 backdrop-blur-xl rounded-[2.5rem] border border-white/40 p-8 shadow-xl">
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">Send a Message</h3>
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Name</label>
-                    <input type="text" id="name" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-white/50 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="John Doe" />
+            <div className="h-full bg-white/40 dark:bg-slate-800/40 backdrop-blur-md rounded-[2rem] border border-white/50 dark:border-slate-700/50 p-8 shadow-xl">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Send a Message</h3>
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label htmlFor="name" className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider ml-1">Name</label>
+                    <input type="text" id="name" className="w-full px-4 py-2.5 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary-500 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900/30 outline-none transition-all text-sm font-medium placeholder:text-slate-400" placeholder="John Doe" />
                   </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Email</label>
-                    <input type="email" id="email" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-white/50 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="john@example.com" />
+                  <div className="space-y-1.5">
+                    <label htmlFor="email" className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider ml-1">Email</label>
+                    <input type="email" id="email" className="w-full px-4 py-2.5 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary-500 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900/30 outline-none transition-all text-sm font-medium placeholder:text-slate-400" placeholder="john@example.com" />
                   </div>
                 </div>
                 
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Subject</label>
-                  <input type="text" id="subject" className="w-full px-4 py-3 rounded-xl bg-white/40 border border-white/50 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all font-medium placeholder:text-slate-400" placeholder="Project discussion" />
+                <div className="space-y-1.5">
+                  <label htmlFor="subject" className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider ml-1">Subject</label>
+                  <input type="text" id="subject" className="w-full px-4 py-2.5 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary-500 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900/30 outline-none transition-all text-sm font-medium placeholder:text-slate-400" placeholder="Project discussion" />
                 </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Message</label>
-                  <textarea id="message" rows={4} className="w-full px-4 py-3 rounded-xl bg-white/40 border border-white/50 text-slate-900 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all resize-none font-medium placeholder:text-slate-400" placeholder="Tell me about your project..."></textarea>
+                <div className="space-y-1.5">
+                  <label htmlFor="message" className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider ml-1">Message</label>
+                  <textarea id="message" rows={3} className="w-full px-4 py-2.5 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-primary-500 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900/30 outline-none transition-all resize-none text-sm font-medium placeholder:text-slate-400" placeholder="Tell me about your project..."></textarea>
                 </div>
 
-                <button type="submit" className="w-full py-4 px-6 bg-slate-900 hover:bg-primary-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
+                <button type="submit" className="w-full py-3.5 px-6 bg-gradient-to-r from-primary-600 to-blue-600 hover:from-primary-500 hover:to-blue-500 text-white font-bold text-base rounded-xl shadow-lg hover:shadow-primary-500/30 transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 mt-2">
                   Send Message
-                  <Send className="w-5 h-5" />
+                  <Send className="w-4 h-4" />
                 </button>
               </form>
             </div>

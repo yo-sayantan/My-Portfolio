@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+    <footer className="bg-slate-950 text-slate-400 py-12 border-t border-slate-900 relative z-20">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="text-center md:text-left space-y-2">
           <h3 className="text-2xl font-bold text-white tracking-tight">Sayantan<span className="text-primary-500">.Dev</span></h3>
