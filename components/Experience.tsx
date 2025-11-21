@@ -137,48 +137,48 @@ const Experience: React.FC = () => {
 
           <div className="absolute left-8 top-0 bottom-0 w-1 bg-slate-200 dark:bg-slate-800 md:hidden"></div>
 
-          <div className="space-y-24">
+          <div className="space-y-16">
             {EXPERIENCES.map((exp, idx) => {
               const isEven = idx % 2 === 0;
               return (
                 <ScrollReveal key={exp.id} threshold={0.1} variant="fade-in">
                   <div className={`relative flex flex-col md:flex-row items-center ${isEven ? 'md:flex-row-reverse' : ''}`}>
                     
-                    <div className="w-full md:w-[48%] pl-20 md:pl-0">
+                    <div className="w-full md:w-[50%] pl-12 md:pl-0">
                        <div className={`
-                          relative bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-8 md:p-12 rounded-[2.5rem] border border-slate-200 dark:border-white/10 shadow-xl 
+                          relative bg-white/10 dark:bg-slate-900/30 backdrop-blur-lg p-6 md:p-8 rounded-[2rem] border border-slate-200 dark:border-white/10 shadow-xl 
                           transition-all duration-500 group
                           hover:-translate-y-2 hover:shadow-[0_0_40px_-5px_rgba(14,165,233,0.4)] hover:border-primary-400/60
-                          ${isEven ? 'md:mr-10' : 'md:ml-10'}
+                          ${isEven ? 'md:mr-8' : 'md:ml-8'}
                        `}>
-                          <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                          <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                          <div className="flex flex-col xl:flex-row justify-between items-start gap-4 mb-8">
+                          <div className="flex flex-col xl:flex-row justify-between items-start gap-4 mb-6">
                             <div className="space-y-2">
-                               <h3 className="text-3xl font-bold text-slate-900 dark:text-white transition-all duration-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 group-hover:scale-[1.02] origin-left">
+                               <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white transition-all duration-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 group-hover:scale-[1.02] origin-left">
                                  {exp.role}
                                </h3>
-                               <div className="flex items-center gap-2 text-primary-600 dark:text-primary-400 font-bold text-xl transition-all duration-300 group-hover:text-primary-700 dark:group-hover:text-primary-300 group-hover:scale-[1.02] origin-left">
-                                 <Briefcase className="w-6 h-6" />
+                               <div className="flex items-center gap-2 text-primary-600 dark:text-primary-400 font-bold text-lg md:text-xl transition-all duration-300 group-hover:text-primary-700 dark:group-hover:text-primary-300 group-hover:scale-[1.02] origin-left">
+                                 <Briefcase className="w-5 h-5 md:w-6 md:h-6" />
                                  {exp.company}
                                </div>
                             </div>
-                            <div className="text-sm font-bold text-slate-500 dark:text-slate-400 bg-white/20 dark:bg-white/5 px-5 py-3 rounded-2xl group-hover:bg-white/40 dark:group-hover:bg-white/10 group-hover:shadow-md transition-all whitespace-nowrap">
+                            <div className="text-xs md:text-sm font-bold text-slate-500 dark:text-slate-400 bg-white/20 dark:bg-white/5 px-4 py-2 md:px-5 md:py-3 rounded-2xl group-hover:bg-white/40 dark:group-hover:bg-white/10 group-hover:shadow-md transition-all whitespace-nowrap">
                                {exp.period}
                             </div>
                           </div>
 
-                          <ul className="space-y-5 mb-8">
+                          <ul className="space-y-3 md:space-y-4 mb-6">
                             {exp.description.map((item, i) => (
-                              <li key={i} className="flex items-start gap-4 text-slate-700 dark:text-slate-300 text-lg leading-relaxed group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                                <ArrowRight className="w-5 h-5 text-primary-400 mt-1.5 flex-shrink-0 group-hover:translate-x-1 transition-transform stroke-[3px]" />
+                              <li key={i} className="flex items-start gap-3 text-slate-700 dark:text-slate-300 text-base md:text-lg leading-relaxed group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                                <ArrowRight className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0 group-hover:translate-x-1 transition-transform stroke-[3px]" />
                                 {item}
                               </li>
                             ))}
                           </ul>
 
                           {exp.skills && (
-                            <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-200 dark:border-slate-700/50">
+                            <div className="flex flex-wrap gap-2 pt-5 border-t border-slate-200 dark:border-slate-700/50">
                               {exp.skills.map((skill) => (
                                 <span key={skill} className="px-3 py-1 text-xs font-bold text-slate-600 dark:text-slate-300 bg-white/20 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700/50 shadow-sm">
                                   {skill}
@@ -203,7 +203,7 @@ const Experience: React.FC = () => {
                          </div>
                     </div>
 
-                    <div className="hidden md:block md:w-[48%]"></div>
+                    <div className="hidden md:block md:w-[50%]"></div>
 
                   </div>
                 </ScrollReveal>

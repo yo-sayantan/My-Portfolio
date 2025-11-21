@@ -157,7 +157,7 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
           // Increased threshold for "web" look (more connections)
           if (distance < 200) { 
             ctx.beginPath();
-            const opacity = (1 - distance / 200) * 0.4;
+            const opacity = (1 - distance / 200) * 0.15;
             
             // Theme colors
             ctx.strokeStyle = isDark 

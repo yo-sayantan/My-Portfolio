@@ -15,6 +15,14 @@ import AIChatbot from './components/AIChatbot';
 function App() {
   const [isDark, setIsDark] = useState(false);
 
+  useEffect(() => {
+    // Ensure page starts at top on reload/load by disabling browser scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   const toggleTheme = () => {
     setIsDark(!isDark);
     if (!isDark) {
