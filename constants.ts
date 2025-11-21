@@ -114,7 +114,7 @@ export const PROJECTS: Project[] = [
     id: 'quick-task',
     title: 'QuickTask Mobile Suite',
     type: 'Personal',
-    techStack: ['Flutter', 'Dart', 'Android', 'SQLite', 'Provider', 'Material Design'],
+    techStack: ['Flutter', 'Dart', 'Android', 'SQLite', 'Material Design'],
     description: 'Designed and deployed a cross-platform productivity application using Flutter. Implemented advanced state management with Provider and local data persistence via SQLite to ensure a seamless offline-first experience for task tracking.',
     longDescription: 'QuickTask is a productivity-focused mobile application built with Flutter to ensure a native-like performance on both Android and iOS. It prioritizes an "Offline-First" architecture, utilizing SQLite for local persistence so users can manage tasks without internet connectivity. The app features a clean, Material Design interface and uses the Provider pattern for efficient state management across complex widget trees.',
     features: [
@@ -160,7 +160,7 @@ export const PROJECTS: Project[] = [
     id: 'investment-tracker',
     title: 'Algorithmic Investment Tracker',
     type: 'Personal',
-    techStack: ['Google Sheets API', 'Python', 'Data Analysis', 'Pandas', 'Matplotlib'],
+    techStack: ['Google Sheets API', 'Python', 'Data Analysis'],
     description: 'Built an automated financial analytics tool integrating Google Sheets API for real-time market data ingestion. Developed custom algorithms to calculate risk-adjusted returns and visualize portfolio diversification for data-driven decisions.',
     longDescription: 'An automated personal finance tool that bridges the gap between raw market data and actionable insights. Using Python and the Google Sheets API, this tool fetches real-time stock prices, calculates complex metrics like Sharpe Ratio and Beta, and generates visualization reports. It allows for automated rebalancing alerts based on pre-set portfolio allocation targets.',
     features: [
@@ -176,7 +176,7 @@ export const PROJECTS: Project[] = [
     id: 'os-scheduler',
     title: 'OS CPU Scheduler Simulator',
     type: 'Personal',
-    techStack: ['C++', 'Bash', 'System Architecture', 'Make', 'Linux'],
+    techStack: ['C++', 'Bash', 'Linux', 'System Architecture'],
     description: 'Simulated a complex Operating System process scheduler in C++. Implemented core algorithms like Round Robin and Shortest Job First (SJF) to visualize CPU resource allocation and context switching in a resource-constrained environment.',
     longDescription: 'A deep-dive educational simulation of Operating System internals. This project implements various CPU scheduling algorithms from scratch in C++ to visualize how processes are managed in a time-sharing environment. It includes a CLI interface to monitor process states (Ready, Running, Blocked) and analyzes the efficiency of algorithms like Round Robin, SJF, and Priority Scheduling under different loads.',
     features: [

@@ -120,7 +120,20 @@ const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
               className="p-2.5 rounded-full bg-white/10 dark:bg-slate-800/30 hover:bg-white/20 dark:hover:bg-slate-700/50 text-slate-700 dark:text-slate-200 transition-all duration-300 hover:scale-110 focus:outline-none relative overflow-hidden group"
               aria-label="Toggle Theme"
             >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              <div className="relative w-[18px] h-[18px]">
+                <Sun 
+                  size={18} 
+                  className={`absolute inset-0 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                    isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
+                  }`} 
+                />
+                <Moon 
+                  size={18} 
+                  className={`absolute inset-0 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                    !isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
+                  }`} 
+                />
+              </div>
               <div className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10 transition-opacity rounded-full" />
             </button>
 
