@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useMemo } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, ChevronDown, Terminal } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
 
@@ -8,6 +9,14 @@ const Hero: React.FC = () => {
     const element = document.querySelector(id);
     if (element) window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
   };
+
+  const experienceYears = useMemo(() => {
+    const startDate = new Date('2020-05-01');
+    const today = new Date();
+    const diffTime = Math.abs(today.getTime() - startDate.getTime());
+    const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25);
+    return diffYears.toFixed(1);
+  }, []);
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden">
@@ -20,7 +29,7 @@ const Hero: React.FC = () => {
         </h1>
 
         <p className="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Senior Software Engineer specializing in <span className="text-slate-800 dark:text-slate-200 font-semibold">Java, Microservices</span>, <span className="text-slate-800 dark:text-slate-200 font-semibold">AWS</span>, and <span className="text-slate-800 dark:text-slate-200 font-semibold">AI Agents</span>. 
+          Senior Software Engineer specializing in <span className="text-slate-800 dark:text-slate-200 font-semibold">Java, Microservices</span>, <span className="text-slate-800 dark:text-slate-200 font-semibold">Cloud</span>, and <span className="text-slate-800 dark:text-slate-200 font-semibold">AI Agents</span>. 
           I build scalable cloud ecosystems that power the next generation of fintech.
         </p>
 
@@ -48,7 +57,7 @@ const Hero: React.FC = () => {
             <img 
               src="https://github.com/yo-sayantan.png" 
               alt="Sayantan Biswas" 
-              className="w-40 h-40 md:w-48 md:h-48 rounded-[2rem] object-cover opacity-95"
+              className="w-56 h-56 md:w-72 md:h-72 rounded-[2rem] object-cover opacity-95"
             />
             
             <div className="absolute -bottom-4 -right-8 bg-white/30 dark:bg-slate-800/50 backdrop-blur-xl px-4 py-2 rounded-xl shadow-xl border border-white/20 dark:border-slate-700/30 flex items-center gap-3 animate-bounce-slow">
@@ -57,7 +66,7 @@ const Hero: React.FC = () => {
                 </div>
                 <div className="text-left">
                     <p className="text-[10px] uppercase font-bold text-slate-600 dark:text-slate-400 tracking-wider">Experience</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">5 Years</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white">{experienceYears} years</p>
                 </div>
             </div>
           </div>
