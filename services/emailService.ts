@@ -2,6 +2,7 @@
 export interface EmailData {
   name: string;
   email: string;
+  subject?: string;
   message: string;
   type?: 'contact' | 'transcript';
   transcript?: any[]; // Array of message objects for rich HTML generation

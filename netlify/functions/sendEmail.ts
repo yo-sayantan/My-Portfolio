@@ -4,6 +4,7 @@ import nodemailer from 'nodemailer';
 interface EmailPayload {
   name: string;
   email: string;
+  subject?: string;
   message: string;
   type?: 'contact' | 'transcript';
   transcript?: any[]; // Array of message objects
@@ -158,6 +159,10 @@ export default async (req: Request) => {
 
     } else {
       // CASE 2: SEND CONTACT FORM TO OWNER
+      const subjectLine = body.subject 
+        ? `Portfolio: ${body.subject}` 
+        : `Portfolio Inquiry: ${body.name}`;
+
       const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -168,6 +173,7 @@ export default async (req: Request) => {
             <h2 style="color: #0f172a; margin: 0;">New Portfolio Contact</h2>
           </div>
           <p><strong>From:</strong> ${body.name} &lt;${body.email}&gt;</p>
+          <p><strong>Subject:</strong> ${body.subject || 'N/A'}</p>
           <div style="background-color: #f8fafc; border-left: 3px solid #0ea5e9; padding: 16px; margin: 20px 0; white-space: pre-wrap;">${body.message}</div>
           <div style="font-size: 12px; color: #64748b; border-top: 1px solid #eee; padding-top: 10px;">
             <strong>IP:</strong> ${ip} | <strong>UA:</strong> ${userAgent}
@@ -181,8 +187,8 @@ export default async (req: Request) => {
         from: `"Portfolio Notification" <${GMAIL_USER}>`,
         to: OWNER_EMAIL, // Send TO you
         replyTo: body.email,
-        subject: `Portfolio Inquiry: ${body.name}`,
-        text: `Name: ${body.name}\nEmail: ${body.email}\nMessage:\n${body.message}`,
+        subject: subjectLine,
+        text: `Name: ${body.name}\nEmail: ${body.email}\nSubject: ${body.subject || 'N/A'}\nMessage:\n${body.message}`,
         html: htmlContent,
       };
     }
