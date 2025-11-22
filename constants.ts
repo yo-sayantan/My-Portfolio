@@ -1,16 +1,17 @@
-
 import { Experience, Project, Skill, Certification, Education, Award } from './types';
 
-export const SOCIAL_LINKS = {
+// --- Raw Data Definitions ---
+
+const SOCIAL_LINKS_DATA = {
   github: "https://github.com/yo-sayantan",
   linkedin: "https://www.linkedin.com/in/yo-sayantan",
   email: "sayantanbiswas.mycareer@gmail.com",
   phone: "+917381183721",
 };
 
-export const SUMMARY = "Experienced Senior Software Engineer with nearly 5 years of expertise in Java backend development, AWS cloud architectures, and Microservices. I specialize in building high-performance, scalable systems while leveraging AI-driven workflows—including prompt engineering, MCP Servers, and AI agents—to maximize productivity and code quality. Committed to continuous innovation, I drive engineering excellence through modern tech stacks and intelligent solutions.";
+const SUMMARY_DATA = "Experienced Senior Software Engineer with nearly 5 years of expertise in Java backend development, AWS cloud architectures, and Microservices. I specialize in building high-performance, scalable systems while leveraging AI-driven workflows—including prompt engineering, MCP Servers, and AI agents—to maximize productivity and code quality. Committed to continuous innovation, I drive engineering excellence through modern tech stacks and intelligent solutions.";
 
-export const EXPERIENCES: Experience[] = [
+const EXPERIENCES_DATA: Experience[] = [
   {
     id: 'experian',
     company: 'Experian',
@@ -72,7 +73,7 @@ export const EXPERIENCES: Experience[] = [
   }
 ];
 
-export const EDUCATION: Education[] = [
+const EDUCATION_DATA: Education[] = [
   {
     school: "Birla Institute of Technology & Science (BITS) Pilani",
     degree: "M. Tech. (Software Engineering)",
@@ -93,7 +94,7 @@ export const EDUCATION: Education[] = [
   }
 ];
 
-export const PROJECTS: Project[] = [
+const PROJECTS_DATA: Project[] = [
   {
     id: 'book-exchange',
     title: 'Book Exchange Ecosystem',
@@ -189,7 +190,7 @@ export const PROJECTS: Project[] = [
   }
 ];
 
-export const SKILLS: Skill[] = [
+const SKILLS_DATA: Skill[] = [
   {
     category: "Backend Engineering",
     items: ["Java", "SpringBoot", "Microservices", "Hibernate", "REST/SOAP", "System Design", "DSA"]
@@ -208,14 +209,14 @@ export const SKILLS: Skill[] = [
   }
 ];
 
-export const CERTIFICATIONS: Certification[] = [
+const CERTIFICATIONS_DATA: Certification[] = [
   { name: "OCI Foundations Associate", date: "11/2023", issuer: "Oracle" },
   { name: "Product Essentials Program", date: "06/2021" },
   { name: "Basic Python Certification", date: "06/2019" },
   { name: "NIIT Java Certification", date: "05/2018" }
 ];
 
-export const AWARDS: Award[] = [
+const AWARDS_DATA: Award[] = [
   {
     title: "Spot Award",
     issuer: "Oracle",
@@ -229,3 +230,50 @@ export const AWARDS: Award[] = [
     description: "Recognized for outstanding contributions to the Credit Cloud module and team mentorship."
   }
 ];
+
+// --- Logical Grouping for Structured Access ---
+
+export interface PortfolioData {
+  personal: {
+    name: string;
+    role: string;
+    summary: string;
+    socialLinks: typeof SOCIAL_LINKS_DATA;
+  };
+  professional: {
+    experiences: Experience[];
+    skills: Skill[];
+    projects: Project[];
+    certifications: Certification[];
+    awards: Award[];
+    education: Education[];
+  };
+}
+
+export const PORTFOLIO_DATA: PortfolioData = {
+  personal: {
+    name: "Sayantan Biswas",
+    role: "Senior Software Engineer",
+    summary: SUMMARY_DATA,
+    socialLinks: SOCIAL_LINKS_DATA
+  },
+  professional: {
+    experiences: EXPERIENCES_DATA,
+    skills: SKILLS_DATA,
+    projects: PROJECTS_DATA,
+    certifications: CERTIFICATIONS_DATA,
+    awards: AWARDS_DATA,
+    education: EDUCATION_DATA
+  }
+};
+
+// --- Backward Compatibility Exports ---
+// These are kept to ensure existing imports in other files don't break.
+export const SOCIAL_LINKS = SOCIAL_LINKS_DATA;
+export const SUMMARY = SUMMARY_DATA;
+export const EXPERIENCES = EXPERIENCES_DATA;
+export const PROJECTS = PROJECTS_DATA;
+export const SKILLS = SKILLS_DATA;
+export const EDUCATION = EDUCATION_DATA;
+export const CERTIFICATIONS = CERTIFICATIONS_DATA;
+export const AWARDS = AWARDS_DATA;

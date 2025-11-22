@@ -73,19 +73,18 @@ const Hero: React.FC = () => {
                 </div>
 
                 {/* Main Headline with Improved Spacing */}
-                <h1 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tight mb-8 leading-tight">
-                  <span className="block bg-clip-text text-transparent bg-gradient-to-b from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-500 drop-shadow-sm pb-3">
-                    Engineering
+                <h1 className="text-4xl md:text-5xl xl:text-6xl font-black tracking-tight mb-8 leading-[1.15]">
+                  <span className="block bg-clip-text text-transparent bg-gradient-to-b from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-500 drop-shadow-sm pb-2">
+                    I Transform Complex Business Requirements
                   </span>
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 via-blue-500 to-purple-600 animate-gradient-x bg-[length:200%_auto] py-2">
-                    Intelligent Systems
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 via-blue-500 to-purple-600 animate-gradient-x bg-[length:200%_auto] py-1 block">
+                    Into High-Performance, Scalable Microservices
                   </span>
                 </h1>
 
                 {/* Subheadline */}
-                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mb-10 leading-relaxed font-medium">
-                  Senior Software Engineer architecting scalable <span className="text-slate-900 dark:text-white font-bold">Cloud Solutions</span> and <span className="text-slate-900 dark:text-white font-bold">AI Agents</span>. 
-                  I turn complex problems into elegant, production-ready code.
+                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-10 leading-relaxed font-medium">
+                  Specializing in <span className="text-slate-900 dark:text-white font-bold">Java, SQL/NoSQL, AWS Ecosystems</span> and <span className="text-slate-900 dark:text-white font-bold">AI-Driven Development</span>. I turn complex problems into elegant, production-ready code.
                 </p>
 
                 {/* Action Buttons */}
