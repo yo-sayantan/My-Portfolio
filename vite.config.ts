@@ -15,8 +15,8 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [react()],
       define: {
-        // No API keys are exposed to the client. 
-        // All API interactions (SendPulse & Gemini) are proxied via Netlify Functions.
+        // Expose the API Key to the client for direct SDK usage
+        'process.env.API_KEY': JSON.stringify(env.API_KEY),
       },
       resolve: {
         alias: {

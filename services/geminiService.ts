@@ -1,3 +1,4 @@
+import { GoogleGenAI } from "@google/genai";
 import { SUMMARY, EXPERIENCES, PROJECTS, SKILLS, SOCIAL_LINKS } from '../constants';
 
 const RESUME_DATA = {
@@ -28,34 +29,28 @@ Guidelines:
 - If asked something unrelated to the portfolio or professional skills, politely steer the conversation back to ${RESUME_DATA.name}'s work.
 `;
 
+// Initialize the Google GenAI client with the API key from environment variables
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
 /**
- * Calls the secure Netlify Function to interact with Gemini.
+ * Calls the Gemini API directly using the SDK.
  */
 export const sendMessageToGemini = async (message: string): Promise<string> => {
   try {
-    // Include the current URL to give context to the AI about where the user is
     const currentUrl = typeof window !== 'undefined' ? window.location.href : 'Unknown';
     const promptWithContext = `[Current Page Context: ${currentUrl}]\n\n${message}`;
 
-    const response = await fetch('/.netlify/functions/ai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        prompt: promptWithContext,
-        systemInstruction: SYSTEM_INSTRUCTION
-      }),
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: promptWithContext,
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION,
+      }
     });
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
-    const data = await response.json();
-    return data.text || "I'm thinking... but couldn't generate a response right now.";
+    return response.text || "I'm thinking... but couldn't generate a response right now.";
   } catch (error) {
     console.error("Gemini Service Error:", error);
-    return "I'm having trouble connecting to the server right now. Please try again later.";
+    return "I'm having trouble connecting to the AI service right now. Please try again later.";
   }
 };
