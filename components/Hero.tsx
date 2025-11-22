@@ -75,16 +75,16 @@ const Hero: React.FC = () => {
                 {/* Main Headline with Improved Spacing */}
                 <h1 className="text-4xl md:text-5xl xl:text-6xl font-black tracking-tight mb-8 leading-[1.15]">
                   <span className="block bg-clip-text text-transparent bg-gradient-to-b from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-500 drop-shadow-sm pb-2">
-                    I Transform Complex Business Requirements
+                    Engineering
                   </span>
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 via-blue-500 to-purple-600 animate-gradient-x bg-[length:200%_auto] py-1 block">
-                    Into High-Performance, Scalable Microservices
+                    Intelligent Systems
                   </span>
                 </h1>
 
                 {/* Subheadline */}
                 <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-10 leading-relaxed font-medium">
-                  Specializing in <span className="text-slate-900 dark:text-white font-bold">Java, SQL/NoSQL, AWS Ecosystems</span> and <span className="text-slate-900 dark:text-white font-bold">AI-Driven Development</span>. I turn complex problems into elegant, production-ready code.
+                  I Transform Complex Business Requirements into High-Performance, Scalable Microservices. Specializing in <span className="text-slate-900 dark:text-white font-bold">Java, SQL/NoSQL, AWS Ecosystems</span> and <span className="text-slate-900 dark:text-white font-bold">AI-Driven Development</span>. I turn complex problems into elegant, production-ready code.
                 </p>
 
                 {/* Action Buttons */}
