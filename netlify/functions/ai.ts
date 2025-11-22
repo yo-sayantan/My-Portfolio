@@ -1,6 +1,8 @@
+
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY;
+// Support both variable names
+const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
 
 export default async (req: Request) => {
   // Handle CORS
@@ -19,7 +21,7 @@ export default async (req: Request) => {
   }
 
   if (!apiKey) {
-    console.error("Server Error: API_KEY is missing in environment variables.");
+    console.error("Server Error: API_KEY (or GEMINI_API_KEY) is missing in environment variables.");
     return new Response(JSON.stringify({ error: "Server misconfiguration" }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
