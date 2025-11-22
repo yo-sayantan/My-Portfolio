@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect, Component, ErrorInfo } from 'react';
 import { MessageSquare, Send, X, Sparkles, Loader2, User, Bot, Trash2, Mail, Check } from 'lucide-react';
 import { sendMessageToGemini, ChatHistoryItem } from '../services/geminiService';
@@ -41,13 +42,17 @@ class ChatErrorBoundary extends Component<{ children: React.ReactNode }, { hasEr
 // --- Typing Indicator Component ---
 const TypingIndicator = () => (
   <div className="flex items-end gap-2 animate-in fade-in duration-300">
-    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-blue-600 flex items-center justify-center shrink-0 shadow-sm">
+    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-blue-600 flex items-center justify-center shrink-0 shadow-sm ring-2 ring-white dark:ring-slate-900">
        <Bot size={16} className="text-white" />
     </div>
-    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-2xl rounded-bl-sm shadow-sm flex items-center gap-1.5 h-10">
-      <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-      <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-      <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+    <div className="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-2xl rounded-bl-sm shadow-sm flex items-center gap-1.5 h-10 overflow-hidden">
+      {/* Background Animation */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 via-purple-500/5 to-primary-500/5 animate-pulse"></div>
+      
+      {/* Animated Dots */}
+      <span className="relative w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+      <span className="relative w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+      <span className="relative w-2 h-2 bg-primary-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
     </div>
   </div>
 );

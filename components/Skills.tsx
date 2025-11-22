@@ -41,7 +41,7 @@ const Skills: React.FC = () => {
                   {skillGroup.items.map((skill) => (
                     <span 
                       key={skill}
-                      className="px-3 py-1.5 text-sm font-bold text-slate-700 dark:text-slate-300 bg-white/20 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg shadow-sm hover:bg-white/40 dark:hover:bg-white/10 transition-colors"
+                      className="px-3 py-1.5 text-sm font-bold text-slate-700 dark:text-slate-300 bg-white/20 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg shadow-sm hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-primary-500 cursor-default"
                     >
                       {skill}
                     </span>

@@ -57,11 +57,11 @@ const Hero: React.FC = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* Grid Layout: Text Left (Centered Content), Image Right */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
+        {/* Grid Layout: Text Left (Left Aligned), Image Right */}
+        <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-12 lg:gap-8 items-center w-full">
             
-            {/* Text Content - Centered Alignment */}
-            <div className="flex flex-col items-center text-center order-2 lg:order-1 relative z-20">
+            {/* Text Content - Left Aligned */}
+            <div className="flex flex-col items-start text-left order-2 lg:order-1 relative z-20">
                 
                 {/* Status Badge */}
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-slate-200/20 backdrop-blur-xl shadow-lg mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
@@ -72,8 +72,8 @@ const Hero: React.FC = () => {
                     <span className="text-xs font-bold tracking-widest uppercase text-slate-600 dark:text-slate-300">Looking for Exciting Opportunities</span>
                 </div>
 
-                {/* Main Headline with Improved Spacing */}
-                <h1 className="text-4xl md:text-5xl xl:text-6xl font-black tracking-tight mb-8 leading-[1.15]">
+                {/* Main Headline */}
+                <h1 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tight mb-8 leading-[1.1]">
                   <span className="block bg-clip-text text-transparent bg-gradient-to-b from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-500 drop-shadow-sm pb-2">
                     Engineering
                   </span>
@@ -82,13 +82,18 @@ const Hero: React.FC = () => {
                   </span>
                 </h1>
 
-                {/* Subheadline */}
-                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-10 leading-relaxed font-medium">
-                  I Transform Complex Business Requirements into High-Performance, Scalable Microservices. Specializing in <span className="text-slate-900 dark:text-white font-bold">Java, SQL/NoSQL, AWS Ecosystems</span> and <span className="text-slate-900 dark:text-white font-bold">AI-Driven Development</span>. I turn complex problems into elegant, production-ready code.
+                {/* Introduction Text */}
+                <p className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100 max-w-2xl mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 leading-snug">
+                  Senior Software Engineer developing and architecting scalable cloud solutions and AI-agents.
+                </p>
+
+                {/* Detailed Description */}
+                <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mb-10 leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
+                  I Transform Complex Business Requirements into High-Performance, Scalable Microservices. Specializing in <span className="text-slate-900 dark:text-white font-bold">Java, SQL/NoSQL, AWS Ecosystems</span> and <span className="text-slate-900 dark:text-white font-bold">AI-Driven Development</span>.
                 </p>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row items-center gap-5 mb-12">
+                <div className="flex flex-col sm:flex-row items-center gap-5 mb-12 w-full sm:w-auto">
                     <a 
                         href="#projects" 
                         onClick={(e) => handleScrollTo(e, '#projects')}
@@ -131,7 +136,7 @@ const Hero: React.FC = () => {
 
             {/* Image Section - Right Column */}
             <div className="flex justify-center lg:justify-end order-1 lg:order-2 relative z-10 mb-12 lg:mb-0">
-                <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] pointer-events-auto group perspective-1000">
+                <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] pointer-events-auto group perspective-1000">
                     
                     {/* Partition/Background Elements - Circular */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-primary-600 to-purple-600 rounded-full rotate-6 scale-105 opacity-20 dark:opacity-40 group-hover:rotate-12 transition-transform duration-500"></div>
@@ -148,19 +153,19 @@ const Hero: React.FC = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
 
-                    {/* Experience Badge - Elegant & Optimised */}
-                    <div className="absolute bottom-4 -right-4 md:bottom-8 md:-right-12 z-20 animate-bounce-slow">
+                    {/* Experience Badge - Elegant & Optimised (Smaller) */}
+                    <div className="absolute bottom-4 -right-4 md:bottom-8 md:-right-4 z-20 animate-bounce-slow">
                         <div className="relative group">
                             <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-blue-600 rounded-full blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-                            <div className="relative flex items-center gap-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-white/60 dark:border-white/10 py-3 pl-3 pr-6 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-transform duration-300 group-hover:scale-105">
-                                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-primary-500/25">
-                                    <Terminal size={22} className="drop-shadow-md" />
+                            <div className="relative flex items-center gap-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-white/60 dark:border-white/10 py-2 pl-2 pr-5 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-transform duration-300 group-hover:scale-105">
+                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-primary-500/25">
+                                    <Terminal size={18} className="drop-shadow-md" />
                                  </div>
                                  <div className="flex flex-col justify-center">
-                                    <p className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Experience</p>
-                                    <div className="flex items-baseline gap-1.5">
-                                       <span className="text-2xl font-black text-slate-900 dark:text-white leading-none">{experienceYears}</span>
-                                       <span className="text-xs font-bold text-primary-600 dark:text-primary-400 leading-none">Years</span>
+                                    <p className="text-[9px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Experience</p>
+                                    <div className="flex items-baseline gap-1">
+                                       <span className="text-xl font-black text-slate-900 dark:text-white leading-none">{experienceYears}</span>
+                                       <span className="text-[10px] font-bold text-primary-600 dark:text-primary-400 leading-none">Years</span>
                                     </div>
                                  </div>
                             </div>
