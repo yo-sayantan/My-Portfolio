@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface ParticleNetworkProps {
   isDark: boolean;
@@ -7,7 +7,10 @@ interface ParticleNetworkProps {
 
 const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  // Using refs for mouse state to avoid re-renders/closure staleness in animation loop
+  // Initialize based on window width to prevent flash of content
+  // Disable on Mobile (< 768px) and Tablet (< 1024px)
+  const [isHidden, setIsHidden] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
+  
   const interactionRef = useRef({
     x: -1000,
     y: -1000,
@@ -15,6 +18,18 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
   });
 
   useEffect(() => {
+    const checkScreenSize = () => {
+        // Disable on Mobile (< 768px) and Tablet (< 1024px)
+        setIsHidden(window.innerWidth < 1024);
+    };
+    
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  useEffect(() => {
+    if (isHidden) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -23,6 +38,11 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
 
     let width = window.innerWidth;
     let height = window.innerHeight;
+    
+    // Set actual canvas size to match display size for sharp rendering
+    canvas.width = width;
+    canvas.height = height;
+
     let particles: Particle[] = [];
     let animationFrameId: number;
     
@@ -188,7 +208,7 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mousedown', handleMouseDown);
     
-    // CRITICAL FIX: Call resizeCanvas initially to set the correct canvas buffer size
+    // Initialize
     resizeCanvas(); 
     animate();
 
@@ -198,7 +218,9 @@ const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ isDark }) => {
       window.removeEventListener('mousedown', handleMouseDown);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isDark]);
+  }, [isDark, isHidden]);
+
+  if (isHidden) return null;
 
   return (
     <canvas
