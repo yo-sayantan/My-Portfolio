@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
       define: {
         // Expose the API Key to the client for direct SDK usage
         // Default to empty string to prevent undefined replacement crashes
-        'process.env.API_KEY': JSON.stringify(env.API_KEY || ''),
+        'process.env.GEMINI_API_KEY': JSON.stringify(env.API_KEY || ''),
       },
       resolve: {
         alias: {
