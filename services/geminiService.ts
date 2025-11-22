@@ -1,3 +1,4 @@
+
 import { GoogleGenAI, Type } from "@google/genai";
 import { PORTFOLIO_DATA } from '../constants';
 
@@ -31,9 +32,6 @@ Your primary goal is to represent Sayantan professionally and answer questions a
 4. **Boundaries:** If asked about unrelated topics (politics, general knowledge unrelated to tech), politely steer the conversation back to Sayantan's professional work.
 `;
 
-// Initialize the Google GenAI client
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export interface ChatHistoryItem {
   role: 'user' | 'model';
   text: string;
@@ -56,6 +54,18 @@ export const sendMessageToGemini = async (
   history: ChatHistoryItem[] = []
 ): Promise<AIResponse> => {
   try {
+    // Initialize client lazily to prevent top-level module crashes
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+        console.warn("Gemini API Key is missing.");
+        return { 
+            text: "I'm currently offline because my API key is missing. Please contact Sayantan to fix this configuration!", 
+            suggestions: ["Contact Sayantan"] 
+        };
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
+
     // Add current page context if available to help the AI understand where the user is looking
     const currentUrl = typeof window !== 'undefined' ? window.location.href : 'Unknown';
     const systemInstructionWithContext = `${SYSTEM_INSTRUCTION}\n\nUser Context: Browsing ${currentUrl}`;
