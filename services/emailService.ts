@@ -49,7 +49,7 @@ export const sendEmail = async (data: EmailData): Promise<EmailResponse> => {
       success: true,
       reply: data.type === 'transcript' 
         ? "Transcript sent successfully!" 
-        : "Message sent! 🚀 I'll reply faster than a hot-reloaded React component (usually)."
+        : "Thank you! Your message has been delivered. I'll get back to you shortly."
     };
 
   } catch (error) {

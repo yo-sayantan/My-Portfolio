@@ -1,9 +1,67 @@
 
 import React, { useState } from 'react';
 import { SOCIAL_LINKS } from '../constants';
-import { Mail, MapPin, Send, Loader2, CheckCircle, AlertCircle, Linkedin, MessageCircle, User, Type, AlignLeft, AtSign } from 'lucide-react';
+import { Mail, MapPin, Send, Loader2, CheckCircle, AlertCircle, Linkedin, MessageCircle, User, Type, AlignLeft, AtSign, LucideIcon } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import { sendEmail } from '../services/emailService';
+
+// Extract InputField outside the main component to prevent re-renders causing focus loss
+interface InputFieldProps {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+  type?: string;
+  value: string;
+  error?: string;
+  placeholder?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const InputField = ({ 
+  id, 
+  label, 
+  icon: Icon, 
+  type = "text", 
+  value, 
+  error, 
+  placeholder,
+  onChange 
+}: InputFieldProps) => (
+  <div className="space-y-2">
+    <label htmlFor={id} className="text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1 block">
+      {label}
+    </label>
+    <div className={`relative group transition-all duration-300 ${error ? 'shake' : ''}`}>
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-500 transition-colors duration-300 pointer-events-none">
+        <Icon size={18} />
+      </div>
+      <input
+        type={type}
+        id={id}
+        name={id}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={`
+          w-full pl-11 pr-4 py-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 
+          border transition-all duration-300 outline-none
+          text-slate-900 dark:text-white placeholder:text-slate-400/60 font-medium text-sm
+          shadow-sm hover:border-slate-300 dark:hover:border-slate-600
+          ${error 
+            ? 'border-red-400 bg-red-50/50 dark:bg-red-900/10 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' 
+            : 'border-slate-200 dark:border-slate-700 focus:border-primary-500 dark:focus:border-primary-400 focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-500/10'
+          }
+        `}
+      />
+      {error && (
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500 animate-pulse pointer-events-none">
+          <AlertCircle size={18} />
+        </div>
+      )}
+    </div>
+    {error && <p className="text-red-500 text-xs font-bold ml-1 animate-in slide-in-from-top-1">{error}</p>}
+  </div>
+);
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -28,6 +86,9 @@ const Contact: React.FC = () => {
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
       isValid = false;
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+      isValid = false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,13 +100,17 @@ const Contact: React.FC = () => {
       isValid = false;
     }
 
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-      isValid = false;
-    }
+    // Subject is optional now
+    // if (!formData.subject.trim()) {
+    //   newErrors.subject = 'Subject is required';
+    //   isValid = false;
+    // }
 
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
+      isValid = false;
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
       isValid = false;
     }
 
@@ -94,52 +159,6 @@ const Contact: React.FC = () => {
       setStatus('error');
     }
   };
-
-  const InputField = ({ 
-    id, 
-    label, 
-    icon: Icon, 
-    type = "text", 
-    value, 
-    error, 
-    placeholder,
-    onChange 
-  }: any) => (
-    <div className="space-y-2">
-      <label htmlFor={id} className="text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1 block">
-        {label}
-      </label>
-      <div className={`relative group transition-all duration-300 ${error ? 'shake' : ''}`}>
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-500 transition-colors duration-300 pointer-events-none">
-          <Icon size={18} />
-        </div>
-        <input
-          type={type}
-          id={id}
-          name={id}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          className={`
-            w-full pl-11 pr-4 py-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 
-            border transition-all duration-300 outline-none
-            text-slate-900 dark:text-white placeholder:text-slate-400/60 font-medium text-sm
-            shadow-sm hover:border-slate-300 dark:hover:border-slate-600
-            ${error 
-              ? 'border-red-400 bg-red-50/50 dark:bg-red-900/10 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' 
-              : 'border-slate-200 dark:border-slate-700 focus:border-primary-500 dark:focus:border-primary-400 focus:bg-white dark:focus:bg-slate-800 focus:ring-4 focus:ring-primary-500/10'
-            }
-          `}
-        />
-        {error && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500 animate-pulse pointer-events-none">
-            <AlertCircle size={18} />
-          </div>
-        )}
-      </div>
-      {error && <p className="text-red-500 text-xs font-bold ml-1 animate-in slide-in-from-top-1">{error}</p>}
-    </div>
-  );
 
   return (
     <section id="contact" className="py-24 relative">
@@ -251,7 +270,7 @@ const Contact: React.FC = () => {
 
                          <InputField 
                              id="subject" 
-                             label="Subject" 
+                             label="Subject (Optional)" 
                              icon={Type} 
                              value={formData.subject} 
                              error={errors.subject} 
