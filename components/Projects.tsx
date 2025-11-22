@@ -231,7 +231,7 @@ const Projects: React.FC = () => {
                                     </span>
                                     <button 
                                       onClick={(e) => handleGithubClick(e, project.link!)}
-                                      className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 dark:bg-white text-white dark:text-slate-900 shadow-lg transform transition-transform duration-300 hover:scale-110 active:scale-95 hover:rotate-12 z-20"
+                                      className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 dark:bg-white text-white dark:text-slate-900 shadow-lg transform transition-all duration-300 hover:scale-110 hover:-translate-y-1 active:scale-95 z-20"
                                     >
                                         <Github size={20} />
                                     </button>

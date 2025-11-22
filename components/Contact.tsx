@@ -191,7 +191,7 @@ const Contact: React.FC = () => {
                     <div className="space-y-4">
                       {/* Contact Items */}
                       <a href={`mailto:${SOCIAL_LINKS.email}`} className="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/50 dark:hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-slate-200/50 dark:hover:border-white/10">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-all duration-300">
                           <Mail className="w-5 h-5" />
                         </div>
                         <div>
@@ -201,7 +201,7 @@ const Contact: React.FC = () => {
                       </a>
 
                       <a href={`tel:${SOCIAL_LINKS.phone}`} className="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/50 dark:hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-slate-200/50 dark:hover:border-white/10">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30 group-hover:scale-110 transition-all duration-300">
                           <MessageCircle className="w-5 h-5" />
                         </div>
                         <div>
@@ -211,7 +211,7 @@ const Contact: React.FC = () => {
                       </a>
                       
                       <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/50 dark:hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-slate-200/50 dark:hover:border-white/10">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0077b5] to-[#005582] flex items-center justify-center text-white shadow-lg shadow-blue-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0077b5] to-[#005582] flex items-center justify-center text-white shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-all duration-300">
                           <Linkedin className="w-5 h-5" />
                         </div>
                         <div>
@@ -221,7 +221,7 @@ const Contact: React.FC = () => {
                       </a>
 
                       <a href="https://maps.google.com/?q=Kondapur,+Hyderabad,+Telangana" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/50 dark:hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-slate-200/50 dark:hover:border-white/10">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-purple-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-all duration-300">
                           <MapPin className="w-5 h-5" />
                         </div>
                         <div>

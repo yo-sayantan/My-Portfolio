@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
                           href={s.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`transition-colors duration-300 transform hover:scale-110 ${s.color} opacity-0 animate-fade-in-up`}
+                          className={`transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 ${s.color} opacity-0 animate-fade-in-up`}
                           style={{ animationDelay: `${0.6 + (i * 0.1)}s` }}
                           aria-label={s.label}
                         >
@@ -195,4 +195,3 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-    

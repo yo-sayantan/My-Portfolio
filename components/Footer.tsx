@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SOCIAL_LINKS } from '../constants';
 import { Github, Linkedin, Heart, Mail } from 'lucide-react';
@@ -48,11 +49,11 @@ const Footer: React.FC = () => {
                   href={item.href}
                   target={item.label !== 'Email' ? "_blank" : undefined}
                   rel={item.label !== 'Email' ? "noopener noreferrer" : undefined}
-                  className={`flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:-translate-y-0.5 hover:scale-110 hover:shadow-sm group ${item.color}`}
+                  className={`flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:shadow-sm group ${item.color}`}
                   aria-label={item.label}
                   title={item.label}
                 >
-                  <item.Icon className="w-4 h-4 transition-transform group-hover:rotate-12" />
+                  <item.Icon className="w-4 h-4 transition-transform group-hover:scale-110" />
                 </a>
               ))}
            </div>
