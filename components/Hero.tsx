@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
                     {/* Main Image Container - Circular */}
                     <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl border border-white/20 dark:border-white/5 bg-white dark:bg-slate-900 z-10 transform transition-transform duration-500 group-hover:scale-[1.02]">
                         <img 
-                            src="public/profile.png" 
+                            src="https://github.com/yo-sayantan.png" 
                             alt="Sayantan Biswas" 
                             className="w-full h-full object-cover"
                         />
