@@ -21,7 +21,7 @@ export default async (req: Request) => {
   }
 
   if (!apiKey) {
-    console.error("Server Error: Variables or Keys are missing in environment variables.");
+    console.error("Server Error: Something is missing in environment variables.");
     return new Response(JSON.stringify({ error: "Server misconfiguration" }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
