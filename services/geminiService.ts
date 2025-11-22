@@ -56,12 +56,18 @@ export const sendMessageToGemini = async (
   try {
     // Initialize client lazily to prevent top-level module crashes
     const apiKey = process.env.API_KEY;
+    
     if (!apiKey) {
-        console.warn("Gemini API Key is missing.");
-        return { 
-            text: "I'm currently offline because my API key is missing. Please contact Sayantan to fix this configuration!", 
-            suggestions: ["Contact Sayantan"] 
-        };
+        console.warn("Gemini API Key is missing. Running in DEMO mode.");
+        // Mock response to prevent app breakage for users without keys
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({ 
+                    text: "I'm currently running in **Demo Mode** because the API key hasn't been configured yet. \n\nIn a live environment, I would use Google's Gemini AI to answer your questions about Sayantan's experience with Java, Microservices, and Cloud Architecture. \n\nPlease contact Sayantan to see the full AI integration in action!", 
+                    suggestions: ["View Projects", "Contact Sayantan", "Check Skills"] 
+                });
+            }, 1000);
+        });
     }
 
     const ai = new GoogleGenAI({ apiKey });
