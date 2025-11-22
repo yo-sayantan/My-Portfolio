@@ -7,7 +7,6 @@ import ScrollReveal from './ScrollReveal';
 const Experience: React.FC = () => {
   const [pathD, setPathD] = useState('');
   const [pathLength, setPathLength] = useState(0);
-  const [drawProgress, setDrawProgress] = useState(0);
   
   const containerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
@@ -61,19 +60,48 @@ const Experience: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    // Performance Optimization: Use a flag to prevent stacking animation frames
+    let ticking = false;
+
+    // Ensure any CSS transition is removed to allow instant JS updates
+    if (pathRef.current) {
+      pathRef.current.style.transition = 'none';
+    }
+
     const handleScroll = () => {
-        if (!containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const start = rect.top;
-        const height = rect.height;
-        let progress = (windowHeight - start - (windowHeight * 0.2)) / height;
-        progress = Math.max(0, Math.min(1, progress));
-        setDrawProgress(Math.min(1, progress * 1.2)); 
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                if (!containerRef.current || !pathRef.current) {
+                  ticking = false;
+                  return;
+                }
+                
+                const rect = containerRef.current.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // Calculate progress based on section's position in viewport
+                // Formula ensures the line draws as the user scrolls through the section
+                let progress = (windowHeight - rect.top - (windowHeight * 0.3)) / (rect.height * 0.8);
+                
+                progress = Math.max(0, Math.min(1, progress));
+                
+                const dashOffset = pathLength - (pathLength * progress);
+                
+                // Direct DOM manipulation for performance (bypasses React render cycle)
+                pathRef.current.style.strokeDashoffset = String(dashOffset);
+                
+                ticking = false;
+            });
+            ticking = true;
+        }
     };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [pathLength]);
 
   return (
@@ -129,8 +157,8 @@ const Experience: React.FC = () => {
               filter="url(#glow)"
               style={{
                 strokeDasharray: pathLength,
-                strokeDashoffset: pathLength - (pathLength * drawProgress),
-                transition: 'stroke-dashoffset 0.1s linear'
+                strokeDashoffset: pathLength, // Initial state hidden
+                transition: 'none' // Ensure no CSS transition causes lag
               }}
             />
           </svg>
