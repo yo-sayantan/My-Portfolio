@@ -171,7 +171,7 @@ const AIChatbot: React.FC = () => {
 
     setIsSendingTranscript(true);
 
-    // Format transcript
+    // Format text version for fallback
     const transcriptText = messages.map(msg => 
       `[${new Date(msg.timestamp).toLocaleTimeString()}] ${msg.sender === 'user' ? 'You' : 'AI'}: ${msg.text}`
     ).join('\n\n');
@@ -181,6 +181,7 @@ const AIChatbot: React.FC = () => {
         name: "User", // Placeholder
         email: transcriptEmail,
         message: transcriptText,
+        transcript: messages, // Pass structured data for rich HTML email
         type: 'transcript'
       });
 
@@ -349,14 +350,15 @@ const AIChatbot: React.FC = () => {
           
           {/* Suggestions Chips - Always visible unless email mode */}
           {!isEmailMode && (
-              <div className="px-4 pb-2 border-t border-slate-100 dark:border-slate-800/50 pt-2">
-                <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none mask-gradient">
+              <div className="px-4 py-2 border-t border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 backdrop-blur-md">
+                <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
                     {suggestions.map((q, i) => (
                       <button
-                        key={i}
+                        key={`${q}-${messages.length}`}
                         onClick={() => handleSendMessage(undefined, q)}
                         disabled={isLoading}
-                        className="whitespace-nowrap px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-200 dark:hover:border-primary-800 transition-all flex-shrink-0 shadow-sm hover:shadow-md disabled:opacity-50"
+                        className="whitespace-nowrap px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-500 dark:hover:text-white hover:border-primary-600 transition-all duration-300 flex-shrink-0 shadow-sm hover:shadow-md disabled:opacity-50 animate-in fade-in slide-in-from-bottom-2 fill-mode-both"
+                        style={{ animationDelay: `${i * 100}ms` }}
                       >
                         {q}
                       </button>

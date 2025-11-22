@@ -4,6 +4,7 @@ export interface EmailData {
   email: string;
   message: string;
   type?: 'contact' | 'transcript';
+  transcript?: any[]; // Array of message objects for rich HTML generation
 }
 
 export interface EmailResponse {
