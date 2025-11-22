@@ -1,3 +1,4 @@
+
 import React, { useMemo } from 'react';
 import { ArrowRight, Github, Linkedin, Mail, ChevronDown, Terminal } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants';
@@ -148,22 +149,23 @@ const Hero: React.FC = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
 
-                    {/* Experience Badge */}
-                    <div className="absolute -bottom-2 -right-2 md:bottom-4 md:right-4 z-20 
-                        bg-sky-100/20 dark:bg-sky-900/20 backdrop-blur-xl 
-                        p-3 rounded-xl border border-white/30 dark:border-white/10 
-                        shadow-[0_8px_32px_0_rgba(14,165,233,0.15)]
-                        flex items-center gap-3 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200 group-hover:translate-y-2 transition-transform">
-                             <div className="p-2 rounded-lg bg-sky-50/50 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300 shadow-inner border border-white/20">
-                                <Terminal size={18} />
-                             </div>
-                             <div className="text-left">
-                                <p className="text-[9px] font-bold text-sky-800 dark:text-sky-200 uppercase tracking-wider mb-0.5 drop-shadow-sm">Experience</p>
-                                <div className="flex items-baseline gap-1">
-                                   <span className="text-lg font-black text-slate-900 dark:text-white drop-shadow-sm">{experienceYears}</span>
-                                   <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 drop-shadow-sm">Years</span>
-                                </div>
-                             </div>
+                    {/* Experience Badge - Elegant & Optimised */}
+                    <div className="absolute bottom-4 -right-4 md:bottom-8 md:-right-12 z-20 animate-bounce-slow">
+                        <div className="relative group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-blue-600 rounded-full blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+                            <div className="relative flex items-center gap-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-white/60 dark:border-white/10 py-3 pl-3 pr-6 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-transform duration-300 group-hover:scale-105">
+                                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-primary-500/25">
+                                    <Terminal size={22} className="drop-shadow-md" />
+                                 </div>
+                                 <div className="flex flex-col justify-center">
+                                    <p className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Experience</p>
+                                    <div className="flex items-baseline gap-1.5">
+                                       <span className="text-2xl font-black text-slate-900 dark:text-white leading-none">{experienceYears}</span>
+                                       <span className="text-xs font-bold text-primary-600 dark:text-primary-400 leading-none">Years</span>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
