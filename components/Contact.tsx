@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { SOCIAL_LINKS } from '../constants';
-import { Mail, Phone, MapPin, Send, ArrowRight, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ArrowRight, Loader2, CheckCircle, AlertCircle, Clock, Linkedin } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import { sendEmail } from '../services/emailService';
 
@@ -138,15 +138,42 @@ const Contact: React.FC = () => {
                       </div>
                     </a>
                     
-                    <div className="flex items-center gap-5 group">
-                      <div className="w-14 h-14 rounded-2xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center shadow-sm">
-                        <MapPin className="w-6 h-6 text-slate-400 dark:text-slate-400" />
+                    <a href="https://maps.google.com/?q=Hyderabad,+Telangana" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 group">
+                      <div className="w-14 h-14 rounded-2xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-400 transition-all duration-300 shadow-sm group-hover:shadow-purple-500/30">
+                        <MapPin className="w-6 h-6 text-slate-400 dark:text-slate-400 group-hover:text-white transition-colors" />
                       </div>
                       <div>
                          <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Location</p>
-                         <p className="text-lg font-medium text-slate-900 dark:text-white">Hyderabad, Telangana</p>
+                         <p className="text-lg font-medium text-slate-900 dark:text-white group-hover:text-purple-500 dark:group-hover:text-purple-400 transition-colors">Hyderabad, Telangana</p>
                       </div>
-                    </div>
+                    </a>
+                  </div>
+
+                  {/* New Urgent/Response Time Card */}
+                  <div className="mt-10 p-6 bg-white/50 dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-white/5 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-500 hover:border-primary-200 dark:hover:border-primary-900/50 transition-colors">
+                      <div className="flex items-center gap-4 mb-6">
+                          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-2xl text-blue-600 dark:text-blue-400 shadow-inner">
+                              <Clock size={20} />
+                          </div>
+                          <div>
+                              <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-0.5">Response Time</p>
+                              <p className="text-sm font-bold text-slate-800 dark:text-white">Usually within 24 hours</p>
+                          </div>
+                      </div>
+                      
+                      <a 
+                        href={SOCIAL_LINKS.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                        className="flex items-center justify-between w-full px-6 py-4 bg-[#0077b5] hover:bg-[#006396] text-white rounded-2xl transition-all duration-300 shadow-lg shadow-blue-900/20 group/btn hover:-translate-y-1 active:scale-95 hover:shadow-xl"
+                      >
+                          <div className="flex items-center gap-3">
+                              <Linkedin size={20} className="fill-white" />
+                              <span className="font-bold text-base">DM on LinkedIn</span>
+                          </div>
+                          <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                      </a>
+                      <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-4">For Urgent Matters</p>
                   </div>
                 </ScrollReveal>
              </div>
@@ -216,8 +243,9 @@ const Contact: React.FC = () => {
                       type="submit" 
                       disabled={status === 'submitting' || status === 'success'}
                       className={`
-                        w-full font-bold py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg 
-                        active:scale-95 disabled:opacity-80 disabled:cursor-not-allowed disabled:active:scale-100
+                        w-full font-bold py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg group
+                        transform active:scale-95 hover:-translate-y-1 hover:shadow-xl
+                        disabled:opacity-80 disabled:cursor-not-allowed disabled:active:scale-100 disabled:hover:translate-y-0
                         ${status === 'success' 
                           ? 'bg-green-500 text-white hover:bg-green-600 shadow-green-500/20' 
                           : 'bg-slate-900 text-white hover:bg-primary-600 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 shadow-slate-900/10'
