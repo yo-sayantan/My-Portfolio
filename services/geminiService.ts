@@ -1,5 +1,4 @@
 
-import { GoogleGenAI, Type } from "@google/genai";
 import { PORTFOLIO_DATA } from '../constants';
 
 // Construct a rich context object for the AI
@@ -43,86 +42,63 @@ export interface AIResponse {
 }
 
 /**
- * Sends a message to the Gemini API with chat history and returns the generated response + suggestions.
- * 
- * @param message - The user's input message string.
- * @param history - Array of previous messages for context.
- * @returns A Promise resolving to the AI's text response and suggestions.
+ * Sends a message to the Netlify Function proxy to avoid exposing API keys.
  */
 export const sendMessageToGemini = async (
   message: string, 
   history: ChatHistoryItem[] = []
 ): Promise<AIResponse> => {
   try {
-    // Initialize client lazily to prevent top-level module crashes
-    const apiKey = process.env.API_KEY;
-    
-    if (!apiKey) {
-        console.warn("Gemini API Key is missing. Running in DEMO mode.");
-        // Mock response to prevent app breakage for users without keys
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({ 
-                    text: "I'm currently running in **Demo Mode** because the API key hasn't been configured yet. \n\nIn a live environment, I would use Google's Gemini AI to answer your questions about Sayantan's experience with Java, Microservices, and Cloud Architecture. \n\nPlease contact Sayantan to see the full AI integration in action!", 
-                    suggestions: ["View Projects", "Contact Sayantan", "Check Skills"] 
-                });
-            }, 1000);
-        });
-    }
-
-    const ai = new GoogleGenAI({ apiKey });
-
-    // Add current page context if available to help the AI understand where the user is looking
+    // Add current page context if available
     const currentUrl = typeof window !== 'undefined' ? window.location.href : 'Unknown';
     const systemInstructionWithContext = `${SYSTEM_INSTRUCTION}\n\nUser Context: Browsing ${currentUrl}`;
 
-    // Convert chat history to API format
-    const historyContents = history.map(msg => ({
-      role: msg.role,
-      parts: [{ text: msg.text }]
-    }));
-
-    const responseSchema = {
-      type: Type.OBJECT,
-      properties: {
-        answer: {
-          type: Type.STRING,
-          description: "The natural language response to the user's query. Use Markdown for formatting.",
+    const response = await fetch('/.netlify/functions/ai', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
         },
-        suggestions: {
-          type: Type.ARRAY,
-          items: { type: Type.STRING },
-          description: "3 to 4 short, relevant follow-up questions the user might want to ask next based on this answer. Keep them under 6 words.",
-        },
-      },
-      required: ["answer", "suggestions"],
-    };
-
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: [
-        ...historyContents,
-        { role: 'user', parts: [{ text: message }] }
-      ],
-      config: {
-        systemInstruction: systemInstructionWithContext,
-        temperature: 0.7,
-        responseMimeType: "application/json",
-        responseSchema: responseSchema,
-      }
+        body: JSON.stringify({
+            message,
+            history,
+            systemInstruction: systemInstructionWithContext
+        })
     });
 
-    const jsonResponse = JSON.parse(response.text || "{}");
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `Server Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Handle Demo Mode response from backend
+    if (data.mode === 'demo') {
+        return {
+            text: "I'm currently running in **Demo Mode** because the API key is being configured securely on the server. \n\nIn a live environment, I would use Google's Gemini AI to answer your questions about Sayantan's experience with Java, Microservices, and Cloud Architecture.",
+            suggestions: ["View Projects", "Contact Sayantan", "Check Skills"]
+        };
+    }
+
+    // Parse the JSON response from Gemini
+    // The backend returns the raw text which should be a JSON string due to the schema
+    let parsedContent;
+    try {
+        parsedContent = typeof data.text === 'string' ? JSON.parse(data.text) : data.text;
+    } catch (e) {
+        console.error("Failed to parse AI JSON response", e);
+        parsedContent = { answer: data.text, suggestions: [] };
+    }
     
     return {
-      text: jsonResponse.answer || "I'm thinking... but I couldn't generate a response right now.",
-      suggestions: jsonResponse.suggestions || []
+      text: parsedContent.answer || "I'm thinking... but I couldn't generate a response right now.",
+      suggestions: parsedContent.suggestions || []
     };
 
   } catch (error) {
     console.error("Gemini Service Error:", error);
     return {
-      text: "I'm having a bit of trouble connecting to my brain (the cloud) right now. Please try again in a moment!",
+      text: "I'm having a bit of trouble connecting to the server right now. Please try again in a moment!",
       suggestions: ["Try again later", "Contact Sayantan directly"]
     };
   }

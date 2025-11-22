@@ -1,5 +1,5 @@
 
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 
 // Support both variable names
 const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
@@ -20,20 +20,24 @@ export default async (req: Request) => {
     return new Response('Method Not Allowed', { status: 405 });
   }
 
+  // Graceful fallback if keys are missing (Demo Mode)
   if (!apiKey) {
-    console.error("Server Error: Something is missing in environment variables.");
-    return new Response(JSON.stringify({ error: "Server misconfiguration" }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
+    console.warn("Server: API_KEY (or GEMINI_API_KEY) is missing.");
+    return new Response(JSON.stringify({ mode: 'demo', text: '' }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
     });
   }
 
   try {
     const body = await req.json();
-    const { prompt, systemInstruction } = body;
+    const { message, history, systemInstruction } = body;
 
-    if (!prompt) {
-      return new Response(JSON.stringify({ error: "Prompt is required" }), {
+    if (!message) {
+      return new Response(JSON.stringify({ error: "Message is required" }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -41,11 +45,42 @@ export default async (req: Request) => {
 
     const ai = new GoogleGenAI({ apiKey });
     
+    // Define Schema for structured output
+    const responseSchema = {
+      type: Type.OBJECT,
+      properties: {
+        answer: {
+          type: Type.STRING,
+          description: "The natural language response to the user's query. Use Markdown for formatting.",
+        },
+        suggestions: {
+          type: Type.ARRAY,
+          items: { type: Type.STRING },
+          description: "3 to 4 short, relevant follow-up questions the user might want to ask next based on this answer. Keep them under 6 words.",
+        },
+      },
+      required: ["answer", "suggestions"],
+    };
+
+    // Format history for Gemini API
+    // Frontend sends: { role: 'user' | 'model', text: string }
+    // SDK expects: { role: string, parts: [{ text: string }] }
+    const contents = (history || []).map((msg: any) => ({
+        role: msg.role,
+        parts: [{ text: msg.text }]
+    }));
+
+    // Add the current user message
+    contents.push({ role: 'user', parts: [{ text: message }] });
+
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
-      contents: prompt,
+      contents: contents,
       config: {
         systemInstruction: systemInstruction,
+        temperature: 0.7,
+        responseMimeType: "application/json",
+        responseSchema: responseSchema,
       }
     });
 
